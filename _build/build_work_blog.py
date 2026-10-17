@@ -65,7 +65,6 @@ work_body = f'''
 </section>
 
 <section class="work-block">
-  <p class="group-label">With TYFNOW</p>
   <div class="tiles one">
     <figure class="tile"><img src="/img/sporthopod.jpg" alt="Sporthopod Clinics sign on a building" width="961" height="822" loading="eager"><figcaption class="t">Sporthopod</figcaption></figure>
   </div>
