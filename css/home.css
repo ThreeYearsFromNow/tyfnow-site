@@ -38,13 +38,6 @@
   .chip.c5{right:8px;top:auto;bottom:16px;--w:120px;--h:80px;display:block}
 }
 
-/* Build: app-style icon tiles */
-.apps{display:flex;justify-content:center;flex-wrap:wrap;gap:40px;margin-top:56px}
-.app{display:flex;flex-direction:column;align-items:center;gap:10px;width:112px;font-size:13px;font-weight:600;color:var(--body);text-align:center}
-.app svg{width:72px;height:72px;padding:18px;border-radius:20px;color:#fff;box-shadow:0 8px 24px rgba(43,33,64,.12)}
-.app.a1 svg{background:var(--sky)}.app.a2 svg{background:var(--accent)}.app.a3 svg{background:var(--green)}.app.a4 svg{background:var(--yellow)}
-@media (max-width:900px){.apps{gap:16px;margin-top:40px}.app{width:76px;font-size:11px}.app svg{width:56px;height:56px;padding:14px;border-radius:16px}}
-
 /* Why now */
 .globe-card{background:var(--globe);padding:64px;display:flex;justify-content:center}
 .globe-wrap{width:600px;max-width:100%}
