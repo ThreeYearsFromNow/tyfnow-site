@@ -63,7 +63,7 @@
 .row.rev{animation-direction:reverse;animation-duration:48s}
 .row.slow{animation-duration:56s}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.pill{display:inline-flex;align-items:center;height:56px;margin-right:12px;padding:0 24px;border-radius:999px;background:var(--ink);font-size:18px;font-weight:600;color:#fff;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;height:56px;margin-right:12px;padding:0 24px;border-radius:999px;border:1.5px solid var(--ink);font-size:18px;font-weight:500;color:var(--ink);white-space:nowrap}
 .embedded{padding:0 var(--gutter);font-size:18px;color:var(--body);text-align:center}
 @media (max-width:900px){.marquee-wrap{padding-top:40px;gap:32px}.pill{height:44px;padding:0 18px;font-size:15px}}
 
@@ -141,6 +141,7 @@
 /* Work */
 .work-sec{padding-top:160px;display:flex;flex-direction:column;gap:56px}
 .work-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.work-more{text-align:center;margin-top:48px}
 .work-head .left{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
 .work-head h2{font-size:72px}
 .film{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:32px;overflow:hidden;background:var(--ink);color:#fff;text-decoration:none}

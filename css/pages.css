@@ -21,6 +21,7 @@
 .form .help{font-size:13px;color:var(--muted2)}
 .form .consent{color:var(--body);margin-top:0}
 .form .consent a{color:var(--ink)}
+.form .consent input{width:22px;height:22px;padding:0;border:0;border-radius:0;flex:0 0 auto}
 .form .note{font-size:14px;color:var(--accent-ink);min-height:18px}
 .success{background:var(--band);border-radius:24px;padding:32px;font-size:18px;line-height:1.5}
 .aside h2{font-size:22px;margin:40px 0 8px}
@@ -46,7 +47,7 @@
 /* Work */
 .work-block{padding-top:120px;display:flex;flex-direction:column;align-items:center;gap:40px}
 .tiles{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 24px}
-.tiles.one{grid-template-columns:minmax(0,1fr);max-width:628px}
+.tiles.one{grid-template-columns:minmax(0,1fr)}
 .tile{display:flex;flex-direction:column;gap:14px;margin:0;color:var(--ink)}
 .tile img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:20px}
 .tile .t{font-size:22px;font-weight:600;letter-spacing:-0.01em;min-height:1em}
