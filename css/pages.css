@@ -38,8 +38,6 @@
 }
 
 /* ===== Work and blog, 17 Oct 2026. Tokens and pattern from home v3. ===== */
-.tag{display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:600;color:#fff;background:var(--ink)}
-.tag.sky{background:var(--sky)}.tag.accent{background:var(--accent)}.tag.green{background:var(--green)}
 .card{width:100%;border-radius:32px}
 .page-head{padding-top:64px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px}
 .page-head h1{font-size:96px;max-width:960px}
@@ -50,8 +48,7 @@
 .tiles{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 24px}
 .tiles.one{grid-template-columns:minmax(0,1fr);max-width:628px}
 .tile{display:flex;flex-direction:column;gap:14px;margin:0;color:var(--ink)}
-.tile .frame{background:#fff;border-radius:24px;padding:12px;box-shadow:0 8px 28px rgba(43,33,64,.08)}
-.tile img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:14px}
+.tile img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:20px}
 .tile .t{font-size:22px;font-weight:600;letter-spacing:-0.01em;min-height:1em}
 .work-block .line{font-size:22px;line-height:1.4;color:var(--body);max-width:860px;text-align:center;margin-top:16px}
 .work-block .line a{font-weight:600}
@@ -120,7 +117,6 @@
   .page-head .sub{font-size:20px}
   .work-block{padding-top:64px;gap:28px}
   .tiles{grid-template-columns:1fr;gap:28px}
-  .tile .frame{padding:8px;border-radius:18px}
   .tile img{border-radius:12px}
   .work-block .line{font-size:18px}
   .cta-sec{padding-top:96px;padding-bottom:80px}

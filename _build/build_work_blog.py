@@ -60,26 +60,25 @@ BASE = "https://www.threeyearsfromnow.com"
 # ---------------- Work ----------------
 work_body = f'''
 <section class="page-head">
-  <span class="tag accent">Work</span>
   <h1>Built, fixed or improved.</h1>
   <p class="sub">Some of it with TYFNOW. Most of it before, in the years that built the way we work.</p>
 </section>
 
 <section class="work-block">
-  <span class="tag green">With TYFNOW</span>
+  <p class="group-label">With TYFNOW</p>
   <div class="tiles one">
-    <figure class="tile"><div class="frame"><img src="/img/sporthopod.jpg" alt="Sporthopod Clinics sign on a building" width="961" height="822" loading="eager"></div><figcaption class="t">Sporthopod</figcaption></figure>
+    <figure class="tile"><img src="/img/sporthopod.jpg" alt="Sporthopod Clinics sign on a building" width="961" height="822" loading="eager"><figcaption class="t">Sporthopod</figcaption></figure>
   </div>
 </section>
 
 <section class="work-block">
-  <span class="tag accent">Before TYFNOW, the work that built it</span>
+  <p class="group-label">Before TYFNOW, the work that built it</p>
   <div class="tiles">
-    <figure class="tile"><div class="frame"><img src="/img/todaytix.jpg" alt="TodayTix campaign artwork" width="960" height="823" loading="lazy"></div><figcaption class="t">TodayTix</figcaption></figure>
-    <figure class="tile"><div class="frame"><img src="/img/amex-puppet.jpg" alt="Sock puppet at a desk in front of a city skyline" width="961" height="823" loading="lazy"></div><figcaption class="t">American Express</figcaption></figure>
-    <figure class="tile"><div class="frame"><img src="/img/amex-business.jpg" alt="American Express small business campaign artwork" width="961" height="823" loading="lazy"></div><figcaption class="t">American Express</figcaption></figure>
-    <figure class="tile"><div class="frame"><img src="/img/wardrobe.jpg" alt="Open wardrobe, styled for a campaign" width="960" height="822" loading="lazy"></div><figcaption class="t"><!-- caption pending: believed IKEA Space Solutions --></figcaption></figure>
-    <figure class="tile"><div class="frame"><img src="/img/helmet.jpg" alt="Helmet, campaign artwork" width="961" height="822" loading="lazy"></div><figcaption class="t"><!-- caption pending: client to confirm --></figcaption></figure>
+    <figure class="tile"><img src="/img/todaytix.jpg" alt="TodayTix campaign artwork" width="960" height="823" loading="lazy"><figcaption class="t">TodayTix</figcaption></figure>
+    <figure class="tile"><img src="/img/amex-puppet.jpg" alt="Sock puppet at a desk in front of a city skyline" width="961" height="823" loading="lazy"><figcaption class="t">American Express</figcaption></figure>
+    <figure class="tile"><img src="/img/amex-business.jpg" alt="American Express small business campaign artwork" width="961" height="823" loading="lazy"><figcaption class="t">American Express</figcaption></figure>
+    <figure class="tile"><img src="/img/wardrobe.jpg" alt="Open wardrobe, styled for a campaign" width="960" height="822" loading="lazy"><figcaption class="t"><!-- caption pending: believed IKEA Space Solutions --></figcaption></figure>
+    <figure class="tile"><img src="/img/helmet.jpg" alt="Helmet, campaign artwork" width="961" height="822" loading="lazy"><figcaption class="t"><!-- caption pending: client to confirm --></figcaption></figure>
   </div>
   <p class="line">Also: Conference Badges, NESO, IKEA, Huawei, Siemens, McCarthy Stone, Nutella, Wetha, Kids Clubs and Velvis. <a href="/contact">Ask about any of them.</a></p>
 </section>
@@ -303,7 +302,6 @@ for p in posts:
     </a>'''
 blog_body = f'''
 <section class="page-head">
-  <span class="tag sky">Blog</span>
   <h1>Notes from the road.</h1>
   <p class="sub">Mostly the ride to Lisbon, for now.</p>
 </section>

@@ -1,6 +1,4 @@
 /* TYFNOW home.css: home v3 from the locked board (17 Oct 2026). */
-.tag{display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:600;color:#fff;background:var(--ink)}
-.tag.sky{background:var(--sky)}.tag.accent{background:var(--accent)}.tag.green{background:var(--green)}
 .sec{padding-top:160px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:64px}
 .sec-head{display:flex;flex-direction:column;align-items:center;gap:24px}
 .sec h2{font-size:72px;max-width:960px}
@@ -20,8 +18,8 @@
 .hero h1{font-size:112px;line-height:.98;max-width:900px}
 .hero .sub{font-size:24px;line-height:1.4;max-width:560px;color:var(--body)}
 .hero .btn{margin-top:8px}
-.chip{position:absolute;background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(43,33,64,.10);padding:10px}
-.chip img{border-radius:8px;object-fit:cover;width:var(--w);height:var(--h)}
+.chip{position:absolute}
+.chip img{border-radius:12px;object-fit:cover;width:var(--w);height:var(--h)}
 .chip.c1{left:70px;top:90px;transform:rotate(-5deg);--w:180px;--h:120px}
 .chip.c2{left:120px;top:380px;transform:rotate(3deg);--w:150px;--h:100px}
 .chip.c3{left:226px;top:557px;transform:rotate(-2deg);--w:130px;--h:88px}
@@ -33,8 +31,7 @@
   .hero{height:auto;min-height:600px;padding:96px 0 96px;gap:20px}
   .hero h1{font-size:64px}
   .hero .sub{font-size:19px}
-  .chip{padding:6px;border-radius:10px}
-  .chip img{border-radius:6px}
+  .chip img{border-radius:8px}
   .chip.c2,.chip.c3,.chip.c6{display:none}
   .chip.c1{left:0;top:12px;--w:112px;--h:74px}
   .chip.c4{right:0;top:30px;--w:104px;--h:70px}

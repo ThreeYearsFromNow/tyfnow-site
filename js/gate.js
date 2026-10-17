@@ -24,8 +24,10 @@
   function show(name) {
     Object.keys(screens).forEach(function (k) { screens[k].classList.toggle('on', k === name); });
     gate.scrollTop = 0;
+    /* s1: focus the goal field, never a button (an auto-focused button showed its focus ring on first load). Mobile: nothing, so the keyboard stays down. */
+    if (name === 's1') { if (W.innerWidth >= 900) work.focus(); return; }
     var first = screens[name].querySelector('textarea,input:not([type=hidden]),button');
-    if (first && !(name === 's1' && W.innerWidth < 900)) first.focus();
+    if (first) first.focus();
   }
   function openSite() {
     html.classList.remove('gate-pending');
