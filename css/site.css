@@ -71,22 +71,30 @@ p{margin:0}
 
 .site-footer{border-top:1px solid var(--rule);color:var(--body);font-size:15px}
 .site-footer .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:32px;padding-top:56px;padding-bottom:120px}
-.site-footer .f-logo{grid-column:1/span 4}
-.site-footer .f-nav{grid-column:7/span 3;display:flex;flex-direction:column;gap:10px}
+.site-footer .f-co{grid-column:1/span 5;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.site-footer .f-company{font-size:13px;line-height:1.6}
+.site-footer .f-company a{color:var(--body)}
+.site-footer .f-nav{grid-column:7/span 2;display:flex;flex-direction:column;gap:10px}
 .site-footer .f-nav a{color:var(--ink);text-decoration:none}
 .site-footer .f-contact{grid-column:10/span 3;display:flex;flex-direction:column;gap:10px}
 .site-footer .f-contact a{color:var(--body)}
-.site-footer .f-company{grid-column:1/span 12;font-size:13px}
+.site-footer .f-copy{grid-column:1/span 12;font-size:13px;padding-top:24px;border-top:1px solid var(--rule)}
 @media (max-width:900px){
   .site-footer .wrap{display:flex;flex-direction:column;padding-bottom:64px}
 }
 
-/* Banner: skipped or side door */
-.banner{display:none;background:var(--band);color:var(--ink);font-size:15px}
-.banner.show{display:block}
-.banner .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px}
+/* Current page in the header */
+.site-header nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;text-decoration-color:var(--accent)}
+
+/* Plain group labels (replace the pill eyebrows) */
+.group-label{font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--body);margin:0}
+
+/* Toast: skipped the question (bottom left, once per session) */
+.banner{position:fixed;left:16px;bottom:16px;z-index:59;display:none;align-items:center;gap:8px;max-width:calc(100% - 32px);padding:14px 8px 14px 20px;border-radius:16px;background:#fff;color:var(--ink);font-size:15px;box-shadow:0 12px 40px rgba(43,33,64,.18)}
+.banner.show{display:flex}
 .banner a{font-weight:600}
-.banner button{width:44px;height:44px;border:0;background:transparent;font-size:22px;line-height:1;cursor:pointer;border-radius:999px}
+.banner button{width:40px;height:40px;flex:0 0 auto;border:0;background:transparent;color:var(--body);font-size:22px;line-height:1;cursor:pointer;border-radius:999px}
+.banner button:hover{color:var(--ink)}
 
 /* Cookie notice */
 .cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;display:none;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 16px;border-radius:16px;background:var(--ink);color:var(--cream);font-size:14px;box-shadow:0 12px 40px rgba(43,33,64,.25)}

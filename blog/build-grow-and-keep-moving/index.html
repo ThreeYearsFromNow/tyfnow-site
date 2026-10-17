@@ -23,12 +23,12 @@
     <button type="button" class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav id="nav">
       <a href="/work">Work</a>
-      <a href="/blog">Blog</a>
+      <a href="/blog" aria-current="page">Blog</a>
       <a href="/contact" data-track="nav_contact">Contact</a>
-      <a href="/contact" class="btn ink sm">Tell us what's not working</a>
+      <a href="/contact" class="btn outline sm">Tell us what's not working</a>
     </nav>
   </header>
-  <div id="banner" class="banner"><div class="wrap"><span>You skipped the question. <a href="/?gate=1" data-answer>Answer it</a></span><button type="button" aria-label="Dismiss" data-close>&times;</button></div></div>
+  <div id="banner" class="banner" role="status"><p>You skipped the question. <a href="/?gate=1" data-answer>Answer it</a></p><button type="button" aria-label="Dismiss" data-close>&times;</button></div>
   <main class="wrap">
 
 <article class="post">
@@ -88,10 +88,13 @@
 </main>
   <footer class="site-footer">
     <div class="wrap">
-      <div class="f-logo"><span class="logo small">#TYFNOW</span></div>
-      <nav class="f-nav"><a href="/work">Work</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="/privacy">Privacy policy</a><a href="/terms">Terms</a></nav>
+      <div class="f-co">
+        <span class="logo small">#TYFNOW</span>
+        <p class="f-company">Three Years From Now Ltd<br>Company number 17013338<br>Registered office: 259 Sheepcot Lane, Watford WD25 7DJ<br><a href="/privacy">Privacy policy</a> <span aria-hidden="true">&middot;</span> <a href="/terms">Terms</a></p>
+      </div>
+      <nav class="f-nav" aria-label="Footer"><a href="/work">Work</a><a href="/blog">Blog</a><a href="/contact">Contact</a></nav>
       <div class="f-contact"><a href="mailto:team@threeyearsfromnow.com">team@threeyearsfromnow.com</a><a href="https://g.page/r/CUSgnoBxODRjEBM/review" rel="noopener" data-track="review_link_click">Leave a Google review</a></div>
-      <div class="f-company">Three Years From Now Ltd. Company number 17013338. Registered office: 259 Sheepcot Lane, Watford WD25 7DJ.</div>
+      <p class="f-copy">&copy; 2026 Three Years From Now Ltd</p>
     </div>
   </footer>
 </div>
