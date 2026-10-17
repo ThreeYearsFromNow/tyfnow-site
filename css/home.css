@@ -26,30 +26,24 @@
 .chip.c4{right:80px;top:70px;transform:rotate(4deg);--w:170px;--h:112px}
 .chip.c5{right:110px;top:360px;transform:rotate(-3deg);--w:150px;--h:100px}
 .chip.c6{right:233px;top:570px;transform:rotate(2deg);--w:130px;--h:88px}
-/* App-style icon tiles scattered among the thumbnails */
-.app{position:absolute;display:flex;flex-direction:column;align-items:center;gap:8px;width:92px;font-size:12px;font-weight:600;color:var(--body)}
-.app svg{width:64px;height:64px;padding:16px;border-radius:18px;color:#fff;background:var(--sky);box-shadow:0 8px 24px rgba(43,33,64,.12)}
-.app.a1 svg{background:var(--sky)}.app.a2 svg{background:var(--accent)}.app.a3 svg{background:var(--green)}.app.a4 svg{background:var(--yellow)}
-.app.a1{left:300px;top:230px;transform:rotate(3deg)}
-.app.a2{left:40px;top:560px;transform:rotate(-4deg)}
-.app.a3{right:300px;top:240px;transform:rotate(-3deg)}
-.app.a4{right:60px;top:560px;transform:rotate(4deg)}
-@media (max-width:1200px){.app.a1{left:230px}.app.a3{right:230px}.chip.c3,.chip.c6{display:none}.chip.c1{left:24px}.chip.c4{right:24px}.chip.c2{left:40px}.chip.c5{right:40px}}
+@media (max-width:1200px){.chip.c3,.chip.c6{display:none}.chip.c1{left:24px}.chip.c4{right:24px}.chip.c2{left:40px}.chip.c5{right:40px}}
 @media (max-width:900px){
   .hero{height:auto;min-height:600px;padding:96px 0 96px;gap:20px}
   .hero h1{font-size:64px}
   .hero .sub{font-size:19px}
   .chip img{border-radius:8px}
-  .app{width:64px;font-size:10px;gap:4px}
-  .app svg{width:44px;height:44px;padding:11px;border-radius:12px}
-  .app.a1,.app.a4{display:none}
-  .app.a2{left:4px;top:auto;bottom:24px}
-  .app.a3{left:4px;top:112px;right:auto}
   .chip.c2,.chip.c3,.chip.c6{display:none}
   .chip.c1{left:0;top:12px;--w:112px;--h:74px}
   .chip.c4{right:0;top:30px;--w:104px;--h:70px}
   .chip.c5{right:8px;top:auto;bottom:16px;--w:120px;--h:80px;display:block}
 }
+
+/* Build: app-style icon tiles */
+.apps{display:flex;justify-content:center;flex-wrap:wrap;gap:40px;margin-top:56px}
+.app{display:flex;flex-direction:column;align-items:center;gap:10px;width:112px;font-size:13px;font-weight:600;color:var(--body);text-align:center}
+.app svg{width:72px;height:72px;padding:18px;border-radius:20px;color:#fff;box-shadow:0 8px 24px rgba(43,33,64,.12)}
+.app.a1 svg{background:var(--sky)}.app.a2 svg{background:var(--accent)}.app.a3 svg{background:var(--green)}.app.a4 svg{background:var(--yellow)}
+@media (max-width:900px){.apps{gap:16px;margin-top:40px}.app{width:76px;font-size:11px}.app svg{width:56px;height:56px;padding:14px;border-radius:16px}}
 
 /* Why now */
 .globe-card{background:var(--globe);padding:64px;display:flex;justify-content:center}
