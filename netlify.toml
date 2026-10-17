@@ -18,12 +18,13 @@
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 
+# CSS and JS: always revalidate, so a deploy shows at once. Netlify's ETags make the check free.
 [[headers]]
   for = "/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/js/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=0, must-revalidate"
