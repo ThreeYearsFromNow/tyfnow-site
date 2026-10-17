@@ -1,0 +1,42 @@
+# Bare domain to www (needs the bare domain added as an alias in Netlify)
+http://threeyearsfromnow.com/*  https://www.threeyearsfromnow.com/:splat  301!
+https://threeyearsfromnow.com/* https://www.threeyearsfromnow.com/:splat  301!
+
+# Old core pages
+/home               /          301
+/about-us           /          301
+/services           /          301
+/contact-us         /contact   301
+/privacy-policy     /privacy   301
+/terms-conditions   /terms     301
+
+# Old work pages (explicit, because /work/* -> /work loops on Netlify)
+/work/conference-badges     /work  301
+/work/sporthopod            /work  301
+/work/neso                  /work  301
+/work/todaytixgroup         /work  301
+/work/amex                  /work  301
+/work/amexbusinessopen      /work  301
+/work/spacesolutionsikea    /work  301
+/work/ikea                  /work  301
+/work/huawei                /work  301
+/work/siemens               /work  301
+/work/mccarthy-stone        /work  301
+/work/nutella-bready        /work  301
+/work/wethaapp              /work  301
+/work/kids-clubs            /work  301
+/work/velvis                /work  301
+
+# Old blog posts and categories
+/blog/cyclingtolisbontraining-6nw4c      /blog/two-thousand-and-ninety-three  301
+/blog/cyclingtolisbontraining            /blog/five-months-of-saturdays  301
+/blog/cyclingtolisbonsponsorship         /blog/build-grow-and-keep-moving  301
+/blog/category/*                  /blog  301
+
+# Orphans and legacy portfolio pages
+/channel-five         /work  301
+/london-theatre-week  /work  301
+/siemens              /work  301
+/apprentice-branding  /work  301
+/portfolio            /work  301
+/portfolio/*          /work  410

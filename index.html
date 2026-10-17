@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en-GB" data-ga="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Years From Now. A growth studio for founder-led businesses</title>
+<meta name="description" content="Stop trying every AI tool. Fix what's blocking growth. Brand, website, content and pipeline, built, measured and improved every week.">
+<link rel="canonical" href="https://www.threeyearsfromnow.com/">
+<meta property="og:title" content="Three Years From Now">
+<meta property="og:description" content="Build. Measure. Repeat. A growth studio for founder-led businesses.">
+<meta property="og:url" content="https://www.threeyearsfromnow.com/">
+<meta property="og:type" content="website">
+<link rel="preload" href="/fonts/InterTight-var.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/home.css">
+<script>
+/* Set before first paint so the homepage never flashes behind the gate. No JS: class never set, home shows. */
+(function(){try{var s=localStorage.getItem('tyfnow_gate');var f=/[?&]gate=1/.test(location.search);if(!s||f){document.documentElement.className+=' gate-pending';}}catch(e){document.documentElement.className+=' gate-pending';}})();
+</script>
+</head>
+<body data-home>
+
+<!-- ========== GATE ========== -->
+<div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-heading">
+
+  <!-- Screen 1 -->
+  <section id="gate-s1" class="gate-screen on">
+    <div class="gate-top"><span class="logo small" aria-hidden="true">#TYFNOW</span></div>
+    <div class="gate-grid">
+      <div class="gate-left">
+        <p id="gate-heading" class="gate-h">Three Years From Now is <span class="gate-date" data-three-years>three years from today</span></p>
+        <div class="quote-wrap">
+          <div class="quote" aria-hidden="true"><span id="quote"></span><span id="caret" class="caret"></span></div>
+          <div id="quote-author" class="quote-author" aria-hidden="true"></div>
+          <p id="quote-sr" class="sr-only" aria-live="polite"></p>
+          <div class="quote-ctl">
+            <button type="button" id="q-prev" aria-label="Previous quote"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <button type="button" id="q-again" aria-label="Type it again"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></button>
+            <button type="button" id="q-next" aria-label="Next quote"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            <span id="quote-count" class="quote-count" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      <div class="gate-spacer"></div>
+      <div class="gate-right">
+        <div class="field">
+          <label for="work">What does the business look like?</label>
+          <textarea id="work" maxlength="280" rows="3" autocomplete="off"></textarea>
+        </div>
+        <button type="button" id="hold" class="btn full" disabled>Hold me to it</button>
+        <p class="gate-terms">Terms and conditions apply. <a href="/terms" id="terms-open">Read them.</a></p>
+        <p class="gate-skip"><button type="button" id="skip">Skip for now</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen 1b: email, optional -->
+  <section id="gate-s1b" class="gate-screen" aria-labelledby="s1b-h">
+    <div class="gate-top"><span class="logo small" aria-hidden="true">#TYFNOW</span></div>
+    <div class="gate-grid">
+      <div class="gate-left">
+        <h2 id="s1b-h" class="gate-h">Written down. Now the hard part.</h2>
+        <p class="gate-body">Want it back? Leave an email and we'll send you what you wrote today, then on <strong data-year-1></strong>, <strong data-year-2></strong> and <strong data-year-3></strong>. Three check-ins. No newsletter.</p>
+      </div>
+      <div class="gate-spacer"></div>
+      <div class="gate-right">
+        <div class="field short">
+          <label for="gate-email">Email</label>
+          <input id="gate-email" type="email" inputmode="email" autocomplete="email" required>
+        </div>
+        <input type="text" id="gate-hp" name="website" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
+        <label class="consent"><input type="checkbox" id="gate-consent"><span>Send me my goals today and on each anniversary. You store what I wrote for three years and one month, then delete it. <a href="/privacy" target="_blank" rel="noopener">Privacy policy</a>.</span></label>
+        <div class="gate-stack">
+          <button type="button" id="gate-send" class="btn full" disabled>Send it</button>
+          <button type="button" id="gate-nothanks" class="btn full ghost">No thanks, just let me in</button>
+        </div>
+        <p id="gate-note" class="gate-note" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen 2: the skip interrupt -->
+  <section id="gate-s2" class="gate-screen" aria-labelledby="s2-h">
+    <div class="gate-top"><span class="logo small" aria-hidden="true">#TYFNOW</span></div>
+    <div class="gate-grid">
+      <div class="gate-left">
+        <h2 id="s2-h" class="gate-h">Fair enough. One thing before you go.</h2>
+        <p class="gate-body">In a goal-setting study at Dominican University of California, Dr Gail Matthews found that people who wrote their goals down achieved more of them than people who didn't. That's her research, not ours.</p>
+        <p class="gate-body">It takes about ninety seconds. The clock is running either way.</p>
+      </div>
+      <div class="gate-spacer"></div>
+      <div class="gate-right">
+        <div class="gate-stack">
+          <button type="button" id="s2-back" class="btn full">Go back and write it</button>
+          <button type="button" id="s2-skip" class="btn full ghost">I'll take my chances</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terms drawer -->
+  <div id="gate-terms" class="overlay" role="dialog" aria-modal="true" aria-labelledby="gt-h">
+    <div id="gate-sheet" class="sheet">
+      <h2 id="gt-h">Terms and conditions</h2>
+      <p>By pressing "Hold me to it" you agree to the following.</p>
+      <ol>
+        <li>You wrote it, you own it. If you didn't leave an email, we can't remind you. That's your job.</li>
+        <li>"Be a millionaire" is not a goal. It's a wish with a number on it. Say what the business does, who it does it for, and what that lets you do.</li>
+        <li>You cannot write "more clients" and then spend three years doing what you're doing now. The site will let you in. Reality won't.</li>
+        <li>Three years is 1,096 days. It's also 156 Mondays. Plan accordingly.</li>
+        <li>Nothing here is legal, financial or health advice, or a guarantee. It's a question, and you answered it.</li>
+      </ol>
+      <div class="row"><button type="button" id="terms-accept" class="btn">I accept</button><button type="button" id="terms-later" class="btn outline">I need a minute</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SITE ========== -->
+<div id="site">
+  <header class="site-header wrap">
+    <a href="/" class="logo">#TYFNOW</a>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav">
+      <a href="/work">Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact" data-track="nav_contact">Contact</a>
+      <a href="/contact" class="btn ink sm">Tell us what's not working</a>
+    </nav>
+  </header>
+
+  <div id="banner" class="banner"><div class="wrap"><span>You skipped the question. <a href="/?gate=1" data-answer>Answer it</a></span><button type="button" aria-label="Dismiss" data-close>&times;</button></div></div>
+
+  <main>
+    <section class="hero wrap" id="top">
+      <h1>Build.<br>Measure.<br>Repeat.</h1>
+      <p class="sub">Stop trying every AI tool. Fix what's blocking growth.</p>
+      <a href="/contact" class="btn" data-track="hero_cta_primary">Tell us what's not working</a>
+      <div class="chip c1" aria-hidden="true"><img src="/img/todaytix-480.jpg" alt="" loading="eager"></div>
+      <div class="chip c2" aria-hidden="true"><img src="/img/amex-puppet-480.jpg" alt="" loading="lazy"></div>
+      <div class="chip c3" aria-hidden="true"><img src="/img/wardrobe-480.jpg" alt="" loading="lazy"></div>
+      <div class="chip c4" aria-hidden="true"><img src="/img/sporthopod-480.jpg" alt="" loading="eager"></div>
+      <div class="chip c5" aria-hidden="true"><img src="/img/amex-business-480.jpg" alt="" loading="lazy"></div>
+      <div class="chip c6" aria-hidden="true"><img src="/img/helmet-480.jpg" alt="" loading="lazy"></div>
+    </section>
+
+    <section id="why-now" class="sec wrap">
+      <div class="sec-head">
+        <span class="tag sky">Why now</span>
+        <h2 class="wide">Everyone's got more tools than ever. The ones that pull ahead build better.</h2>
+      </div>
+      <div class="card globe-card">
+        <div class="globe-wrap">
+          <svg id="globe" class="net" viewBox="0 0 600 600" role="img" aria-label="One business surrounded by dozens of AI, design, CRM and social tools"></svg>
+          <p class="globe-hint">Tap to show or hide the names.</p>
+        </div>
+      </div>
+      <div class="three">
+        <div><div class="num">1</div><div class="line">Output is cheap now</div></div>
+        <div><div class="num">2</div><div class="line">Most will bolt it onto chaos</div></div>
+        <div><div class="num">3</div><div class="line">Everything starts to look the same</div></div>
+      </div>
+    </section>
+
+    <section id="build" class="sec wrap tight">
+      <div class="sec-head">
+        <span class="tag">Build</span>
+        <h2>Something gets built, fixed or improved every week.</h2>
+        <p class="sub">Brand, website, content and pipeline. One at a time, in the order that moves the number.</p>
+      </div>
+    </section>
+    <section class="marquee-wrap" aria-label="What we build">
+      <div class="rows">
+        <div class="row" aria-hidden="true">
+          <span class="pill">Research</span><span class="pill">Audience breakdown</span><span class="pill">Brand positioning</span><span class="pill">Logo design</span><span class="pill">Colours and type</span><span class="pill">Tone of voice</span><span class="pill">Brand guidelines</span><span class="pill">Messaging</span>
+          <span class="pill">Research</span><span class="pill">Audience breakdown</span><span class="pill">Brand positioning</span><span class="pill">Logo design</span><span class="pill">Colours and type</span><span class="pill">Tone of voice</span><span class="pill">Brand guidelines</span><span class="pill">Messaging</span>
+        </div>
+        <div class="row rev" aria-hidden="true">
+          <span class="pill">User journey</span><span class="pill">User flow</span><span class="pill">Website</span><span class="pill">SEO</span><span class="pill">Landing pages</span><span class="pill">Copywriting</span><span class="pill">Content calendar</span><span class="pill">Social media</span><span class="pill">Conversion rate optimisation</span>
+          <span class="pill">User journey</span><span class="pill">User flow</span><span class="pill">Website</span><span class="pill">SEO</span><span class="pill">Landing pages</span><span class="pill">Copywriting</span><span class="pill">Content calendar</span><span class="pill">Social media</span><span class="pill">Conversion rate optimisation</span>
+        </div>
+        <div class="row slow" aria-hidden="true">
+          <span class="pill">Lead generation</span><span class="pill">Email sequences</span><span class="pill">Lead magnets</span><span class="pill">Paid ads</span><span class="pill">Retargeting</span><span class="pill">A/B testing</span><span class="pill">CRM and automation</span><span class="pill">Analytics dashboard</span>
+          <span class="pill">Lead generation</span><span class="pill">Email sequences</span><span class="pill">Lead magnets</span><span class="pill">Paid ads</span><span class="pill">Retargeting</span><span class="pill">A/B testing</span><span class="pill">CRM and automation</span><span class="pill">Analytics dashboard</span>
+        </div>
+      </div>
+      <p class="sr-only">Research, audience breakdown, brand positioning, logo design, colours and type, tone of voice, brand guidelines, messaging, user journey, user flow, website, SEO, landing pages, copywriting, content calendar, social media, conversion rate optimisation, lead generation, email sequences, lead magnets, paid ads, retargeting, A/B testing, CRM and automation, analytics dashboard.</p>
+      <p class="embedded">Embedded, with every change tested and the founder approving every step.</p>
+    </section>
+
+    <section id="measure" class="sec wrap">
+      <div class="sec-head">
+        <span class="tag accent">Measure</span>
+        <h2>Every change tracked against a number tied to revenue.</h2>
+        <p class="sub">You see what moved, what didn't, and what we're doing about it. Every week.</p>
+      </div>
+      <div class="card measure-card">
+        <div class="mcard">
+          <div class="mhead">
+            <div><div class="eyebrow">Monthly traffic by source</div><div class="mtitle">120 to 3,770 visits a month</div></div>
+            <div class="illus">Illustrative, first 12 months</div>
+          </div>
+          <div class="scroll"><svg aria-hidden="true" viewBox="0 0 1000 300"><line x1="0" y1="205.0" x2="1000" y2="205.0" stroke="#ECE9E3" stroke-width="1"></line><text x="0" y="201.0" font-size="11" fill="#A194B8">1,000</text><line x1="0" y1="140.0" x2="1000" y2="140.0" stroke="#ECE9E3" stroke-width="1"></line><text x="0" y="136.0" font-size="11" fill="#A194B8">2,000</text><line x1="0" y1="75.0" x2="1000" y2="75.0" stroke="#ECE9E3" stroke-width="1"></line><text x="0" y="71.0" font-size="11" fill="#A194B8">3,000</text><line x1="0" y1="10.0" x2="1000" y2="10.0" stroke="#ECE9E3" stroke-width="1"></line><text x="0" y="6.0" font-size="11" fill="#A194B8">4,000</text><rect x="15.7" y="262.2" width="52" height="7.8" fill="#2B2140"></rect><text x="41.7" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Jan</text><text x="41.7" y="256.2" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">120</text><rect x="99.0" y="260.9" width="52" height="9.1" fill="#2B2140"></rect><text x="125.0" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Feb</text><text x="125.0" y="254.9" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">140</text><rect x="182.3" y="260.2" width="52" height="9.8" fill="#2B2140"></rect><rect x="182.3" y="256.4" width="52" height="3.9" fill="#E8744F"></rect><text x="208.3" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Mar</text><text x="208.3" y="250.4" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">210</text><rect x="265.7" y="258.9" width="52" height="11.1" fill="#2B2140"></rect><rect x="265.7" y="249.8" width="52" height="9.1" fill="#E8744F"></rect><text x="291.7" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Apr</text><text x="291.7" y="243.8" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">310</text><rect x="349.0" y="257.6" width="52" height="12.3" fill="#2B2140"></rect><rect x="349.0" y="240.7" width="52" height="16.9" fill="#E8744F"></rect><rect x="349.0" y="238.1" width="52" height="2.6" fill="#F2B35B"></rect><text x="375.0" y="290" font-size="12" text-anchor="middle" fill="#4F4664">May</text><text x="375.0" y="232.1" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">490</text><rect x="432.3" y="256.4" width="52" height="13.7" fill="#2B2140"></rect><rect x="432.3" y="231.7" width="52" height="24.7" fill="#E8744F"></rect><rect x="432.3" y="226.5" width="52" height="5.2" fill="#F2B35B"></rect><rect x="432.3" y="222.6" width="52" height="3.9" fill="#9B7FD1"></rect><text x="458.3" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Jun</text><text x="458.3" y="216.6" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">730</text><rect x="515.7" y="255.1" width="52" height="15.0" fill="#2B2140"></rect><rect x="515.7" y="221.2" width="52" height="33.8" fill="#E8744F"></rect><rect x="515.7" y="213.4" width="52" height="7.8" fill="#F2B35B"></rect><rect x="515.7" y="204.3" width="52" height="9.1" fill="#9B7FD1"></rect><rect x="515.7" y="198.5" width="52" height="5.8" fill="#5FB08A"></rect><text x="541.7" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Jul</text><text x="541.7" y="192.5" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">1,100</text><rect x="599.0" y="253.8" width="52" height="16.2" fill="#2B2140"></rect><rect x="599.0" y="210.8" width="52" height="42.9" fill="#E8744F"></rect><rect x="599.0" y="200.4" width="52" height="10.4" fill="#F2B35B"></rect><rect x="599.0" y="184.8" width="52" height="15.6" fill="#9B7FD1"></rect><rect x="599.0" y="173.2" width="52" height="11.7" fill="#5FB08A"></rect><text x="625.0" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Aug</text><text x="625.0" y="167.2" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">1,490</text><rect x="682.3" y="252.4" width="52" height="17.6" fill="#2B2140"></rect><rect x="682.3" y="200.4" width="52" height="52.0" fill="#E8744F"></rect><rect x="682.3" y="187.4" width="52" height="13.0" fill="#F2B35B"></rect><rect x="682.3" y="164.0" width="52" height="23.4" fill="#9B7FD1"></rect><rect x="682.3" y="145.8" width="52" height="18.2" fill="#5FB08A"></rect><rect x="682.3" y="138.0" width="52" height="7.8" fill="#2F6B4F"></rect><text x="708.3" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Sep</text><text x="708.3" y="132.0" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">2,030</text><rect x="765.7" y="251.2" width="52" height="18.8" fill="#2B2140"></rect><rect x="765.7" y="190.1" width="52" height="61.1" fill="#E8744F"></rect><rect x="765.7" y="174.5" width="52" height="15.6" fill="#F2B35B"></rect><rect x="765.7" y="142.0" width="52" height="32.5" fill="#9B7FD1"></rect><rect x="765.7" y="117.3" width="52" height="24.7" fill="#5FB08A"></rect><rect x="765.7" y="101.7" width="52" height="15.6" fill="#2F6B4F"></rect><text x="791.7" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Oct</text><text x="791.7" y="95.7" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">2,590</text><rect x="849.0" y="249.8" width="52" height="20.1" fill="#2B2140"></rect><rect x="849.0" y="179.6" width="52" height="70.2" fill="#E8744F"></rect><rect x="849.0" y="161.4" width="52" height="18.2" fill="#F2B35B"></rect><rect x="849.0" y="118.5" width="52" height="42.9" fill="#9B7FD1"></rect><rect x="849.0" y="87.3" width="52" height="31.2" fill="#5FB08A"></rect><rect x="849.0" y="63.9" width="52" height="23.4" fill="#2F6B4F"></rect><text x="875.0" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Nov</text><text x="875.0" y="57.9" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">3,170</text><rect x="932.3" y="248.6" width="52" height="21.4" fill="#2B2140"></rect><rect x="932.3" y="170.6" width="52" height="78.0" fill="#E8744F"></rect><rect x="932.3" y="149.8" width="52" height="20.8" fill="#F2B35B"></rect><rect x="932.3" y="95.2" width="52" height="54.6" fill="#9B7FD1"></rect><rect x="932.3" y="56.2" width="52" height="39.0" fill="#5FB08A"></rect><rect x="932.3" y="25.0" width="52" height="31.2" fill="#2F6B4F"></rect><text x="958.3" y="290" font-size="12" text-anchor="middle" fill="#4F4664">Dec</text><text x="958.3" y="19.0" font-size="11" font-weight="600" text-anchor="middle" fill="#2B2140">3,770</text></svg></div>
+          <div class="legend"><span class="lg"><i class="sw ink"></i>Direct</span><span class="lg"><i class="sw accent"></i>Google search</span><span class="lg"><i class="sw yellow"></i>Bing</span><span class="lg"><i class="sw sky"></i>AI assistants</span><span class="lg"><i class="sw mint"></i>LinkedIn</span><span class="lg"><i class="sw green"></i>Newsletter</span></div>
+        </div>
+        <div class="mgrid">
+          <div class="mcard">
+            <div class="mhead"><div><div class="eyebrow">LinkedIn followers</div><div class="mtitle sm">210 to 2,400</div></div><div class="illus">Illustrative</div></div>
+            <svg aria-hidden="true" viewBox="0 0 480 200"><path d="M10.0 156.6 L51.8 153.4 L93.6 148.9 L135.5 143.1 L177.3 135.4 L219.1 125.8 L260.9 115.0 L302.7 100.9 L344.5 84.2 L386.4 65.0 L428.2 42.6 L470.0 16.4 L470.0 170 L10.0 170 Z" fill="#9B7FD1" opacity="0.15"></path><path d="M10.0 156.6 L51.8 153.4 L93.6 148.9 L135.5 143.1 L177.3 135.4 L219.1 125.8 L260.9 115.0 L302.7 100.9 L344.5 84.2 L386.4 65.0 L428.2 42.6 L470.0 16.4" fill="none" stroke="#9B7FD1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="470.0" cy="16.4" r="7" fill="#9B7FD1"></circle><text x="456.0" y="2.4" font-size="14" font-weight="600" text-anchor="end" fill="#2B2140">2,400</text><text x="10.0" y="144.6" font-size="12" fill="#4F4664">210</text><text x="10.0" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Jan</text><text x="51.8" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Feb</text><text x="93.6" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Mar</text><text x="135.5" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Apr</text><text x="177.3" y="192" font-size="11" text-anchor="middle" fill="#4F4664">May</text><text x="219.1" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Jun</text><text x="260.9" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Jul</text><text x="302.7" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Aug</text><text x="344.5" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Sep</text><text x="386.4" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Oct</text><text x="428.2" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Nov</text><text x="470.0" y="192" font-size="11" text-anchor="middle" fill="#4F4664">Dec</text></svg>
+          </div>
+          <div class="mcard">
+            <div class="mhead"><div><div class="eyebrow">Shipped this year</div><div class="mtitle sm">Output you can count</div></div><div class="illus">Illustrative</div></div>
+            <div class="ship">
+              <div class="stat"><div class="big accent">22</div><div class="lab">videos made</div></div>
+              <div class="stat"><div class="big green">9</div><div class="lab">podcast episodes</div></div>
+              <div class="media">
+                <div class="fan"><img src="/img/todaytix-480.jpg" alt="" loading="lazy"><img src="/img/amex-puppet-480.jpg" alt="" loading="lazy"><div class="playcard"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="mic"><span class="ring" aria-hidden="true"></span><span class="ring r2" aria-hidden="true"></span><div class="micbtn"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3" fill="#FFFFFF"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></div><span class="rec" aria-hidden="true"></span></div>
+              </div>
+            </div>
+            <div class="reacts">
+              <span class="react"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#E8744F"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 5 6.4 5c1.9 0 3.3 1 4.1 2.3C11.3 6 12.7 5 14.6 5 18 5 20.1 8.3 18.6 11.8 16.5 16.4 12 21 12 21z"/></svg><b>1,840</b><em>↑ 312 this month</em></span>
+              <span class="react"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#9B7FD1"><path d="M2 10h4v11H2zM8 10l4-8c1.5 0 2.5 1 2.5 2.5V9H20c1.2 0 2 1 1.8 2.2l-1.3 7.6c-.2 1.2-1.2 2.2-2.4 2.2H8z"/></svg><b>4,210</b><em>↑ 690 this month</em></span>
+              <span class="react"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#2F6B4F"><path d="M14 4l7 7-7 7v-4.2C8.8 13.8 5.3 15.6 3 19c.8-6 4.6-10 11-10.8z"/></svg><b>326</b><em>↑ 58 this month</em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="repeat" class="sec wrap">
+      <div class="sec-head">
+        <span class="tag green">Repeat</span>
+        <h2>What works gets systemised. What doesn't gets dropped.</h2>
+        <p class="sub">We hold the context: the brand, the customer journey, what's worked and what hasn't.</p>
+      </div>
+      <div class="card repeat-card">
+        <div class="step">
+          <div class="disc"><svg aria-hidden="true" width="72" height="72" viewBox="0 0 48 48" fill="none"><g class="hammer"><path d="M14 40 30 18" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/><path d="M24 12 36 24" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/><circle cx="37" cy="11" r="5" fill="#F2B35B"/><path d="M14 40l-3 3" stroke="#F2B35B" stroke-width="5" stroke-linecap="round"/></g><path d="M6 44h36" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="name">Build</div>
+          <p>Something gets built, fixed or improved every week.</p>
+        </div>
+        <svg class="arrow" aria-hidden="true" width="56" height="132" viewBox="0 0 56 132" fill="none"><path d="M8 66h36" stroke="#F2B35B" stroke-width="3" stroke-linecap="round"/><path d="m36 58 8 8-8 8" stroke="#F2B35B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="step">
+          <div class="disc"><svg aria-hidden="true" width="72" height="72" viewBox="0 0 48 48" fill="none"><rect x="6" y="14" width="20" height="20" rx="10" fill="#9B7FD1"/><circle cx="16" cy="24" r="4" fill="#2B2140"/><g class="tape"><rect x="26" y="20" width="20" height="8" rx="1" fill="#FFFFFF"/><path d="M30 20v3M34 20v4M38 20v3M42 20v4" stroke="#2B2140" stroke-width="1.5"/><rect x="44" y="18" width="3" height="12" rx="1" fill="#F2B35B"/></g></svg></div>
+          <div class="name">Measure</div>
+          <p>Every change tracked against a number tied to revenue.</p>
+        </div>
+        <svg class="arrow" aria-hidden="true" width="56" height="132" viewBox="0 0 56 132" fill="none"><path d="M8 66h36" stroke="#F2B35B" stroke-width="3" stroke-linecap="round"/><path d="m36 58 8 8-8 8" stroke="#F2B35B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="step">
+          <div class="disc"><svg aria-hidden="true" width="72" height="72" viewBox="0 0 48 48" fill="none"><g class="loop"><path d="M38 24a14 14 0 1 1-5-10.7" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/><path d="M30 6h10v10" stroke="#F2B35B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="24" cy="24" r="5" fill="#F2B35B"/></svg></div>
+          <div class="name">Repeat</div>
+          <p>What works gets systemised. What doesn't gets dropped.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="made" class="work-sec wrap">
+      <div class="work-head">
+        <div class="left">
+          <span class="tag accent">Before TYFNOW, the work that built it</span>
+          <h2>What we've made</h2>
+        </div>
+        <a href="/work" class="btn outline" data-track="before_logos_click">See all work</a>
+      </div>
+      <a href="/work" class="film" aria-label="NESO brand film">
+        <div class="poster"></div>
+        <div class="play"><span><svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="cap"><div class="t">NESO</div><div class="s">Brand film</div></div>
+      </a>
+      <div class="tiles">
+        <a href="/work" class="tile"><img src="/img/sporthopod.jpg" alt="Sporthopod Clinics sign on a building" loading="lazy"><div class="t">Sporthopod</div></a>
+        <a href="/work" class="tile"><img src="/img/amex-puppet.jpg" alt="Sock puppet at a desk in front of a city skyline" loading="lazy"><div class="t">American Express</div></a>
+      </div>
+    </section>
+
+    <section id="reviews" class="sec wrap tight">
+      <div class="card reviews-card">
+        <span class="tag sky">What clients say</span>
+        <div class="review-stage">
+          <figure class="review on"><blockquote>“Creative, reliable, and genuinely passionate about what they do.”</blockquote><figcaption>Amy D., Founder of Sundays and Sundays</figcaption></figure>
+          <figure class="review"><blockquote>“Great service from day one and we are still working with TYFN.”</blockquote><figcaption>Shabz M., CEO at Sporthopod</figcaption></figure>
+          <figure class="review"><blockquote>“Their attention to detail and commitment to quality truly stood out. We've already recommended them to others.”</blockquote><figcaption>Kate G., Founder of Whitstable Art Therapy</figcaption></figure>
+        </div>
+        <div class="dots"><button type="button" aria-label="Review 1" aria-current="true"></button><button type="button" aria-label="Review 2"></button><button type="button" aria-label="Review 3"></button></div>
+      </div>
+    </section>
+
+    <section id="contact" class="cta-sec wrap">
+      <div class="card cta-card">
+        <h2>Something need fixing?<br><span>Say what it is.</span><br>We'll say what it takes.</h2>
+        <p class="said" data-you-said hidden>You said: <span data-work></span></p>
+        <form id="cta-form" class="cta-form" action="/contact" method="get">
+          <div class="cta-field">
+            <label for="cta-email" class="sr-only">Your email</label>
+            <input id="cta-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Your email">
+            <button type="submit" class="btn">Tell us what's not working</button>
+          </div>
+          <p class="trust">Reply within five working days. No hard sell.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="f-logo"><span class="logo small">#TYFNOW</span></div>
+      <nav class="f-nav"><a href="/work">Work</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="/privacy">Privacy policy</a><a href="/terms">Terms</a></nav>
+      <div class="f-contact"><a href="mailto:team@threeyearsfromnow.com">team@threeyearsfromnow.com</a><a href="https://g.page/r/CUSgnoBxODRjEBM/review" rel="noopener" data-track="review_link_click">Leave a Google review</a></div>
+      <div class="f-company">Three Years From Now Ltd. Company number 17013338. Registered office: 259 Sheepcot Lane, Watford WD25 7DJ.</div>
+    </div>
+  </footer>
+</div>
+
+<!-- Exit message -->
+<div id="exit" class="overlay" role="dialog" aria-modal="true" aria-labelledby="exit-h">
+  <div class="sheet">
+    <div data-answered hidden>
+      <h2 id="exit-h">Even if we don't work together.</h2>
+      <p>You wrote down where you'll be on <strong data-date></strong>. Most people never do that. Put it somewhere you'll see it. Then do one thing this week that moves it.</p>
+      <p data-email-line hidden>If you left an email, the first one is already on its way. The next is in a year.</p>
+      <div class="row"><button type="button" class="btn" data-close>Close</button></div>
+    </div>
+    <div data-skipped>
+      <h2>You didn't write it down.</h2>
+      <p>That's fine. The date's still coming.</p>
+      <div class="row"><a href="/?gate=1" class="btn" data-write-now>Write it now</a><button type="button" class="btn outline" data-close>Close</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie notice (shows only when a GA4 ID is set) -->
+<div id="cookie" class="cookie" role="region" aria-label="Cookies">
+  <p>We'd like to count visits with Google Analytics. It records which pages and buttons get used, not what you type. <a href="/privacy">Privacy policy</a>.</p>
+  <button type="button" class="btn" data-accept>Accept</button>
+  <button type="button" class="btn ghost" data-decline>Decline</button>
+</div>
+
+<!-- Netlify form registration (never shown) -->
+<form name="gate-goals" netlify netlify-honeypot="website" hidden>
+  <input type="text" name="work"><input type="email" name="email"><input type="text" name="consent"><input type="text" name="entry-date"><input type="text" name="three-years"><input type="text" name="website">
+</form>
+
+<script src="/js/site.js"></script>
+<script src="/js/gate.js"></script>
+<script src="/js/home.js"></script>
+</body>
+</html>

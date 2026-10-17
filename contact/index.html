@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-GB" data-ga="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tell us what's not working. Three Years From Now</title>
+<meta name="description" content="A straight conversation about what's not working. Reply within five working days. No hard sell.">
+<link rel="canonical" href="https://www.threeyearsfromnow.com/contact">
+<link rel="preload" href="/fonts/InterTight-var.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/pages.css">
+</head>
+<body data-contact>
+<div id="site">
+  <header class="site-header wrap">
+    <a href="/" class="logo">#TYFNOW</a>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav">
+      <a href="/work">Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact" data-track="nav_contact">Contact</a>
+      <a href="/contact" class="btn ink sm">Tell us what's not working</a>
+    </nav>
+  </header>
+  <div id="banner" class="banner"><div class="wrap"><span>You skipped the question. <a href="/?gate=1" data-answer>Answer it</a></span><button type="button" aria-label="Dismiss" data-close>&times;</button></div></div>
+  <main class="wrap">
+
+<section class="page">
+  <h1>Tell us what's not working.</h1>
+  <p class="lead">We'll tell you honestly whether we can help, where we'd start, and what it would take. No hard sell. No hour-long discovery call that goes nowhere.</p>
+  <p class="lead">If you're stuck, we'll say so. If we can help, we'll say how. If we can't, we'll say that too.</p>
+  <div class="two">
+    <div>
+      <form id="contact-form" class="form" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="website" novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <div class="f"><label for="c-name">Name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="f"><label for="c-email">Email</label><input id="c-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
+        <div class="f"><label for="c-business">Business (optional)</label><input id="c-business" name="business" type="text" autocomplete="organization"></div>
+        <div class="f"><label for="c-message">What's not working?</label><textarea id="c-message" name="message" required></textarea><span class="help">Business problems only. Please don't include health or other sensitive personal details.</span></div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
+        <input type="hidden" name="consent" value="">
+        <label class="consent"><input type="checkbox" id="c-consent" required><span>You can use what I've written here to reply to me. <a href="/privacy">Privacy policy</a>.</span></label>
+        <button type="submit" id="c-send" class="btn" disabled>Send it</button>
+        <p id="c-note" class="note" aria-live="polite"></p>
+      </form>
+      <div id="c-success" class="success" tabindex="-1" hidden>Sent. You'll hear from Sherry within five working days. If it's urgent, email <a href="mailto:team@threeyearsfromnow.com">team@threeyearsfromnow.com</a>.</div>
+    </div>
+    <aside class="aside">
+      <h2 class="first">Prefer email?</h2>
+      <p><a href="mailto:team@threeyearsfromnow.com">team@threeyearsfromnow.com</a></p>
+      <h2>What happens next</h2>
+      <p>Sherry reads every message. You get a straight reply within five working days: yes and where we'd start, or no and why.</p>
+    </aside>
+  </div>
+</section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="f-logo"><span class="logo small">#TYFNOW</span></div>
+      <nav class="f-nav"><a href="/work">Work</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="/privacy">Privacy policy</a><a href="/terms">Terms</a></nav>
+      <div class="f-contact"><a href="mailto:team@threeyearsfromnow.com">team@threeyearsfromnow.com</a><a href="https://g.page/r/CUSgnoBxODRjEBM/review" rel="noopener" data-track="review_link_click">Leave a Google review</a></div>
+      <div class="f-company">Three Years From Now Ltd. Company number 17013338. Registered office: 259 Sheepcot Lane, Watford WD25 7DJ.</div>
+    </div>
+  </footer>
+</div>
+<div id="exit" class="overlay" role="dialog" aria-modal="true" aria-labelledby="exit-h">
+  <div class="sheet">
+    <div data-answered hidden>
+      <h2 id="exit-h">Even if we don't work together.</h2>
+      <p>You wrote down where you'll be on <strong data-date></strong>. Most people never do that. Put it somewhere you'll see it. Then do one thing this week that moves it.</p>
+      <p data-email-line hidden>If you left an email, the first one is already on its way. The next is in a year.</p>
+      <div class="row"><button type="button" class="btn" data-close>Close</button></div>
+    </div>
+    <div data-skipped>
+      <h2>You didn't write it down.</h2>
+      <p>That's fine. The date's still coming.</p>
+      <div class="row"><a href="/?gate=1" class="btn" data-write-now>Write it now</a><button type="button" class="btn outline" data-close>Close</button></div>
+    </div>
+  </div>
+</div>
+<div id="cookie" class="cookie" role="region" aria-label="Cookies">
+  <p>We'd like to count visits with Google Analytics. It records which pages and buttons get used, not what you type. <a href="/privacy">Privacy policy</a>.</p>
+  <button type="button" class="btn" data-accept>Accept</button>
+  <button type="button" class="btn ghost" data-decline>Decline</button>
+</div>
+<script src="/js/site.js"></script>
+<script src="/js/contact.js"></script>
+</body>
+</html>
