@@ -20,12 +20,12 @@
 .hero .btn{margin-top:8px}
 .chip{position:absolute}
 .chip img{border-radius:12px;object-fit:cover;width:var(--w);height:var(--h)}
-.chip.c1{left:70px;top:90px;transform:rotate(-5deg);--w:180px;--h:120px}
-.chip.c2{left:120px;top:380px;transform:rotate(3deg);--w:150px;--h:100px}
-.chip.c3{left:226px;top:557px;transform:rotate(-2deg);--w:130px;--h:88px}
-.chip.c4{right:80px;top:70px;transform:rotate(4deg);--w:170px;--h:112px}
-.chip.c5{right:110px;top:360px;transform:rotate(-3deg);--w:150px;--h:100px}
-.chip.c6{right:233px;top:570px;transform:rotate(2deg);--w:130px;--h:88px}
+.chip.c1{left:70px;top:90px;transform:rotate(-5deg);--w:252px;--h:168px}
+.chip.c2{left:120px;top:380px;transform:rotate(3deg);--w:210px;--h:140px}
+.chip.c3{left:200px;top:545px;transform:rotate(-2deg);--w:182px;--h:123px}
+.chip.c4{right:80px;top:70px;transform:rotate(4deg);--w:238px;--h:157px}
+.chip.c5{right:110px;top:360px;transform:rotate(-3deg);--w:210px;--h:140px}
+.chip.c6{right:210px;top:555px;transform:rotate(2deg);--w:182px;--h:123px}
 @media (max-width:1200px){.chip.c3,.chip.c6{display:none}.chip.c1{left:24px}.chip.c4{right:24px}.chip.c2{left:40px}.chip.c5{right:40px}}
 @media (max-width:900px){
   .hero{height:auto;min-height:600px;padding:96px 0 96px;gap:20px}
@@ -33,9 +33,9 @@
   .hero .sub{font-size:19px}
   .chip img{border-radius:8px}
   .chip.c2,.chip.c3,.chip.c6{display:none}
-  .chip.c1{left:0;top:12px;--w:112px;--h:74px}
-  .chip.c4{right:0;top:30px;--w:104px;--h:70px}
-  .chip.c5{right:8px;top:auto;bottom:16px;--w:120px;--h:80px;display:block}
+  .chip.c1{left:0;top:12px;--w:157px;--h:104px}
+  .chip.c4{right:0;top:30px;--w:146px;--h:98px}
+  .chip.c5{right:8px;top:auto;bottom:16px;--w:168px;--h:112px;display:block}
 }
 
 /* Why now */
