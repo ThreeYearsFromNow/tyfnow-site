@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Assemble /work, /blog and the three posts for the TYFNOW static site. Run: python3 -I build_work_blog.py <site_dir>"""
 import sys, re, html, pathlib
+BASE = "https://www.threeyearsfromnow.com"
 
 SITE = pathlib.Path(sys.argv[1])
 stub = (SITE / "work" / "index.html").read_text()
@@ -43,6 +44,16 @@ def page(path, title, desc, body, canonical, index=True, extra_head="", body_att
 <meta property="og:description" content="{html.escape(desc, quote=True)}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:type" content="{'article' if '/blog/' in canonical else 'website'}">
+<meta property="og:site_name" content="Three Years From Now">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="{BASE}/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Build. Measure. Repeat. A growth studio for founder-led businesses.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{html.escape(title, quote=True)}">
+<meta name="twitter:description" content="{html.escape(desc, quote=True)}">
+<meta name="twitter:image" content="{BASE}/img/og.png">
 {extra_head}<link rel="preload" href="/fonts/InterTight-var.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="/css/site.css">
 <link rel="stylesheet" href="/css/pages.css">
@@ -55,8 +66,8 @@ def page(path, title, desc, body, canonical, index=True, extra_head="", body_att
     out.write_text(doc)
     print("wrote", path)
 
-BASE = "https://www.threeyearsfromnow.com"
 
+# NOTE 18 Oct 2026: this script predates F29 and v6 JSON-LD enrichment; the live HTML is the source of truth. Reconcile before any rebuild.
 # ---------------- Work ----------------
 work_body = f'''
 <section class="page-head">
