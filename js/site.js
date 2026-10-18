@@ -1,4 +1,4 @@
-/* TYFNOW site.js: storage, dates, banner, exit message, cookie notice, analytics, menu. */
+/* TYFNOW site.js: storage, dates, cookie notice, analytics, menu. Gate, toast and exit message removed 18 Oct 2026 (F37); gate.js parked. */
 (function () {
   'use strict';
   var W = window, D = document;
@@ -50,56 +50,6 @@
     el.querySelector('[data-decline]').addEventListener('click', function () { consent = 'no'; store.set('tyfnow_cookies', 'no'); el.classList.remove('show'); });
   }
 
-  /* ---------- banner: skipped or side door ---------- */
-  function banner() {
-    var el = D.getElementById('banner');
-    if (!el) return;
-    var state = store.get('tyfnow_gate');
-    var isHome = D.body.hasAttribute('data-home');
-    var show = state === 'skipped' || (!state && !isHome);
-    if (!state && !isHome) track('deep_link_entry');
-    if (!show || store.sget('tyfnow_banner_dismissed')) return;
-    el.classList.add('show');
-    track('banner_view');
-    el.querySelector('[data-answer]').addEventListener('click', function () { track('banner_click'); });
-    el.querySelector('[data-close]').addEventListener('click', function () { el.classList.remove('show'); store.sset('tyfnow_banner_dismissed', '1'); track('banner_dismiss'); });
-  }
-
-  /* ---------- exit message: once per visitor ---------- */
-  function exitMessage() {
-    var el = D.getElementById('exit');
-    if (!el) return;
-    var fired = false;
-    function open() {
-      if (fired || store.get('tyfnow_exit_shown')) return;
-      if (D.documentElement.classList.contains('gate-pending')) return; /* never over the gate */
-      fired = true; store.set('tyfnow_exit_shown', '1');
-      var g = goals(), state = store.get('tyfnow_gate');
-      var answered = state === 'answered' && g;
-      el.querySelector('[data-answered]').hidden = !answered;
-      el.querySelector('[data-skipped]').hidden = !!answered;
-      if (answered) {
-        el.querySelector('[data-date]').textContent = fmt(addYears(new Date(g.entry), 3));
-        el.querySelector('[data-email-line]').hidden = !g.emailed;
-      }
-      el.classList.add('on');
-      trapFocus(el);
-      track('exit_view');
-    }
-    el.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', function () { el.classList.remove('on'); track('exit_close'); }); });
-    var wn = el.querySelector('[data-write-now]'); if (wn) wn.addEventListener('click', function () { track('exit_write_now'); });
-    el.addEventListener('click', function (e) { if (e.target === el) { el.classList.remove('on'); } });
-    D.addEventListener('keydown', function (e) { if (e.key === 'Escape' && el.classList.contains('on')) el.classList.remove('on'); });
-    D.addEventListener('visibilitychange', function () { if (D.visibilityState === 'hidden') open(); });
-    W.addEventListener('beforeunload', function () { open(); });
-    /* mobile fallback: after the contact page, or five minutes idle */
-    if (D.body.hasAttribute('data-contact')) { W.setTimeout(open, 20000); }
-    var idle = W.setTimeout(open, 5 * 60 * 1000);
-    ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (ev) {
-      D.addEventListener(ev, function () { W.clearTimeout(idle); idle = W.setTimeout(open, 5 * 60 * 1000); }, { passive: true });
-    });
-  }
-
   /* ---------- focus trap ---------- */
   function trapFocus(container) {
     var f = container.querySelectorAll('a[href],button:not([disabled]),input,textarea,[tabindex]:not([tabindex="-1"])');
@@ -138,7 +88,7 @@
   W.TYFNOW = { store: store, goals: goals, addYears: addYears, fmt: fmt, iso: iso, track: track, trapFocus: trapFocus };
 
   D.addEventListener('DOMContentLoaded', function () {
-    cookieNotice(); banner(); exitMessage(); menu(); youSaid();
+    cookieNotice(); menu(); youSaid();
     D.querySelectorAll('[data-track]').forEach(function (el) {
       el.addEventListener('click', function () { track(el.getAttribute('data-track')); });
     });
