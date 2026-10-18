@@ -13,107 +13,8 @@
 <link rel="preload" href="/fonts/InterTight-var.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="/css/site.css">
 <link rel="stylesheet" href="/css/home.css">
-<script>
-/* Set before first paint so the homepage never flashes behind the gate. No JS: class never set, home shows. */
-(function(){try{var s=localStorage.getItem('tyfnow_gate');var f=/[?&]gate=1/.test(location.search);if(!s||f){document.documentElement.className+=' gate-pending';}}catch(e){document.documentElement.className+=' gate-pending';}})();
-</script>
 </head>
 <body data-home>
-
-<!-- ========== GATE ========== -->
-<div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-heading">
-
-  <!-- Screen 1 -->
-  <section id="gate-s1" class="gate-screen on">
-    <div class="gate-top"><span class="logo small" aria-hidden="true">#TYFNOW</span></div>
-    <div class="gate-grid">
-      <div class="gate-left">
-        <p id="gate-heading" class="gate-h">Three Years From Now is <span class="gate-date" data-three-years>three years from today</span></p>
-        <div class="quote-wrap">
-          <div class="quote" aria-hidden="true"><span id="quote"></span><span id="caret" class="caret"></span></div>
-          <div id="quote-author" class="quote-author" aria-hidden="true"></div>
-          <p id="quote-sr" class="sr-only" aria-live="polite"></p>
-          <div class="quote-ctl">
-            <button type="button" id="q-prev" aria-label="Previous quote"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-            <button type="button" id="q-again" aria-label="Type it again"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></button>
-            <button type="button" id="q-next" aria-label="Next quote"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-            <span id="quote-count" class="quote-count" aria-hidden="true"></span>
-          </div>
-        </div>
-      </div>
-      <div class="gate-spacer"></div>
-      <div class="gate-right">
-        <div class="field">
-          <label for="work">What does the business look like?</label>
-          <textarea id="work" maxlength="280" rows="3" autocomplete="off"></textarea>
-        </div>
-        <button type="button" id="hold" class="btn full" disabled>Hold me to it</button>
-        <p class="gate-terms">Terms and conditions apply. <a href="/terms" id="terms-open">Read them.</a></p>
-        <p class="gate-skip"><button type="button" id="skip">Skip for now</button></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screen 1b: email, optional -->
-  <section id="gate-s1b" class="gate-screen" aria-labelledby="s1b-h">
-    <div class="gate-top"><span class="logo small" aria-hidden="true">#TYFNOW</span></div>
-    <div class="gate-grid">
-      <div class="gate-left">
-        <h2 id="s1b-h" class="gate-h">Written down. Now the hard part.</h2>
-        <p class="gate-body">Want it back? Leave an email and we'll send you what you wrote today, then on <strong data-year-1></strong>, <strong data-year-2></strong> and <strong data-year-3></strong>. Three check-ins. No newsletter.</p>
-      </div>
-      <div class="gate-spacer"></div>
-      <div class="gate-right">
-        <div class="field short">
-          <label for="gate-email">Email</label>
-          <input id="gate-email" type="email" inputmode="email" autocomplete="email" required>
-        </div>
-        <input type="text" id="gate-hp" name="website" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
-        <label class="consent"><input type="checkbox" id="gate-consent"><span>Send me my goals today and on each anniversary. You store what I wrote for three years and one month, then delete it. <a href="/privacy" target="_blank" rel="noopener">Privacy policy</a>.</span></label>
-        <div class="gate-stack">
-          <button type="button" id="gate-send" class="btn full" disabled>Send it</button>
-          <button type="button" id="gate-nothanks" class="btn full ghost">No thanks, just let me in</button>
-        </div>
-        <p id="gate-note" class="gate-note" aria-live="polite"></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screen 2: the skip interrupt -->
-  <section id="gate-s2" class="gate-screen" aria-labelledby="s2-h">
-    <div class="gate-top"><span class="logo small" aria-hidden="true">#TYFNOW</span></div>
-    <div class="gate-grid">
-      <div class="gate-left">
-        <h2 id="s2-h" class="gate-h">Fair enough. One thing before you go.</h2>
-        <p class="gate-body">In a goal-setting study at Dominican University of California, Dr Gail Matthews found that people who wrote their goals down achieved more of them than people who didn't. That's her research, not ours.</p>
-        <p class="gate-body">It takes about ninety seconds. The clock is running either way.</p>
-      </div>
-      <div class="gate-spacer"></div>
-      <div class="gate-right">
-        <div class="gate-stack">
-          <button type="button" id="s2-back" class="btn full">Go back and write it</button>
-          <button type="button" id="s2-skip" class="btn full ghost">I'll take my chances</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Terms drawer -->
-  <div id="gate-terms" class="overlay" role="dialog" aria-modal="true" aria-labelledby="gt-h">
-    <div id="gate-sheet" class="sheet">
-      <h2 id="gt-h">Terms and conditions</h2>
-      <p>By pressing "Hold me to it" you agree to the following.</p>
-      <ol>
-        <li>You wrote it, you own it. If you didn't leave an email, we can't remind you. That's your job.</li>
-        <li>"Be a millionaire" is not a goal. It's a wish with a number on it. Say what the business does, who it does it for, and what that lets you do.</li>
-        <li>You cannot write "more clients" and then spend three years doing what you're doing now. The site will let you in. Reality won't.</li>
-        <li>Three years is 1,096 days. It's also 156 Mondays. Plan accordingly.</li>
-        <li>Nothing here is legal, financial or health advice, or a guarantee. It's a question, and you answered it.</li>
-      </ol>
-      <div class="row"><button type="button" id="terms-accept" class="btn">I accept</button><button type="button" id="terms-later" class="btn outline">I need a minute</button></div>
-    </div>
-  </div>
-</div>
 
 <!-- ========== SITE ========== -->
 <div id="site">
@@ -127,7 +28,6 @@
     </nav>
   </header>
 
-  <div id="banner" class="banner" role="status"><div><p>You skipped the question.<br><a href="/?gate=1" data-answer>Write it here</a> and we'll<br>map the path to it.</p><p class="small">Trust the process.</p></div><button type="button" aria-label="Dismiss" data-close>&times;</button></div>
 
   <main>
     <section class="hero wrap" id="top">
@@ -278,7 +178,6 @@
     <section id="contact" class="cta-sec wrap">
       <div class="card cta-card">
         <h2>Something need fixing?<br><span>Say what it is.</span><br>We'll say what it takes.</h2>
-        <p class="said" data-you-said hidden>You said: <span data-work></span></p>
         <form id="cta-form" class="cta-form" action="/contact" method="get">
           <div class="cta-field">
             <label for="cta-email" class="sr-only">Your email</label>
@@ -302,23 +201,6 @@
   </footer>
 </div>
 
-<!-- Exit message -->
-<div id="exit" class="overlay" role="dialog" aria-modal="true" aria-labelledby="exit-h">
-  <div class="sheet">
-    <div data-answered hidden>
-      <h2 id="exit-h">Even if we don't work together.</h2>
-      <p>You wrote down where you'll be on <strong data-date></strong>. Most people never do that. Put it somewhere you'll see it. Then do one thing this week that moves it.</p>
-      <p data-email-line hidden>If you left an email, the first one is already on its way. The next is in a year.</p>
-      <div class="row"><button type="button" class="btn" data-close>Close</button></div>
-    </div>
-    <div data-skipped>
-      <h2>You didn't write it down.</h2>
-      <p>That's fine. The date's still coming.</p>
-      <div class="row"><a href="/?gate=1" class="btn" data-write-now>Write it now</a><button type="button" class="btn outline" data-close>Close</button></div>
-    </div>
-  </div>
-</div>
-
 <!-- Cookie notice (shows only when a GA4 ID is set) -->
 <div id="cookie" class="cookie" role="region" aria-label="Cookies">
   <p>We'd like to count visits with Google Analytics. It records which pages and buttons get used, not what you type. <a href="/privacy">Privacy policy</a>.</p>
@@ -326,13 +208,7 @@
   <button type="button" class="btn ghost" data-decline>Decline</button>
 </div>
 
-<!-- Netlify form registration (never shown) -->
-<form name="gate-goals" netlify netlify-honeypot="website" hidden>
-  <input type="text" name="work"><input type="email" name="email"><input type="text" name="consent"><input type="text" name="entry-date"><input type="text" name="three-years"><input type="text" name="website">
-</form>
-
 <script src="/js/site.js"></script>
-<script src="/js/gate.js"></script>
 <script src="/js/home.js"></script>
 </body>
 </html>
