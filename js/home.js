@@ -125,7 +125,7 @@
     var hs = D.getElementById('hs'), track = D.getElementById('hs-track'); if (!hs || !track || reduced) return;
     var prev = D.getElementById('hs-prev'), next = D.getElementById('hs-next'), cards = track.children;
     hs.classList.add('hs-on');
-    var ticking = false, maxX = 0, told = false, LO = 0.02, HI = 0.98;   // barely any hold at either end
+    var ticking = false, maxX = 0, told = false, LO = 0, HI = 1;   // no hold: the page moves on the moment the last card reaches the grid
     var measure = function () {
       maxX = Math.max(0, track.scrollWidth - W.innerWidth);
       hs.style.height = Math.round(W.innerHeight + maxX * 1.35 + 40) + 'px';

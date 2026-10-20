@@ -131,32 +131,30 @@
 @media (prefers-reduced-motion:reduce){.ring,.rec{animation:none}.tool{transition:none}}
 
 /* Repeat */
-.repeat-card{background:var(--green);color:#fff;padding:96px 72px;display:flex;align-items:flex-start;justify-content:center}
+.repeat-card{background:#E8E6EC;color:var(--ink);padding:96px 72px;display:flex;align-items:flex-start;justify-content:center}
 .step{flex:1 1 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px}
-.step .disc{width:132px;height:132px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center}
+.step .disc{width:132px;height:132px;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center}
 .step .name{font-size:26px;font-weight:600;letter-spacing:-0.02em}
-.step p{font-size:16px;line-height:1.5;color:rgba(255,255,255,.82);max-width:300px}
+.step p{font-size:16px;line-height:1.5;color:var(--body);max-width:300px}
 .arrow{flex:0 0 56px}
+.arrow path{stroke:var(--ink);opacity:.4}
 /* Build: window, five parts slide in, then the Live pill. 6s loop */
 .bld .p{opacity:0;transform-box:fill-box;transform-origin:left center;animation:bpart 6s ease-out infinite;animation-delay:var(--d)}
 .bld .p1{--d:.4s}.bld .p5{--d:.9s}.bld .p2{--d:1.4s}.bld .p3{--d:1.9s}.bld .p4{--d:2.4s}
 @keyframes bpart{0%{opacity:0;transform:translateX(-8px) scaleX(.3)}6%{opacity:1;transform:translateX(0) scaleX(1)}78%{opacity:1}86%,100%{opacity:0}}
 .bld .ship{opacity:0;transform-box:fill-box;transform-origin:center;animation:bship 6s ease-out infinite;animation-delay:3.2s}
 @keyframes bship{0%{opacity:0;transform:scale(.5)}5%{opacity:1;transform:scale(1.1)}8%{transform:scale(1)}65%{opacity:1;transform:scale(1)}72%,100%{opacity:0;transform:scale(.8)}}
-/* Repeat: static loop arrow; the three dots under the brain take turns lighting up */
-.rpt .dots circle{opacity:.3;transform-box:fill-box;transform-origin:center;animation:think 1.8s ease-in-out infinite}
-.rpt .d1{animation-delay:0s}.rpt .d2{animation-delay:.3s}.rpt .d3{animation-delay:.6s}
-@keyframes think{0%,60%,100%{opacity:.3;transform:translateY(0)}20%{opacity:1;transform:translateY(-2px)}}72%{opacity:1}90%{opacity:1}96%,100%{opacity:0}}
-.tape{transform-box:fill-box;transform-origin:0 50%;animation:tape 2.6s ease-in-out infinite}
-@keyframes tape{0%,100%{transform:scaleX(.25)}50%{transform:scaleX(1)}}
-/* Measure: three rows always on; the tallies tick. 6s loop */
-.meas .mrow{transform:translate(0,var(--y))}
-.meas .r1{--y:16px;--d:0s}.meas .r2{--y:32px;--d:.4s}.meas .r3{--y:48px;--d:.8s}
-.meas .n{opacity:0;animation:mnum 6s linear infinite}
-.meas .n1{animation-delay:var(--d)}.meas .n2{animation-delay:calc(var(--d) + 1.6s)}.meas .n3{animation-delay:calc(var(--d) + 3.2s)}
-@keyframes mnum{0%{opacity:0;transform:translateY(3px)}4%{opacity:1;transform:translateY(0)}24%{opacity:1}28%{opacity:0;transform:translateY(-3px)}100%{opacity:0}}
-.meas .n3{animation-name:mnum3}
-@keyframes mnum3{0%{opacity:0;transform:translateY(3px)}4%{opacity:1;transform:translateY(0)}44%{opacity:1}48%,100%{opacity:0}}
+/* Repeat: two chunky arrows turn a full circle, rest, turn again */
+.rpt .spin{transform-origin:32px 32px;animation:turn 3.6s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes turn{0%,12%{transform:rotate(0)}62%,100%{transform:rotate(360deg)}}
+.rpt .core{transform-box:fill-box;transform-origin:center;animation:core 3.6s ease-in-out infinite}
+@keyframes core{0%,12%{transform:scale(1)}37%{transform:scale(1.35)}62%,100%{transform:scale(1)}}
+/* Measure: three bars climb in turn, then the arrow lifts. 4.5s loop */
+.meas .bar{transform-box:fill-box;transform-origin:50% 100%;animation:grow 4.5s ease-out infinite}
+.meas .b2{animation-delay:.25s}.meas .b3{animation-delay:.5s}
+@keyframes grow{0%{transform:scaleY(.12)}16%,82%{transform:scaleY(1)}94%,100%{transform:scaleY(.12)}}
+.meas .up{opacity:0;animation:lift 4.5s ease-out infinite;animation-delay:.9s}
+@keyframes lift{0%{opacity:0;transform:translateY(5px)}10%,70%{opacity:1;transform:translateY(0)}82%,100%{opacity:0;transform:translateY(-2px)}}
 @media (max-width:900px){
   .repeat-card{flex-direction:column;align-items:center;padding:48px 24px;gap:28px}
   .arrow{transform:rotate(90deg);height:56px;flex-basis:auto}
@@ -228,8 +226,8 @@
 
 @media (prefers-reduced-motion:reduce){
   .row,.tape{animation:none}
-  .bld .p,.bld .ship,.rpt .dots circle{animation:none;opacity:1;transform:none}
-  .meas .n{animation:none}.meas .n3{opacity:1}
+  .bld .p,.bld .ship{animation:none;opacity:1;transform:none}
+  .meas .bar,.meas .up,.rpt .spin,.rpt .core{animation:none;opacity:1;transform:none}
 }
 
 
