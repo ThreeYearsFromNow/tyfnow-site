@@ -83,18 +83,32 @@
     var rw; W.addEventListener('resize', function () { W.clearTimeout(rw); rw = W.setTimeout(build, 200); });
   })();
 
-  /* ---------- three steps: 2 and 3 revealed on scroll ---------- */
+  /* ---------- three steps: number first, then its text, as the page scrolls ---------- */
   (function () {
     var list = D.getElementById('steps'); if (!list) return;
     var items = [].slice.call(list.querySelectorAll('.stp'));
     if (reduced || !('IntersectionObserver' in W)) return;
     list.classList.add('armed');
-    var set = function () { var n = list.querySelectorAll('.stp.is-in').length; list.style.setProperty('--prog', Math.max(0, n - 1) / (items.length - 1)); };
-    set();
+    var targets = [], seen = [], idx = 0;
+    items.forEach(function (li, i) {
+      [li.querySelector('.n'), li.querySelector('.txt')].forEach(function (el) { targets.push({ el: el, step: i, isNum: el.classList.contains('n') }); });
+    });
+    var flush = function () {
+      while (idx < targets.length && seen[idx]) {
+        var t = targets[idx];
+        t.el.classList.add('is-in');
+        if (t.isNum) { if (t.step > 0) items[t.step - 1].classList.add('lit'); T.track('step_' + (t.step + 1)); }
+        idx++;
+      }
+    };
     var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); set(); T.track('step_' + (items.indexOf(e.target) + 1)); } });
-    }, { rootMargin: '0px 0px -30% 0px', threshold: 0.3 });
-    items.forEach(function (i) { io.observe(i); });
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        for (var k = 0; k < targets.length; k++) if (targets[k].el === e.target) { seen[k] = true; io.unobserve(e.target); }
+      });
+      flush();
+    }, { rootMargin: '0px 0px -28% 0px', threshold: 0.4 });
+    targets.forEach(function (t) { io.observe(t.el); });
   })();
 
   /* ---------- reviews ---------- */
