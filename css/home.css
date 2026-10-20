@@ -291,12 +291,31 @@
 }
 
 /* Coloured container around the Branding / Website / Content stage */
-.sys-sec{max-width:none;background:var(--band);margin-top:120px;padding:96px 0 0}
-.sys-sec .sec-head{padding:0 var(--gutter)}
+.sys-sec{max-width:none;background:var(--band);margin-top:120px;padding:0}
 .sys-sec .hs-img{background:rgba(255,255,255,.55)}
 .sys-sec .hs-img.two{background:var(--band)}
 .sys-sec .hs-img.two .ph{background:rgba(255,255,255,.55)}
 .sys-sec .hs-nav span{background:var(--band);border-color:#cdbfe0;color:#7d6c99}
 .sys-sec .hs-nav span.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .sys-sec .hs-text .q{color:#7d6c99}
-@media (max-width:900px){.sys-sec{margin-top:80px;padding-top:64px}}
+@media (max-width:900px){.sys-sec{margin-top:80px}}
+
+/* v27: headline and pills pinned at the top of the stage; image a card, not the whole half */
+.hs-head{padding:56px var(--gutter) 0}
+.hs-head h2{font-size:56px;max-width:none}
+.hs-panel{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}
+.hs-img{border-radius:24px;margin:8px var(--gutter) 24px 0;align-self:center;height:min(100%,500px);width:100%}
+.hs-on .hs-nav{position:static;justify-content:center;margin:20px 0 4px;gap:8px}
+.hs-on .hs-text{padding-top:24px;padding-bottom:24px}
+.hs-on .hs-stick .foundation{padding:22px var(--gutter)}
+.hs-on .hs-stick .foundation p{font-size:20px}
+@media (max-width:900px){
+  .hs-panel{grid-template-columns:minmax(0,1fr)}
+  .hs-head{padding:20px var(--gutter) 0}.hs-head h2{font-size:26px;line-height:1.1}
+  .hs-on .hs-nav{margin:12px 0 0;gap:6px}.hs-nav span{font-size:11px;padding:5px 9px}
+  .hs-img{margin:0 var(--gutter) 16px;height:auto;width:auto;aspect-ratio:4/3;align-self:stretch}
+  .hs-on .hs-panel{grid-template-rows:auto minmax(0,1fr)}
+  .hs-on .hs-img{aspect-ratio:auto;height:auto;margin:0 var(--gutter) 14px}
+  .hs-on .hs-text{padding:14px var(--gutter) 12px}
+  .hs-on .hs-stick .foundation p{font-size:14px}
+}
