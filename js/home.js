@@ -4,6 +4,62 @@
   var W = window, D = document, T = W.TYFNOW || { track: function () {} };
   var reduced = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+
+  /* ---------- hero tools: pop in one by one ---------- */
+  (function () {
+    var box = D.getElementById('tools'), hero = box && box.parentNode;
+    if (!box) return;
+    var NAMES = ['ChatGPT','Claude','Gemini','Midjourney','Canva','Adobe Express','Figma','Copilot','Notion','Slack','Monday','Asana','Trello','ClickUp','HubSpot','Salesforce','Pipedrive','Zoho CRM','Mailchimp','Klaviyo','Zapier','Make','Airtable','Webflow','Wix','Squarespace','Shopify','Perplexity','Runway','ElevenLabs','Loom','Framer','Semrush','Instagram','TikTok','YouTube','LinkedIn','Facebook'];
+    var COLS = ['#2B2140','#C85A36','#2F6B4F','#9B7FD1','#E8744F','#5FB08A'];
+    /* Logo slot: drop an SVG at /img/tools/<slug>.svg and it replaces the name. */
+    var LOGOS = {};
+    function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }
+    function build() {
+      box.innerHTML = '';
+      var w = hero.clientWidth, h = hero.clientHeight, slots = [];
+      if (w > 900) {
+        /* two side columns, grid of circles, random jitter */
+        var d = w > 1200 ? 112 : (w > 1000 ? 96 : 80), cols = w > 1200 ? 3 : 2;
+        var rows = Math.floor((h - 40) / (d + 18));
+        for (var r = 0; r < rows; r++) for (var cI = 0; cI < cols; cI++) {
+          var y = 40 + d / 2 + r * (d + 18) + (cI % 2 ? 10 : -6);
+          /* the inner column only above and below the headline band */
+                    slots.push({ x: 24 + d / 2 + cI * (d + 16), y: y, d: d });
+          slots.push({ x: w - (24 + d / 2 + cI * (d + 16)), y: y, d: d });
+        }
+      } else {
+        /* phone: a band above the headline and one below the button */
+        var d2 = 66, perRow = Math.floor((w - 16) / (d2 + 10));
+        for (var i = 0; i < perRow; i++) {
+          slots.push({ x: 8 + d2 / 2 + i * (d2 + 10) + (i % 2 ? 0 : 6), y: 50 + (i % 2 ? 14 : 0), d: d2 });
+          slots.push({ x: 8 + d2 / 2 + i * (d2 + 10) + (i % 2 ? 6 : 0), y: h - 62 - (i % 2 ? 0 : 14), d: d2 });
+        }
+      }
+      /* drop any slot that would touch the headline, sub-line or button */
+      var hb = hero.getBoundingClientRect();
+      var keep = ['h1', '.sub', '.btn'].map(function (q) { var r = hero.querySelector(q).getBoundingClientRect(); return { l: r.left - hb.left - 14, r: r.right - hb.left + 14, t: r.top - hb.top - 14, b: r.bottom - hb.top + 14 }; });
+      slots = slots.filter(function (s) {
+        var l = s.x - s.d / 2, r = s.x + s.d / 2, tp = s.y - s.d / 2, bt = s.y + s.d / 2;
+        return !keep.some(function (k) { return l < k.r && r > k.l && tp < k.b && bt > k.t; });
+      });
+      /* shuffle appearance order, deterministic per load */
+      var order = slots.map(function (s, i) { return i; }).sort(function () { return Math.random() - 0.5; });
+      var els = [];
+      for (var k = 0; k < order.length && k < NAMES.length; k++) {
+        var s = slots[order[k]], name = NAMES[k], el = D.createElement('div');
+        el.className = 'tool'; el.style.setProperty('--d', s.d + 'px'); el.style.left = s.x + 'px'; el.style.top = s.y + 'px';
+        el.style.color = COLS[k % COLS.length];
+        var lg = LOGOS[slug(name)];
+        if (lg) { var im = D.createElement('img'); im.src = lg; im.alt = ''; el.appendChild(im); } else { el.textContent = name; }
+        box.appendChild(el); els.push(el);
+      }
+      var delay = reduced ? 0 : 320;
+      els.forEach(function (el, i) { W.setTimeout(function () { el.classList.add('on'); }, 500 + i * delay); });
+    }
+    build();
+    var rw; W.addEventListener('resize', function () { W.clearTimeout(rw); rw = W.setTimeout(build, 200); });
+  })();
+
   /* ---------- globe ---------- */
   var svg = D.getElementById('globe');
   if (svg) {
