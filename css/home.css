@@ -38,9 +38,11 @@
 .stp .line{font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.15;max-width:640px;margin:0 auto;text-wrap:balance}
 .stp .body{text-wrap:balance;margin:12px auto 0;font-size:18px;line-height:1.45;color:var(--body);max-width:560px}
 .stp:not(:last-child)::after{content:"";position:absolute;left:50%;top:calc(100% + 28px);height:84px;width:2px;margin-left:-1px;background:var(--rule)}
-.stp:not(:last-child)::before{content:"";position:absolute;left:50%;top:calc(100% + 28px);height:84px;width:2px;margin-left:-1px;background:var(--sky);transform:scaleY(0);transform-origin:top;transition:transform .7s ease;z-index:1}
+.stp:not(:last-child)::before{content:"";position:absolute;left:50%;top:calc(100% + 28px);height:84px;width:2px;margin-left:-1px;background:var(--sky);transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.22,.61,.36,1);z-index:1}
 .stp.lit::before{transform:scaleY(1)}
-.steps.armed .n,.steps.armed .txt{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.steps.armed .n,.steps.armed .txt{opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(.22,.61,.36,1),transform .55s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.steps.armed .n{transform:translateY(24px) scale(.8)}
+.steps.armed .txt{transition-delay:.06s}
 .steps.armed .is-in{opacity:1;transform:none}
 .gap-line{margin:56px auto 0;max-width:760px;font-size:20px;line-height:1.4;color:var(--body);text-wrap:balance}
 /* System: three cards */

@@ -83,32 +83,38 @@
     var rw; W.addEventListener('resize', function () { W.clearTimeout(rw); rw = W.setTimeout(build, 200); });
   })();
 
-  /* ---------- three steps: number first, then its text, as the page scrolls ---------- */
+  /* ---------- three steps: number, then its text, driven by scroll position (reverses on the way up) ---------- */
   (function () {
     var list = D.getElementById('steps'); if (!list) return;
     var items = [].slice.call(list.querySelectorAll('.stp'));
-    if (reduced || !('IntersectionObserver' in W)) return;
+    if (reduced) return;
     list.classList.add('armed');
-    var targets = [], seen = [], idx = 0;
+    var targets = [];
     items.forEach(function (li, i) {
-      [li.querySelector('.n'), li.querySelector('.txt')].forEach(function (el) { targets.push({ el: el, step: i, isNum: el.classList.contains('n') }); });
+      [li.querySelector('.n'), li.querySelector('.txt')].forEach(function (el) { targets.push({ el: el, step: i, isNum: el.classList.contains('n'), on: false }); });
     });
-    var flush = function () {
-      while (idx < targets.length && seen[idx]) {
-        var t = targets[idx];
-        t.el.classList.add('is-in');
-        if (t.isNum) { if (t.step > 0) items[t.step - 1].classList.add('lit'); T.track('step_' + (t.step + 1)); }
-        idx++;
-      }
-    };
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        for (var k = 0; k < targets.length; k++) if (targets[k].el === e.target) { seen[k] = true; io.unobserve(e.target); }
+    var told = {}, ticking = false;
+    var update = function () {
+      ticking = false;
+      var line = W.innerHeight * 0.72, slack = 36;
+      targets.forEach(function (t, k) {
+        var top = t.el.getBoundingClientRect().top;
+        var prevOn = k === 0 || targets[k - 1].on;          // strict order: nothing shows before what precedes it
+        var want = t.on ? (top < line + slack && prevOn) : (top < line && prevOn);
+        if (want !== t.on) {
+          t.on = want;
+          t.el.classList.toggle('is-in', want);
+          if (t.isNum && t.step > 0) items[t.step - 1].classList.toggle('lit', want);
+          if (want && t.isNum && !told[t.step]) { told[t.step] = 1; T.track('step_' + (t.step + 1)); }
+        }
       });
-      flush();
-    }, { rootMargin: '0px 0px -28% 0px', threshold: 0.4 });
-    targets.forEach(function (t) { io.observe(t.el); });
+      // a hidden item hides everything after it too
+      for (var k = 1; k < targets.length; k++) if (!targets[k - 1].on && targets[k].on) { targets[k].on = false; targets[k].el.classList.remove('is-in'); if (targets[k].isNum && targets[k].step > 0) items[targets[k].step - 1].classList.remove('lit'); }
+    };
+    var req = function () { if (!ticking) { ticking = true; W.requestAnimationFrame(update); } };
+    W.addEventListener('scroll', req, { passive: true });
+    W.addEventListener('resize', req);
+    update();
   })();
 
   /* ---------- reviews ---------- */
