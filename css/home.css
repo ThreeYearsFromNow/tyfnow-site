@@ -291,7 +291,7 @@
 }
 
 /* Coloured container around the Branding / Website / Content stage */
-.sys-sec{max-width:none;background:var(--band);margin-top:120px;padding:0}
+.sys-sec{max-width:none;margin-top:120px;padding:0}
 .sys-sec .hs-img{background:rgba(255,255,255,.55)}
 .sys-sec .hs-img.two{background:var(--band)}
 .sys-sec .hs-img.two .ph{background:rgba(255,255,255,.55)}
@@ -319,3 +319,41 @@
   .hs-on .hs-text{padding:14px var(--gutter) 12px}
   .hs-on .hs-stick .foundation p{font-size:14px}
 }
+
+/* v28: after the Apple "highlights" reference: left headline, big rounded colour card, text top-left, image floating on it, pill pager below */
+.hs-head{padding:40px max(40px,calc((100vw - 1360px) / 2)) 0;text-align:left}
+.hs-head h2{font-size:56px;text-align:left;max-width:none;margin:0}
+.hs-panel{display:block;padding:20px max(40px,calc((100vw - 1360px) / 2)) 0;min-height:0}
+.hs-card{height:100%;border-radius:32px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);overflow:hidden;position:relative}
+.hs-card.c1{background:#EFEAFB}.hs-card.c2{background:#FBF0D8}.hs-card.c3{background:#DDF0E6}
+.hs-card .hs-text{align-self:start;justify-content:flex-start;padding:48px 24px 40px 56px;gap:14px}
+.hs-card .hs-text .name{font-size:48px}
+.hs-card .hs-text .q{color:#7d6c99}
+.hs-card .hs-img{margin:0;justify-self:center;align-self:center;height:min(calc(100% - 64px),460px);width:auto;aspect-ratio:1/1;max-width:calc(100% - 48px);border-radius:20px;background:#fff;box-shadow:0 18px 50px rgba(43,33,64,.14)}
+.hs-card .hs-img.two{aspect-ratio:16/10;display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.hs-card .hs-img.wide{aspect-ratio:4/3}
+.hs-card .hs-img .ph{background:var(--band)}
+.hs-pager{display:none}
+.hs-on .hs-pager{display:flex;justify-content:center;padding:14px 0 18px}
+.hs-pager .pill{display:flex;align-items:center;gap:6px;background:rgba(43,33,64,.07);border-radius:999px;padding:6px}
+.hs-pager .dot{border:0;background:transparent;cursor:pointer;height:32px;min-width:32px;display:flex;align-items:center;justify-content:center;padding:0;border-radius:999px}
+.hs-pager .dot i{display:block;width:8px;height:8px;border-radius:99px;background:#8a8099;position:relative;overflow:hidden;transition:width .35s cubic-bezier(.22,.61,.36,1),background .3s}
+.hs-pager .dot.on i{width:56px;background:rgba(43,33,64,.25)}
+.hs-pager .dot.on i::after{content:"";position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(var(--f,0))}
+.hs-pager .dot:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.hs-on .hs-text{padding-top:48px}
+.hs-on .hs-panel{padding-top:20px;padding-bottom:0}
+@media (max-width:900px){
+  .hs-head{padding:20px 16px 0}.hs-head h2{font-size:26px}
+  .hs-panel{padding:12px 16px 0}
+  .hs-card{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);border-radius:24px}
+  .hs-card .hs-text{padding:22px 20px 8px;gap:8px}
+  .hs-card .hs-text .name{font-size:30px}
+  .hs-card .hs-img{height:calc(100% - 20px);max-height:none;width:auto;max-width:calc(100% - 32px);margin:0 0 16px;aspect-ratio:1/1;min-height:0}
+  .hs-card .hs-img.two{aspect-ratio:16/10}
+  .hs-on .hs-pager{padding:8px 0 10px}
+  .hs-on .hs-panel{padding-top:12px}
+}
+
+.hs-head{align-items:flex-start;text-align:left}
+.hs-head h2{margin:0}
