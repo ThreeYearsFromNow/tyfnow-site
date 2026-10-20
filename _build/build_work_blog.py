@@ -49,7 +49,7 @@ def page(path, title, desc, body, canonical, index=True, extra_head="", body_att
 <meta property="og:image" content="{BASE}/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Hopping tools isn't a strategy. A system is. A growth studio for business owners.">
+<meta property="og:image:alt" content="Hopping tools isn't a strategy. A growth studio for business owners.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{html.escape(title, quote=True)}">
 <meta name="twitter:description" content="{html.escape(desc, quote=True)}">
