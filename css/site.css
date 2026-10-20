@@ -71,7 +71,7 @@ p{margin:0}
   .menu-btn{display:inline-flex;align-items:center;position:relative;z-index:41}
 }
 
-.site-footer{border-top:1px solid var(--rule);color:var(--body);font-size:15px}
+.site-footer{background:#E8E6EC;color:var(--body);font-size:15px}
 .site-footer .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:32px;padding-top:56px;padding-bottom:120px}
 .site-footer .f-co{grid-column:1/span 5;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .site-footer .f-company{font-size:13px;line-height:1.6}
@@ -79,7 +79,7 @@ p{margin:0}
 .site-footer .f-nav{grid-column:10/span 3;display:flex;flex-direction:column;gap:10px;padding-top:35px}
 .site-footer .f-nav a{color:var(--ink);text-decoration:none}
 .site-footer .f-copy{grid-column:1/span 12;position:relative;font-size:13px;padding-top:24px;text-align:center}
-.site-footer .f-copy::before{content:"";position:absolute;left:50%;top:0;width:100vw;transform:translateX(-50%);border-top:1px solid var(--rule)}
+.site-footer .f-copy::before{content:"";position:absolute;left:50%;top:0;width:100vw;transform:translateX(-50%);border-top:1px solid rgba(43,33,64,.14)}
 .site-footer .f-copy a{color:var(--body)}
 @media (max-width:900px){
   .site-footer .wrap{display:flex;flex-direction:column;padding-bottom:64px}
