@@ -125,10 +125,10 @@
     var hs = D.getElementById('hs'), track = D.getElementById('hs-track'); if (!hs || !track || reduced) return;
     var prev = D.getElementById('hs-prev'), next = D.getElementById('hs-next'), cards = track.children;
     hs.classList.add('hs-on');
-    var ticking = false, maxX = 0, told = false, LO = 0.04, HI = 0.96;   // a short hold at each end
+    var ticking = false, maxX = 0, told = false, LO = 0.02, HI = 0.98;   // barely any hold at either end
     var measure = function () {
       maxX = Math.max(0, track.scrollWidth - W.innerWidth);
-      hs.style.height = Math.round(W.innerHeight + maxX * 2.2 + 120) + 'px';
+      hs.style.height = Math.round(W.innerHeight + maxX * 1.35 + 40) + 'px';
     };
     var span = function () { var r = hs.getBoundingClientRect(); return { top: r.top + W.pageYOffset, total: r.height - W.innerHeight }; };
     var update = function () {
