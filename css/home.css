@@ -151,15 +151,17 @@
 @keyframes tape{0%,100%{transform:scaleX(.25)}50%{transform:scaleX(1)}}
 .loop{transform-box:fill-box;transform-origin:center;animation:turn 3s linear infinite}
 @keyframes turn{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-/* Measure: glass, then bubble, like, share, then the Orders pill counting 3, 7, 11. 6s loop */
-.meas .m1,.meas .m2,.meas .m3,.meas .m4{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.5);animation:mpop 6s ease-out infinite}
-.meas .m1{animation-delay:.6s}.meas .m2{animation-delay:1.3s}.meas .m3{animation-delay:2s}.meas .m4{animation-delay:2.8s}
-@keyframes mpop{0%{opacity:0;transform:scale(.5)}6%{opacity:1;transform:scale(1.12)}9%{transform:scale(1)}78%{opacity:1;transform:scale(1)}86%,100%{opacity:0;transform:scale(.8)}}
-.meas .n{opacity:0;animation:mnum 6s linear infinite}
-.meas .n1{animation-delay:2.8s}.meas .n2{animation-delay:3.6s}.meas .n3{animation-delay:4.4s}
-@keyframes mnum{0%{opacity:0;transform:translateY(4px)}4%{opacity:1;transform:translateY(0)}13%{opacity:1}16%{opacity:0;transform:translateY(-4px)}100%{opacity:0}}
+/* Measure: four rows slide in one by one; tallies tick. 7s loop */
+.meas .mrow{opacity:0;animation:mslide 7s ease-out infinite}
+.meas .r1{animation-delay:.3s}.meas .r2{animation-delay:1.1s}.meas .r3{animation-delay:1.9s}.meas .r4{animation-delay:2.7s}
+@keyframes mslide{0%{opacity:0;transform:translate(-18px,var(--y))}6%{opacity:1;transform:translate(0,var(--y))}80%{opacity:1}88%,100%{opacity:0;transform:translate(0,var(--y))}}
+.meas .r1{--y:14px}.meas .r2{--y:28px}.meas .r3{--y:42px}.meas .r4{--y:56px}
+.meas .n{opacity:0;animation:mnum 7s linear infinite}
+.meas .n1{animation-delay:var(--d)}.meas .n2{animation-delay:calc(var(--d) + 1.1s)}.meas .n3{animation-delay:calc(var(--d) + 2.2s)}
+.meas .r1{--d:.3s}.meas .r2{--d:1.1s}.meas .r3{--d:1.9s}.meas .r4{--d:2.7s}
+@keyframes mnum{0%{opacity:0;transform:translateY(3px)}3%{opacity:1;transform:translateY(0)}14%{opacity:1}16.5%{opacity:0;transform:translateY(-3px)}100%{opacity:0}}
 .meas .n3{animation-name:mnum3}
-@keyframes mnum3{0%{opacity:0;transform:translateY(4px)}4%{opacity:1;transform:translateY(0)}24%{opacity:1}30%,100%{opacity:0}}
+@keyframes mnum3{0%{opacity:0;transform:translateY(3px)}3%{opacity:1;transform:translateY(0)}48%{opacity:1}54%,100%{opacity:0}}4%{opacity:1;transform:translateY(0)}24%{opacity:1}30%,100%{opacity:0}}
 @media (max-width:900px){
   .repeat-card{flex-direction:column;align-items:center;padding:48px 24px;gap:28px}
   .arrow{transform:rotate(90deg);height:56px;flex-basis:auto}
@@ -231,5 +233,5 @@
 
 @media (prefers-reduced-motion:reduce){
   .row,.hammer,.tape,.loop{animation:none}
-  .meas .m1,.meas .m2,.meas .m3,.meas .m4{animation:none;opacity:1;transform:none}.meas .n{animation:none}.meas .n3{opacity:1}
+  .meas .mrow{animation:none;opacity:1;transform:translate(0,var(--y))}.meas .n{animation:none}.meas .n3{opacity:1}
 }
