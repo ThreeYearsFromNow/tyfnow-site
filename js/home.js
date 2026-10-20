@@ -89,12 +89,12 @@
     var items = [].slice.call(list.querySelectorAll('.stp'));
     if (reduced || !('IntersectionObserver' in W)) return;
     list.classList.add('armed');
-    var set = function () { var n = list.querySelectorAll('.stp.is-in').length; list.style.setProperty('--prog', (n - 1) / (items.length - 1)); };
+    var set = function () { var n = list.querySelectorAll('.stp.is-in').length; list.style.setProperty('--prog', Math.max(0, n - 1) / (items.length - 1)); };
     set();
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); set(); T.track('step_' + (items.indexOf(e.target) + 1)); } });
-    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.2 });
-    items.slice(1).forEach(function (i) { io.observe(i); });
+    }, { rootMargin: '0px 0px -30% 0px', threshold: 0.3 });
+    items.forEach(function (i) { io.observe(i); });
   })();
 
   /* ---------- reviews ---------- */
