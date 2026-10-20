@@ -1,4 +1,4 @@
-/* TYFNOW home.js: globe, reviews, closing CTA. */
+/* TYFNOW home.js: hero tools, steps, reviews, closing CTA, owner lines. */
 (function () {
   'use strict';
   var W = window, D = document, T = W.TYFNOW || { track: function () {} };
@@ -83,67 +83,19 @@
     var rw; W.addEventListener('resize', function () { W.clearTimeout(rw); rw = W.setTimeout(build, 200); });
   })();
 
-  /* ---------- globe ---------- */
-  var svg = D.getElementById('globe');
-  if (svg) {
-    var NAMES = ['ChatGPT','Claude','Gemini','Nano Banana','Midjourney','Canva','Adobe Express','Figma','Copilot','Notion','Slack','Monday','Asana','Trello','ClickUp','HubSpot','Salesforce','Pipedrive','Zoho CRM','Mailchimp','Klaviyo','Zapier','Make','Airtable','Webflow','Wix','Squarespace','Shopify','Perplexity','Runway','ElevenLabs','Loom','Framer','Semrush','Instagram','TikTok','YouTube','LinkedIn','Facebook','Threads','Newsletters'];
-    var COLS = ['#2B2140','#F2B35B','#5FB08A','#E8744F','#9B7FD1','#2F6B4F','#F2B35B','#E8744F'];
-    var SIZES = [9,13,7,11,14,8,12,10];
-    var n = NAMES.length, golden = Math.PI * (3 - Math.sqrt(5));
-    var NS = 'http://www.w3.org/2000/svg';
-    var tilt = 0.35, R = 250, cx = 300, cy = 300;
-    var ang = Math.random() * Math.PI * 2, dir = Math.random() < 0.5 ? 1 : -1;
-    var all = true, hover = -1;
-
-    var nodes = NAMES.map(function (name, i) {
-      var y = 1 - (i / (n - 1)) * 2;
-      var k = 0.62 + 0.38 * (((i * 7919) % 97) / 96);
-      var g = D.createElementNS(NS, 'g');
-      var line = D.createElementNS(NS, 'line'); line.setAttribute('x1', cx); line.setAttribute('y1', cy);
-      var c = D.createElementNS(NS, 'circle'); c.setAttribute('fill', COLS[i % 8]); c.setAttribute('stroke-width', '2');
-      var t = D.createElementNS(NS, 'text'); t.textContent = name;
-      g.appendChild(line); g.appendChild(c); g.appendChild(t);
-      g.addEventListener('mouseenter', function () { hover = i; draw(); });
-      g.addEventListener('mouseleave', function () { hover = -1; draw(); });
-      return { id: i, lat: Math.asin(y * 0.92), lon: i * golden, k: k, size: SIZES[i % 8], g: g, line: line, c: c, t: t };
-    });
-    var centre = D.createElementNS(NS, 'circle'); centre.setAttribute('cx', cx); centre.setAttribute('cy', cy); centre.setAttribute('r', '5'); centre.setAttribute('fill', '#2B2140');
-
-    function draw() {
-      var pts = nodes.map(function (nd) {
-        var lon = nd.lon + ang;
-        var x = Math.cos(nd.lat) * Math.sin(lon), y = Math.sin(nd.lat), z = Math.cos(nd.lat) * Math.cos(lon);
-        var y2 = y * Math.cos(tilt) - z * Math.sin(tilt), z2 = y * Math.sin(tilt) + z * Math.cos(tilt);
-        var depth = (z2 + 1) / 2, s = 0.55 + 0.45 * depth;
-        var px = cx + x * R * nd.k, py = cy + y2 * R * nd.k, r = nd.size * s;
-        var right = px >= cx, isHov = hover === nd.id;
-        nd.line.setAttribute('x2', px.toFixed(1)); nd.line.setAttribute('y2', py.toFixed(1));
-        nd.c.setAttribute('cx', px.toFixed(1)); nd.c.setAttribute('cy', py.toFixed(1)); nd.c.setAttribute('r', r.toFixed(1));
-        nd.c.setAttribute('stroke', isHov ? '#2B2140' : 'none');
-        nd.t.setAttribute('x', (right ? px + r + 6 : px - r - 6).toFixed(1)); nd.t.setAttribute('y', (py + 4).toFixed(1));
-        nd.t.setAttribute('text-anchor', right ? 'start' : 'end');
-        nd.t.style.opacity = (all || isHov) ? '1' : '0';
-        nd.g.style.opacity = (0.45 + 0.55 * depth).toFixed(2);
-        nd.z = z2;
-        return nd;
-      }).sort(function (a, b) { return a.z - b.z; });
-      /* draw order: back nodes, centre dot, front nodes */
-      var frag = D.createDocumentFragment(), placedCentre = false;
-      pts.forEach(function (p) { if (!placedCentre && p.z >= 0) { frag.appendChild(centre); placedCentre = true; } frag.appendChild(p.g); });
-      if (!placedCentre) frag.appendChild(centre);
-      svg.appendChild(frag);
-    }
-    svg.addEventListener('click', function () { all = !all; draw(); T.track('globe_toggle'); });
-    draw();
-    if (!reduced) {
-      var last = 0;
-      var step = function (ts) {
-        if (hover < 0 && ts - last > 30) { ang += dir * 0.006; last = ts; draw(); }
-        W.requestAnimationFrame(step);
-      };
-      W.requestAnimationFrame(step);
-    }
-  }
+  /* ---------- three steps: 2 and 3 revealed on scroll ---------- */
+  (function () {
+    var list = D.getElementById('steps'); if (!list) return;
+    var items = [].slice.call(list.querySelectorAll('.stp'));
+    if (reduced || !('IntersectionObserver' in W)) return;
+    list.classList.add('armed');
+    var set = function () { var n = list.querySelectorAll('.stp.is-in').length; list.style.setProperty('--prog', (n - 1) / (items.length - 1)); };
+    set();
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); set(); T.track('step_' + (items.indexOf(e.target) + 1)); } });
+    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.2 });
+    items.slice(1).forEach(function (i) { io.observe(i); });
+  })();
 
   /* ---------- reviews ---------- */
   var reviews = D.querySelectorAll('.review'), dots = D.querySelectorAll('.dots button');
