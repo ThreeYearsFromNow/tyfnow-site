@@ -120,6 +120,28 @@
     update();
   })();
 
+  /* ---------- Brand, Website, Content: horizontal travel driven by vertical scroll ---------- */
+  (function () {
+    var hs = D.getElementById('hs'), track = D.getElementById('hs-track'); if (!hs || !track || reduced) return;
+    hs.classList.add('hs-on');
+    var chips = [].slice.call(hs.querySelectorAll('.hs-nav span')), ticking = false, cur = -1;
+    var ease = function (f) { var a = 0.2, b = 0.8; if (f <= a) return 0; if (f >= b) return 1; var u = (f - a) / (b - a); return u * u * (3 - 2 * u); };
+    var update = function () {
+      ticking = false;
+      var r = hs.getBoundingClientRect(), total = r.height - W.innerHeight;
+      var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+      var t = p * 2, i = Math.min(1, Math.floor(t)), f = t - i;     // two moves across three panels, each one dwells at either end
+      var pos = i + ease(f);
+      track.style.transform = 'translate3d(' + (-pos * (hs.clientWidth)) + 'px,0,0)';
+      var on = Math.round(pos);
+      if (on !== cur) { cur = on; chips.forEach(function (c, k) { c.classList.toggle('on', k === on); }); if (on > 0) T.track('panel_' + (on + 1)); }
+    };
+    var req = function () { if (!ticking) { ticking = true; W.requestAnimationFrame(update); } };
+    W.addEventListener('scroll', req, { passive: true });
+    W.addEventListener('resize', req);
+    update();
+  })();
+
   /* ---------- reviews ---------- */
   var reviews = D.querySelectorAll('.review'), dots = D.querySelectorAll('.dots button');
   if (reviews.length) {
