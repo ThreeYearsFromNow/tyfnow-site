@@ -120,32 +120,41 @@
     update();
   })();
 
-  /* ---------- Branding, Website, Content: horizontal travel driven by vertical scroll ---------- */
+  /* ---------- Branding, Website, Content: four cards travel sideways as the page scrolls down ---------- */
   (function () {
     var hs = D.getElementById('hs'), track = D.getElementById('hs-track'); if (!hs || !track || reduced) return;
+    var prev = D.getElementById('hs-prev'), next = D.getElementById('hs-next'), cards = track.children;
     hs.classList.add('hs-on');
-    var dots = [].slice.call(hs.querySelectorAll('.hs-pager .dot')), ticking = false, cur = -1;
-    var ease = function (f) { var a = 0.2, b = 0.8; if (f <= a) return 0; if (f >= b) return 1; var u = (f - a) / (b - a); return u * u * (3 - 2 * u); };
+    var ticking = false, maxX = 0, told = false, LO = 0.04, HI = 0.96;   // a short hold at each end
+    var measure = function () {
+      maxX = Math.max(0, track.scrollWidth - W.innerWidth);
+      hs.style.height = Math.round(W.innerHeight + maxX * 2.2 + 120) + 'px';
+    };
     var span = function () { var r = hs.getBoundingClientRect(); return { top: r.top + W.pageYOffset, total: r.height - W.innerHeight }; };
     var update = function () {
       ticking = false;
       var r = hs.getBoundingClientRect(), total = r.height - W.innerHeight;
       var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
-      var t = p * 2, i = Math.min(1, Math.floor(t)), f = t - i;     // two moves across three panels, each one dwells at either end
-      var pos = i + ease(f);
-      track.style.transform = 'translate3d(' + (-pos * hs.clientWidth) + 'px,0,0)';
-      var on = Math.round(pos);
-      dots.forEach(function (d, k) { d.classList.toggle('on', k === on); });
-      dots[on].firstElementChild.style.setProperty('--f', Math.min(1, Math.max(0, pos - (on - 0.5))));
-      if (on !== cur) { cur = on; if (on > 0) T.track('panel_' + (on + 1)); }
+      var f = Math.min(1, Math.max(0, (p - LO) / (HI - LO)));
+      var x = f * maxX;
+      track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
+      prev.disabled = x < 2; next.disabled = x > maxX - 2;
+      if (f >= 1 && !told) { told = true; T.track('cards_end'); }
     };
-    dots.forEach(function (d, k) {
-      d.addEventListener('click', function () { var s = span(); W.scrollTo({ top: s.top + (k / 2) * s.total + 2, behavior: 'smooth' }); });
-    });
+    var go = function (dir) {
+      var s = span(), step = cards[1].offsetLeft - cards[0].offsetLeft;
+      var f = Math.min(1, Math.max(0, (-hs.getBoundingClientRect().top / s.total - LO) / (HI - LO)));
+      var x = Math.min(maxX, Math.max(0, Math.round((f * maxX) / step + dir) * step));
+      var tf = maxX ? x / maxX : 0;
+      W.scrollTo({ top: s.top + (LO + tf * (HI - LO)) * s.total + 1, behavior: 'smooth' });
+    };
+    prev.addEventListener('click', function () { go(-1); });
+    next.addEventListener('click', function () { go(1); });
     var req = function () { if (!ticking) { ticking = true; W.requestAnimationFrame(update); } };
     W.addEventListener('scroll', req, { passive: true });
-    W.addEventListener('resize', req);
-    update();
+    W.addEventListener('resize', function () { measure(); req(); });
+    W.addEventListener('load', function () { measure(); req(); });
+    measure(); update();
   })();
 
   /* ---------- reviews ---------- */
