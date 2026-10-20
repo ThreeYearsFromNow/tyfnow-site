@@ -289,3 +289,14 @@
   .hs-on .hs-text .name{font-size:30px}.hs-on .hs-text .q{font-size:15px}.hs-on .hs-text p:last-child{font-size:14px;line-height:1.4}
   .hs-on .hs-nav{top:12px;left:var(--gutter)}
 }
+
+/* Coloured container around the Branding / Website / Content stage */
+.sys-sec{max-width:none;background:var(--band);margin-top:120px;padding:96px 0 0}
+.sys-sec .sec-head{padding:0 var(--gutter)}
+.sys-sec .hs-img{background:rgba(255,255,255,.55)}
+.sys-sec .hs-img.two{background:var(--band)}
+.sys-sec .hs-img.two .ph{background:rgba(255,255,255,.55)}
+.sys-sec .hs-nav span{background:var(--band);border-color:#cdbfe0;color:#7d6c99}
+.sys-sec .hs-nav span.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.sys-sec .hs-text .q{color:#7d6c99}
+@media (max-width:900px){.sys-sec{margin-top:80px;padding-top:64px}}
