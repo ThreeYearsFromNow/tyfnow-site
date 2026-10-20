@@ -5,56 +5,79 @@
   var reduced = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 
-  /* ---------- hero tools: pop in one by one ---------- */
+  /* ---------- hero tools: random, full-bleed, keep changing ---------- */
   (function () {
     var box = D.getElementById('tools'), hero = box && box.parentNode;
     if (!box) return;
-    var NAMES = ['ChatGPT','Claude','Gemini','Midjourney','Canva','Adobe Express','Figma','Copilot','Notion','Slack','Monday','Asana','Trello','ClickUp','HubSpot','Salesforce','Pipedrive','Zoho CRM','Mailchimp','Klaviyo','Zapier','Make','Airtable','Webflow','Wix','Squarespace','Shopify','Perplexity','Runway','ElevenLabs','Loom','Framer','Semrush','Instagram','TikTok','YouTube','LinkedIn','Facebook'];
+    var NAMES = ['ChatGPT','Claude','Gemini','Midjourney','Canva','Adobe Express','Figma','Copilot','Notion','Slack','Monday','Asana','Trello','ClickUp','HubSpot','Salesforce','Pipedrive','Zoho CRM','Mailchimp','Klaviyo','Zapier','Make','Airtable','Webflow','Wix','Squarespace','Shopify','Perplexity','Runway','ElevenLabs','Loom','Framer','Semrush','Instagram','TikTok','YouTube','LinkedIn','Facebook','Threads','Nano Banana'];
     var COLS = ['#2B2140','#C85A36','#2F6B4F','#9B7FD1','#E8744F','#5FB08A'];
-    /* Logo slot: drop an SVG at /img/tools/<slug>.svg and it replaces the name. */
+    /* Logo slot: drop an SVG at /img/tools/<slug>.svg and map it here; the circle shows the logo instead of the name. */
     var LOGOS = {};
     function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }
-    function build() {
-      box.innerHTML = '';
-      var w = hero.clientWidth, h = hero.clientHeight, slots = [];
-      if (w > 900) {
-        /* two side columns, grid of circles, random jitter */
-        var d = w > 1200 ? 112 : (w > 1000 ? 96 : 80), cols = w > 1200 ? 3 : 2;
-        var rows = Math.floor((h - 40) / (d + 18));
-        for (var r = 0; r < rows; r++) for (var cI = 0; cI < cols; cI++) {
-          var y = 40 + d / 2 + r * (d + 18) + (cI % 2 ? 10 : -6);
-          /* the inner column only above and below the headline band */
-                    slots.push({ x: 24 + d / 2 + cI * (d + 16), y: y, d: d });
-          slots.push({ x: w - (24 + d / 2 + cI * (d + 16)), y: y, d: d });
-        }
-      } else {
-        /* phone: a band above the headline and one below the button */
-        var d2 = 66, perRow = Math.floor((w - 16) / (d2 + 10));
-        for (var i = 0; i < perRow; i++) {
-          slots.push({ x: 8 + d2 / 2 + i * (d2 + 10) + (i % 2 ? 0 : 6), y: 50 + (i % 2 ? 14 : 0), d: d2 });
-          slots.push({ x: 8 + d2 / 2 + i * (d2 + 10) + (i % 2 ? 6 : 0), y: h - 62 - (i % 2 ? 0 : 14), d: d2 });
-        }
-      }
-      /* drop any slot that would touch the headline, sub-line or button */
+    var placed = [], pool = [], timer = null, cycle = null;
+
+    function keepOut() {
       var hb = hero.getBoundingClientRect();
-      var keep = ['h1', '.sub', '.btn'].map(function (q) { var r = hero.querySelector(q).getBoundingClientRect(); return { l: r.left - hb.left - 14, r: r.right - hb.left + 14, t: r.top - hb.top - 14, b: r.bottom - hb.top + 14 }; });
-      slots = slots.filter(function (s) {
-        var l = s.x - s.d / 2, r = s.x + s.d / 2, tp = s.y - s.d / 2, bt = s.y + s.d / 2;
-        return !keep.some(function (k) { return l < k.r && r > k.l && tp < k.b && bt > k.t; });
+      return ['h1', '.sub', '.btn'].map(function (q) {
+        var r = hero.querySelector(q).getBoundingClientRect();
+        return { l: r.left - hb.left - 16, r: r.right - hb.left + 16, t: r.top - hb.top - 16, b: r.bottom - hb.top + 16 };
       });
-      /* shuffle appearance order, deterministic per load */
-      var order = slots.map(function (s, i) { return i; }).sort(function () { return Math.random() - 0.5; });
-      var els = [];
-      for (var k = 0; k < order.length && k < NAMES.length; k++) {
-        var s = slots[order[k]], name = NAMES[k], el = D.createElement('div');
-        el.className = 'tool'; el.style.setProperty('--d', s.d + 'px'); el.style.left = s.x + 'px'; el.style.top = s.y + 'px';
-        el.style.color = COLS[k % COLS.length];
-        var lg = LOGOS[slug(name)];
-        if (lg) { var im = D.createElement('img'); im.src = lg; im.alt = ''; el.appendChild(im); } else { el.textContent = name; }
-        box.appendChild(el); els.push(el);
+    }
+    function clear(s, zones) {
+      var l = s.x - s.d / 2, r = s.x + s.d / 2, tp = s.y - s.d / 2, bt = s.y + s.d / 2;
+      if (zones.some(function (k) { return l < k.r && r > k.l && tp < k.b && bt > k.t; })) return false;
+      return !placed.some(function (o) { var dx = o.x - s.x, dy = o.y - s.y; return Math.sqrt(dx * dx + dy * dy) < (o.d + s.d) / 2 + 14; });
+    }
+    function spot(w, h, zones) {
+      var phone = w <= 900, minD = phone ? 56 : 76, maxD = phone ? 76 : 124;
+      for (var i = 0; i < 400; i++) {
+        var d = minD + Math.random() * (maxD - minD);
+        var s = { x: d / 2 + 8 + Math.random() * (w - d - 16), y: d / 2 + 8 + Math.random() * (h - d - 16), d: d };
+        if (clear(s, zones)) return s;
       }
-      var delay = reduced ? 0 : 320;
-      els.forEach(function (el, i) { W.setTimeout(function () { el.classList.add('on'); }, 500 + i * delay); });
+      return null;
+    }
+    function make(name, s) {
+      var el = D.createElement('div');
+      el.className = 'tool'; el.style.setProperty('--d', Math.round(s.d) + 'px'); el.style.left = Math.round(s.x) + 'px'; el.style.top = Math.round(s.y) + 'px';
+      el.style.color = COLS[Math.floor(Math.random() * COLS.length)];
+      var lg = LOGOS[slug(name)];
+      if (lg) { var im = D.createElement('img'); im.src = lg; im.alt = ''; el.appendChild(im); } else { el.textContent = name; }
+      box.appendChild(el);
+      return el;
+    }
+    function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+
+    function build() {
+      W.clearTimeout(timer); W.clearInterval(cycle);
+      box.innerHTML = ''; placed = [];
+      var w = hero.clientWidth, h = hero.clientHeight, zones = keepOut();
+      var max = w <= 900 ? 10 : (w < 1200 ? 18 : 28);
+      pool = shuffle(NAMES.slice());
+      var els = [];
+      for (var k = 0; k < max; k++) {
+        var s = spot(w, h, zones); if (!s) break;
+        var name = pool.shift(); pool.push(name);
+        var el = make(name, s); s.el = el; s.name = name; placed.push(s); els.push(el);
+      }
+      var gap = reduced ? 0 : 300;
+      els.forEach(function (el, i) { W.setTimeout(function () { el.classList.add('on'); }, 400 + i * gap); });
+      if (reduced) return;
+      /* once they're all in, keep swapping one at a time: out, new name, new spot, in */
+      timer = W.setTimeout(function () {
+        cycle = W.setInterval(function () {
+          if (D.hidden || !placed.length) return;
+          var i = Math.floor(Math.random() * placed.length), old = placed[i];
+          old.el.classList.remove('on');
+          W.setTimeout(function () {
+            placed.splice(placed.indexOf(old), 1); old.el.remove();
+            var s = spot(w, h, zones) || { x: old.x, y: old.y, d: old.d };
+            var name = pool.shift(); pool.push(name);
+            var el = make(name, s); s.el = el; s.name = name; placed.push(s);
+            W.setTimeout(function () { el.classList.add('on'); }, 30);
+          }, 380);
+        }, 1100);
+      }, 400 + els.length * gap + 600);
     }
     build();
     var rw; W.addEventListener('resize', function () { W.clearTimeout(rw); rw = W.setTimeout(build, 200); });
