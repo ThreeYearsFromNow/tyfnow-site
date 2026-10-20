@@ -162,4 +162,20 @@
   /* ---------- closing CTA ---------- */
   var f = D.getElementById('cta-form');
   if (f) f.addEventListener('submit', function () { T.track('closing_email_submit'); });
+
+  // Owner lines carousel
+  (function () {
+    var row = document.getElementById('qrow'); if (!row) return;
+    var step = function () { var c = row.querySelector('.qcard'); return c ? c.getBoundingClientRect().width + 20 : 320; };
+    document.querySelectorAll('.qbtn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var d = +b.getAttribute('data-dir');
+        var max = row.scrollWidth - row.clientWidth;
+        var next = row.scrollLeft + d * step();
+        if (next > max + 2) next = 0; else if (next < -2) next = max;
+        row.scrollTo({ left: next, behavior: 'smooth' });
+        T.track('owner_lines_' + (d > 0 ? 'next' : 'prev'));
+      });
+    });
+  })();
 })();
