@@ -127,7 +127,11 @@
     hs.classList.add('hs-on');
     var ticking = false, maxX = 0, told = false, LO = 0, HI = 1;   // no hold: the page moves on the moment the last card reaches the grid
     var measure = function () {
-      maxX = Math.max(0, track.scrollWidth - W.innerWidth);
+      var d = D.documentElement.clientWidth, head = hs.querySelector('.hs-head');
+      var pad = head ? parseFloat(W.getComputedStyle(head).paddingLeft) || 0 : 0;
+      var last = cards[cards.length - 1];
+      var contentRight = last.getBoundingClientRect().right - track.getBoundingClientRect().left;   // transform cancels out
+      maxX = Math.max(0, Math.round(contentRight - (d - pad)));   // last card lands on the right edge of the grid, level with the arrows
       hs.style.height = Math.round(W.innerHeight + maxX * 1.35 + 40) + 'px';
     };
     var span = function () { var r = hs.getBoundingClientRect(); return { top: r.top + W.pageYOffset, total: r.height - W.innerHeight }; };
@@ -155,6 +159,26 @@
     W.addEventListener('resize', function () { measure(); req(); });
     W.addEventListener('load', function () { measure(); req(); });
     measure(); update();
+  })();
+
+  /* ---------- likes tile: the counter climbs, holds, starts again (JS, so every browser behaves the same) ---------- */
+  (function () {
+    var el = D.querySelector('.likes .cnt'); if (!el || reduced) return;
+    var FROM = 12, TO = 2480, UP = 4200, HOLD = 1800, t0 = 0, raf = 0, on = false;
+    var fmt = function (n) { return Math.round(n).toLocaleString('en-GB'); };
+    var tick = function (now) {
+      if (!on) { raf = 0; return; }
+      if (!t0) t0 = now;
+      var e = now - t0, p = Math.min(1, e / UP), eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(FROM + (TO - FROM) * eased);
+      if (e > UP + HOLD) t0 = now;
+      raf = W.requestAnimationFrame(tick);
+    };
+    var start = function () { if (on) return; on = true; t0 = 0; if (!raf) raf = W.requestAnimationFrame(tick); };
+    var stop = function () { on = false; };
+    if ('IntersectionObserver' in W) {
+      new W.IntersectionObserver(function (es) { es.forEach(function (x) { x.isIntersecting ? start() : stop(); }); }, { threshold: 0.3 }).observe(el);
+    } else start();
   })();
 
   /* ---------- reviews ---------- */

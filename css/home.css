@@ -149,12 +149,9 @@
 @keyframes turn{0%,12%{transform:rotate(0)}62%,100%{transform:rotate(360deg)}}
 .rpt .core{transform-box:fill-box;transform-origin:center;animation:core 3.6s ease-in-out infinite}
 @keyframes core{0%,12%{transform:scale(1)}37%{transform:scale(1.35)}62%,100%{transform:scale(1)}}
-/* Measure: three bars climb in turn, then the arrow lifts. 4.5s loop */
-.meas .bar{transform-box:fill-box;transform-origin:50% 100%;animation:grow 4.5s ease-out infinite}
-.meas .b2{animation-delay:.25s}.meas .b3{animation-delay:.5s}
-@keyframes grow{0%{transform:scaleY(.12)}16%,82%{transform:scaleY(1)}94%,100%{transform:scaleY(.12)}}
-.meas .up{opacity:0;animation:lift 4.5s ease-out infinite;animation-delay:.9s}
-@keyframes lift{0%{opacity:0;transform:translateY(5px)}10%,70%{opacity:1;transform:translateY(0)}82%,100%{opacity:0;transform:translateY(-2px)}}
+/* Measure: a live chart; bars drift left, new ones arrive on the right, a mix of ups (dark) and downs (orange). 12s loop */
+.meas .drift{animation:drift 12s linear infinite}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-88px)}}
 @media (max-width:900px){
   .repeat-card{flex-direction:column;align-items:center;padding:48px 24px;gap:28px}
   .arrow{transform:rotate(90deg);height:56px;flex-basis:auto}
@@ -227,7 +224,7 @@
 @media (prefers-reduced-motion:reduce){
   .row,.tape{animation:none}
   .bld .p,.bld .ship{animation:none;opacity:1;transform:none}
-  .meas .bar,.meas .up,.rpt .spin,.rpt .core{animation:none;opacity:1;transform:none}
+  .meas .drift,.rpt .spin,.rpt .core{animation:none;transform:none}
 }
 
 
@@ -235,19 +232,15 @@
 .qcard .tile{flex-direction:column;gap:12px}
 .qcard .tile span{color:inherit}
 .likes{display:flex;align-items:center;gap:10px}
-.likes .hrt{width:44px;height:44px;animation:beat 1.6s ease-in-out infinite}
-.likes .cnt{font-size:44px;font-weight:600;letter-spacing:-0.03em;line-height:1}
-@property --n{syntax:"<integer>";initial-value:12;inherits:false}
-.likes .cnt{counter-reset:n var(--n);animation:tally 5s ease-out infinite}
-.likes .cnt::after{content:counter(n)}
-@keyframes tally{0%{--n:12}85%,100%{--n:2480}}
+.likes .hrt{flex:none;display:block;width:44px;height:44px;transform-origin:50% 55%;animation:beat 1.6s ease-in-out infinite}
+.likes .cnt{font-size:44px;font-weight:600;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums;min-width:4.1ch;text-align:left}
 @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 .chips i{font-style:normal;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;border:1.5px solid var(--ink);color:var(--ink);opacity:0;animation:chip 6s ease-in-out infinite}
 .chips i:nth-child(2){animation-delay:.3s}.chips i:nth-child(3){animation-delay:.6s}.chips i:nth-child(4){animation-delay:.9s}.chips i:nth-child(5){animation-delay:1.2s}
 .chips i.ai{background:var(--accent);border-color:var(--accent);color:#fff}
 @keyframes chip{0%{opacity:0;transform:scale(.7)}8%,86%{opacity:1;transform:scale(1)}94%,100%{opacity:0;transform:scale(.7)}}
-@media (prefers-reduced-motion:reduce){.likes .hrt,.likes .cnt{animation:none}.likes .cnt{--n:2480}.chips i{animation:none;opacity:1}.steps.armed .n,.steps.armed .txt{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){.likes .hrt,.likes .cnt{animation:none}.chips i{animation:none;opacity:1}.steps.armed .n,.steps.armed .txt{opacity:1;transform:none;transition:none}}
 
 /* Branding, Website, Content: pinned stage; four cards travel sideways as the page scrolls, after the Apple "New to Mac?" layout */
 .sys-sec{max-width:none;padding:0;margin-top:120px;display:block}
