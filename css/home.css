@@ -49,13 +49,27 @@
 .three>div{display:flex;flex-direction:column;gap:10px}
 .three .num{font-size:44px;font-weight:600;letter-spacing:-0.03em;color:var(--sky)}
 .three .line{font-size:26px;font-weight:600;letter-spacing:-0.02em;line-height:1.15}
+.three .body{margin:0;font-size:17px;line-height:1.45;color:var(--body)}
 .gap-line{margin:40px auto 0;max-width:720px;font-size:20px;line-height:1.4;color:var(--body)}
+/* System: three cards */
+.sys{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;text-align:left}
+.sys-card{background:#fff;border-radius:24px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;box-shadow:0 12px 40px rgba(43,33,64,.06)}
+.sys-card .q{margin:0;min-height:42px;font-size:15px;line-height:1.4;font-style:italic;color:var(--muted2)}
+.sys-card .name{font-size:30px;font-weight:600;letter-spacing:-0.02em;color:var(--ink)}
+.sys-card p{margin:0;font-size:17px;line-height:1.5;color:var(--body)}
+.sys-card p:last-child{margin-top:auto}
+.alt-line{margin:32px auto 0;max-width:640px;font-size:17px;line-height:1.45;color:var(--body);text-align:center}
+#reviews .group-label{text-align:center}
 @media (max-width:900px){
   .globe-card{padding:24px}
   .globe-hint{display:block}
   .three{grid-template-columns:1fr;gap:28px}
   .three .line{font-size:22px}
   .gap-line{margin-top:28px;font-size:17px}
+  .three .body{font-size:15px}
+  .sys{grid-template-columns:1fr;gap:16px}
+  .sys-card{padding:28px 24px}
+  .sys-card .name{font-size:26px}
 }
 
 /* Build: marquees edge to edge */
@@ -126,7 +140,7 @@
 .step{flex:1 1 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px}
 .step .disc{width:132px;height:132px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center}
 .step .name{font-size:26px;font-weight:600;letter-spacing:-0.02em}
-.step p{font-size:17px;line-height:1.45;color:rgba(255,255,255,.78);max-width:260px}
+.step p{font-size:16px;line-height:1.5;color:rgba(255,255,255,.82);max-width:300px}
 .arrow{flex:0 0 56px}
 .hammer{transform-box:fill-box;transform-origin:20% 90%;animation:tap 1.2s ease-in-out infinite}
 @keyframes tap{0%,100%{transform:rotate(0)}40%{transform:rotate(-28deg)}55%{transform:rotate(4deg)}}
