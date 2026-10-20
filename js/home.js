@@ -83,33 +83,36 @@
     var rw; W.addEventListener('resize', function () { W.clearTimeout(rw); rw = W.setTimeout(build, 200); });
   })();
 
-  /* ---------- three steps: number, then its text, driven by scroll position (reverses on the way up) ---------- */
+  /* ---------- three steps: revealed one piece at a time by scroll position, reversible ---------- */
   (function () {
     var list = D.getElementById('steps'); if (!list) return;
     var items = [].slice.call(list.querySelectorAll('.stp'));
     if (reduced) return;
     list.classList.add('armed');
+    var closing = D.querySelector('#why-now .gap-line');
+    if (closing) closing.classList.add('rv');
+    // order: number, text, connector (to the next step), ... then the closing line
     var targets = [];
     items.forEach(function (li, i) {
-      [li.querySelector('.n'), li.querySelector('.txt')].forEach(function (el) { targets.push({ el: el, step: i, isNum: el.classList.contains('n'), on: false }); });
+      ['.n', '.txt', '.cn'].forEach(function (sel) {
+        var el = li.querySelector(sel); if (el) targets.push({ el: el, step: i, num: sel === '.n', on: false });
+      });
     });
+    if (closing) targets.push({ el: closing, step: -1, num: false, on: false });
     var told = {}, ticking = false;
     var update = function () {
       ticking = false;
-      var line = W.innerHeight * 0.72, slack = 36;
-      targets.forEach(function (t, k) {
+      var line = W.innerHeight * 0.72, slack = 36, prevOn = true;
+      targets.forEach(function (t) {
         var top = t.el.getBoundingClientRect().top;
-        var prevOn = k === 0 || targets[k - 1].on;          // strict order: nothing shows before what precedes it
-        var want = t.on ? (top < line + slack && prevOn) : (top < line && prevOn);
+        var want = prevOn && (t.on ? top < line + slack : top < line);
         if (want !== t.on) {
           t.on = want;
           t.el.classList.toggle('is-in', want);
-          if (t.isNum && t.step > 0) items[t.step - 1].classList.toggle('lit', want);
-          if (want && t.isNum && !told[t.step]) { told[t.step] = 1; T.track('step_' + (t.step + 1)); }
+          if (want && t.num && !told[t.step]) { told[t.step] = 1; T.track('step_' + (t.step + 1)); }
         }
+        prevOn = t.on;   // anything after a hidden piece stays hidden, so order holds both ways
       });
-      // a hidden item hides everything after it too
-      for (var k = 1; k < targets.length; k++) if (!targets[k - 1].on && targets[k].on) { targets[k].on = false; targets[k].el.classList.remove('is-in'); if (targets[k].isNum && targets[k].step > 0) items[targets[k].step - 1].classList.remove('lit'); }
     };
     var req = function () { if (!ticking) { ticking = true; W.requestAnimationFrame(update); } };
     W.addEventListener('scroll', req, { passive: true });
