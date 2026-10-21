@@ -15,20 +15,27 @@
 
 /* Hero */
 .hero{position:relative;overflow:hidden;height:760px;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding-left:24px;padding-right:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:28px}
-.hero h1{font-size:96px;line-height:.98;max-width:820px}
-.hero .sub{font-size:24px;line-height:1.4;max-width:560px;color:var(--body)}
+.hero h1{font-size:64px;line-height:1.04;max-width:840px;text-wrap:balance}
 .hero .btn{margin-top:8px}
-/* Hero tool circles: pop in one by one, the hero gets crowded */
-.tools{position:absolute;inset:0;pointer-events:none}
-.tool{position:absolute;width:var(--d);height:var(--d);margin:calc(var(--d) / -2) 0 0 calc(var(--d) / -2);border-radius:999px;background:#fff;box-shadow:0 10px 30px rgba(43,33,64,.10);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-weight:700;letter-spacing:-0.01em;line-height:1.05;font-size:calc(var(--d) * .15);opacity:0;transform:scale(.4);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.9,.3,1.3)}
-.tool.on{opacity:1;transform:scale(1)}
-.tool img{width:48%;height:48%;object-fit:contain}
-.hero h1,.hero .sub,.hero .btn{position:relative;z-index:2}
-@media (max-width:1200px){.hero h1{font-size:72px}}
+/* Hero portfolio thumbnails (back since v34) */
+.chip{position:absolute}
+.chip img{border-radius:12px;object-fit:cover;width:var(--w);height:var(--h)}
+.chip.c1{left:24px;top:70px;transform:rotate(-5deg);--w:252px;--h:168px}
+.chip.c2{left:60px;top:400px;transform:rotate(3deg);--w:210px;--h:140px}
+.chip.c3{left:200px;top:545px;transform:rotate(-2deg);--w:182px;--h:123px}
+.chip.c4{right:24px;top:60px;transform:rotate(4deg);--w:238px;--h:157px}
+.chip.c5{right:60px;top:390px;transform:rotate(-3deg);--w:210px;--h:140px}
+.chip.c6{right:180px;top:565px;transform:rotate(2deg);--w:182px;--h:123px}
+.hero h1,.hero .btn{position:relative;z-index:2}
+@media (max-width:1200px){.hero h1{font-size:52px}.chip.c3,.chip.c6{display:none}.chip.c1{left:16px;top:60px;--w:200px;--h:133px}.chip.c4{right:16px;top:50px;--w:190px;--h:126px}.chip.c2{left:24px;top:500px;--w:150px;--h:100px}.chip.c5{right:24px;top:auto;bottom:40px;--w:150px;--h:100px}}
 @media (max-width:900px){
   .hero{height:auto;min-height:600px;padding:150px 0 160px;gap:20px}
-  .hero h1{font-size:54px}
-  .hero .sub{font-size:19px}
+  .hero h1{font-size:35px;padding:0 20px}
+  .chip img{border-radius:8px}
+  .chip.c2,.chip.c3,.chip.c6{display:none}
+  .chip.c1{left:0;top:12px;--w:157px;--h:104px}
+  .chip.c4{right:0;top:30px;--w:146px;--h:98px}
+  .chip.c5{right:8px;top:auto;bottom:16px;--w:168px;--h:112px;display:block}
 }
 
 /* Why now */
@@ -128,7 +135,7 @@
   .ship{grid-template-columns:1fr 1fr;gap:20px}
   .media{grid-column:1/-1;justify-content:flex-start}
 }
-@media (prefers-reduced-motion:reduce){.ring,.rec{animation:none}.tool{transition:none}}
+@media (prefers-reduced-motion:reduce){.ring,.rec{animation:none}}
 
 /* Repeat */
 .repeat-card{background:#E8E6EC;color:var(--ink);padding:96px 72px;display:flex;align-items:flex-start;justify-content:center}
@@ -149,9 +156,11 @@
 @keyframes turn{0%,12%{transform:rotate(0)}62%,100%{transform:rotate(360deg)}}
 .rpt .core{transform-box:fill-box;transform-origin:center;animation:core 3.6s ease-in-out infinite}
 @keyframes core{0%,12%{transform:scale(1)}37%{transform:scale(1.35)}62%,100%{transform:scale(1)}}
-/* Measure: a live chart; bars drift left, new ones arrive on the right, a mix of ups (dark) and downs (orange). 12s loop */
+/* Measure: a live chart on a 12s loop. Bars drift left and are cut hard at the edges; each new bar rises as it arrives */
 .meas .drift{animation:drift 12s linear infinite}
 @keyframes drift{from{transform:translateX(0)}to{transform:translateX(-88px)}}
+.meas .g{transform-box:fill-box;transform-origin:50% 100%;animation:rise 12s ease-out infinite}
+@keyframes rise{0%,8%{transform:scaleY(0)}18%,100%{transform:scaleY(1)}}
 @media (max-width:900px){
   .repeat-card{flex-direction:column;align-items:center;padding:48px 24px;gap:28px}
   .arrow{transform:rotate(90deg);height:56px;flex-basis:auto}
@@ -224,7 +233,7 @@
 @media (prefers-reduced-motion:reduce){
   .row,.tape{animation:none}
   .bld .p,.bld .ship{animation:none;opacity:1;transform:none}
-  .meas .drift,.rpt .spin,.rpt .core{animation:none;transform:none}
+  .meas .drift,.meas .g,.rpt .spin,.rpt .core{animation:none;transform:none}
 }
 
 
@@ -287,3 +296,12 @@
   .hs-on .hs-stick{padding-top:0}
   .hs-on .hs-arrows{padding:8px var(--pad) 14px}.hs-arrows button{width:40px;height:40px}
 }
+
+/* Tool pit: tool names drop in as balls, bounce and settle; people can drag, flick or tap them */
+.pit{position:relative;height:440px;margin-top:40px;overflow:hidden;user-select:none;-webkit-user-select:none}
+.pit-in{position:absolute;inset:0}
+.pb{position:absolute;left:0;top:0;width:var(--d);height:var(--d);border-radius:999px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-weight:700;letter-spacing:-0.01em;line-height:1.05;font-size:max(11px,calc(var(--d) * .15));cursor:grab;touch-action:pan-y;visibility:hidden;will-change:transform;box-shadow:0 8px 22px rgba(43,33,64,.12)}
+.pb.on{visibility:visible}
+.pb.grab{cursor:grabbing;z-index:3}
+.pb.b0{background:var(--ink);color:#fff}.pb.b1{background:var(--accent);color:var(--ink)}.pb.b2{background:var(--sky);color:#fff}.pb.b3{background:var(--yellow);color:var(--ink)}.pb.b4{background:var(--mint);color:var(--ink)}.pb.b5{background:#fff;color:var(--ink)}.pb.b6{background:var(--band);color:var(--ink)}
+@media (max-width:900px){.pit{height:380px;margin-top:24px}}
