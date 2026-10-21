@@ -9,8 +9,8 @@
   (function () {
     var pit = D.getElementById('pit'), box = D.getElementById('pit-in'), sec = pit && pit.parentNode, steps = D.getElementById('steps');
     if (!pit || !box || !steps) return;
-    var NAMES = ['ChatGPT','Claude','Gemini','Midjourney','Canva','Adobe Express','Figma','Copilot','Notion','Slack','Monday','Asana','Trello','ClickUp','HubSpot','Salesforce','Pipedrive','Zoho CRM','Mailchimp','Klaviyo','Zapier','Make','Airtable','Webflow','Wix','Squarespace','Shopify','Perplexity','Runway','ElevenLabs','Loom','Framer','Semrush','Instagram','TikTok','YouTube','LinkedIn','Facebook','Threads','Nano Banana'];
-    var G = 2000, bodies = [], PW = 0, PH = 0, FL = 0, KL = 0, KR = 0, over = false, raf = 0, last = 0, still = 0, dragging = null, hist = [], down = null, off = null;
+    var NAMES = ['ChatGPT','Claude','Gemini','Midjourney','Canva','Adobe Express','Figma','Copilot','Notion','Slack','Monday','Asana','Trello','ClickUp','HubSpot','Salesforce','Pipedrive','Zoho CRM','Mailchimp','Klaviyo','Zapier','Make','Airtable','Webflow','Wix','Squarespace','Shopify','Perplexity','Runway','ElevenLabs','Loom','Framer','Semrush','Instagram','TikTok','YouTube','LinkedIn','Facebook','Threads','Nano Banana','Gamma','Buffer','Typeform','Calendly','Stripe','Xero','Descript','Lovable'];
+    var G = 2000, bodies = [], PW = 0, PH = 0, FL = 0, KL = 0, KR = 0, KB = 0, over = false, raf = 0, last = 0, still = 0, dragging = null, hist = [], down = null, off = null;
     var released = 0, queued = 0, kicked = false, viewed = false, taps = 0, told = {}, timers = [];
     function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
 
@@ -21,10 +21,23 @@
       else { pit.style.top = ''; pit.style.height = ''; }
       PW = pit.clientWidth; PH = pit.clientHeight; FL = over ? PH - 4 : PH - 14;
       var K = over ? Math.min(410, PW / 2 - 200) : 0; KL = PW / 2 - K; KR = PW / 2 + K;
+      var gl = sec.querySelector('.gap-line');
+      KB = over && gl ? gl.offsetTop + gl.offsetHeight - steps.offsetTop + 18 : 0;   // the clear column ends just under the AI line
     }
-    function clearOut(b) {          /* keep a ball out of the text column, on whichever side it is nearer */
-      if (!over || b.x + b.r <= KL || b.x - b.r >= KR) return;
-      if (b.x < PW / 2) { b.x = KL - b.r; b.vx = -Math.abs(b.vx) * .4; } else { b.x = KR + b.r; b.vx = Math.abs(b.vx) * .4; }
+    function clearOut(b) {          /* the text column is solid down to just under the AI line; below it the floor is open */
+      if (!over) return;
+      var kb = b.r > 36 ? 1e9 : KB;   // only the small ones fit under the line; the big ones stay at the sides
+      var nx = Math.max(KL, Math.min(b.x, KR)), ny = Math.min(b.y, kb), dx = b.x - nx, dy = b.y - ny, d2 = dx * dx + dy * dy;
+      if (d2 >= b.r * b.r) return;
+      if (d2 > 0) {
+        var d = Math.sqrt(d2), ux = dx / d, uy = dy / d, vn;
+        b.x = nx + ux * b.r; b.y = ny + uy * b.r; vn = b.vx * ux + b.vy * uy;
+        if (vn < 0) { b.vx -= 1.4 * vn * ux; b.vy -= 1.4 * vn * uy; }
+      } else {
+        var l = b.x - KL, r2 = KR - b.x, bt = kb - b.y;
+        if (bt <= l && bt <= r2) { b.y = kb + b.r; if (b.vy < 0) b.vy = -b.vy * .4; }
+        else if (l < r2) { b.x = KL - b.r; b.vx = -Math.abs(b.vx) * .4; } else { b.x = KR + b.r; b.vx = Math.abs(b.vx) * .4; }
+      }
     }
     function spawnX(r) {
       if (!over) return r + Math.random() * Math.max(1, PW - 2 * r);
@@ -35,13 +48,19 @@
       bodies.forEach(function (b) { b.el.remove(); }); bodies = []; released = 0; queued = 0; kicked = false; told.kickSet = 0;
       timers.forEach(W.clearTimeout); timers = [];
       geometry();
-      var phone = PW <= 900, lo = phone ? 56 : 78, hi = phone ? 76 : 112, n;
-      if (over) { var side = KL; n = Math.max(18, Math.min(46, Math.round(2 * side / 95 * 3.4))); }
+      var phone = PW <= 900, lo = phone ? 56 : 78, hi = phone ? 76 : 112, n, ns = 0;
+      if (over) { n = Math.max(18, Math.min(46, Math.round(2 * KL / 95 * 3.4))); ns = PW > 1700 ? 8 : 6; }
       else n = PW > 900 ? 24 : 15;
-      shuffle(NAMES.slice()).slice(0, n).forEach(function (name, i) {
-        var d = Math.round(lo + Math.random() * (hi - lo)), el = D.createElement('div');
-        el.className = 'pb b' + (i % 7); el.style.setProperty('--d', d + 'px'); el.textContent = name;
-        var b = { el: el, name: name, r: d / 2, m: d * d, x: 0, y: -d, vx: 0, vy: 0, alive: false, inside: false, held: false };
+      var names = shuffle(NAMES.slice()), list = [], i;
+      for (i = 0; i < n; i++) list.push({ name: names[i % names.length], small: false });
+      for (i = 0; i < ns; i++) {      /* small ones go in the sequence at fixed points, to fall under the line in the middle */
+        var at = Math.min(list.length, Math.round(n * (.22 + .13 * i)));
+        list.splice(at + i, 0, { name: names[(n + i) % names.length], small: true });
+      }
+      list.forEach(function (it, k) {
+        var d = it.small ? Math.round(52 + Math.random() * 16) : Math.round(lo + Math.random() * (hi - lo)), el = D.createElement('div');
+        el.className = 'pb b' + (k % 7); el.style.setProperty('--d', d + 'px'); el.textContent = it.name;
+        var b = { el: el, name: it.name, small: it.small, r: d / 2, m: d * d, x: 0, y: -d, vx: 0, vy: 0, alive: false, inside: false, held: false };
         b.x = spawnX(b.r); el._b = b; bodies.push(b); box.appendChild(el);
       });
     }
@@ -96,7 +115,15 @@
     function wake() { still = 0; if (!raf) { last = W.performance.now(); raf = W.requestAnimationFrame(frame); } }
 
     function viewOnce() { if (!viewed) { viewed = true; T.track('tools_pit_view'); } }
-    function release(b) { b.alive = true; b.vx = (Math.random() - .5) * 200; b.vy = 60 + Math.random() * 120; b.el.classList.add('on'); put(b); released++; viewOnce(); wake(); }
+    function release(b) {
+      b.alive = true; b.el.classList.add('on');
+      if (b.small && over) {            /* comes out from under the AI line, in the clear middle of the floor */
+        var mid = PW / 2, tries = 0, ok;
+        do { b.x = mid + (Math.random() - .5) * Math.max(100, KR - KL - 80); ok = !bodies.some(function (o) { return o !== b && o.alive && o.y > KB - 10 && Math.abs(o.x - b.x) < o.r + b.r + 2 && Math.abs(o.y - (KB + b.r + 4)) < o.r + b.r; }); } while (!ok && ++tries < 25);
+        b.y = KB + b.r + 4; b.vx = (Math.random() - .5) * 60; b.vy = 0; b.inside = true; b.el.classList.add('pop');
+      } else { b.vx = (Math.random() - .5) * 200; b.vy = 60 + Math.random() * 120; }
+      put(b); released++; viewOnce(); wake();
+    }
     function queueTo(want, gap) {        /* release balls up to `want`, one at a time, so they fall steadily */
       want = Math.min(bodies.length, want);
       while (queued < want) { (function (b) { timers.push(W.setTimeout(function () { release(b); }, Math.max(0, (queued - released)) * gap)); })(bodies[queued]); queued++; }
@@ -130,7 +157,10 @@
       queued = bodies.length;
     }
     function settleNow() {
-      bodies.forEach(function (b) { b.alive = true; b.y = b.r + Math.random() * (PH * .5); b.el.classList.add('on'); });
+      bodies.forEach(function (b) {
+        b.alive = true; b.y = b.r + Math.random() * (PH * .5); b.el.classList.add('on');
+        if (b.small && over) { b.x = PW / 2 + (Math.random() - .5) * Math.max(100, KR - KL - 80); b.y = KB + b.r + 4; b.inside = true; }
+      });
       released = queued = bodies.length;
       for (var k = 0; k < 900; k++) step(1 / 60);
       bodies.forEach(put);
