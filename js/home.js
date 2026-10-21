@@ -25,7 +25,7 @@
       KB = over && gl ? gl.offsetTop + gl.offsetHeight - steps.offsetTop + 18 : 0;   // the clear column ends just under the AI line
     }
     function clearOut(b) {          /* the text column is solid down to just under the AI line; below it the floor is open */
-      if (!over) return;
+      if (!over || b.free) return;   // once a ball has been grabbed it can go anywhere, across the middle too
       var kb = b.r > 36 ? 1e9 : KB;   // only the small ones fit under the line; the big ones stay at the sides
       var nx = Math.max(KL, Math.min(b.x, KR)), ny = Math.min(b.y, kb), dx = b.x - nx, dy = b.y - ny, d2 = dx * dx + dy * dy;
       if (d2 >= b.r * b.r) return;
@@ -175,7 +175,7 @@
     function pt(e) { var r = pit.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top, t: W.performance.now() }; }
     box.addEventListener('pointerdown', function (e) {
       var el = e.target.closest && e.target.closest('.pb'); if (!el || !el._b) return;
-      var b = el._b, p = pt(e); dragging = b; b.held = true; b.vx = b.vy = 0; down = p; off = { x: b.x - p.x, y: b.y - p.y }; hist = [{ x: p.x, y: p.y, t: p.t }];
+      var b = el._b, p = pt(e); dragging = b; b.free = true; b.held = true; b.vx = b.vy = 0; down = p; off = { x: b.x - p.x, y: b.y - p.y }; hist = [{ x: p.x, y: p.y, t: p.t }];
       el.classList.add('grab'); try { el.setPointerCapture(e.pointerId); } catch (x) {} note('grab', b); wake();
     });
     box.addEventListener('pointermove', function (e) {
