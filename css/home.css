@@ -20,22 +20,22 @@
 /* Hero portfolio thumbnails (back since v34) */
 .chip{position:absolute}
 .chip img{border-radius:12px;object-fit:cover;width:var(--w);height:var(--h)}
-.chip.c1{left:24px;top:70px;transform:rotate(-5deg);--w:252px;--h:168px}
-.chip.c2{left:60px;top:400px;transform:rotate(3deg);--w:210px;--h:140px}
-.chip.c3{left:200px;top:545px;transform:rotate(-2deg);--w:182px;--h:123px}
-.chip.c4{right:24px;top:60px;transform:rotate(4deg);--w:238px;--h:157px}
-.chip.c5{right:60px;top:390px;transform:rotate(-3deg);--w:210px;--h:140px}
-.chip.c6{right:180px;top:565px;transform:rotate(2deg);--w:182px;--h:123px}
+.chip.c1{left:calc(50% - 411px);top:44px;transform:rotate(-5deg);--w:252px;--h:168px}
+.chip.c2{left:calc(50% - 432px - var(--w));top:400px;transform:rotate(3deg);--w:clamp(120px,calc(50vw - 440px),210px);--h:calc(var(--w) * .6667)}
+.chip.c3{left:calc(50% - 415px);top:545px;transform:rotate(-2deg);--w:182px;--h:123px}
+.chip.c4{left:calc(50% + 166px);top:50px;transform:rotate(4deg);--w:238px;--h:157px}
+.chip.c5{left:calc(50% + 432px);top:390px;transform:rotate(-3deg);--w:clamp(120px,calc(50vw - 440px),210px);--h:calc(var(--w) * .6667)}
+.chip.c6{left:calc(50% + 244px);top:565px;transform:rotate(2deg);--w:182px;--h:123px}
 .hero h1,.hero .btn{position:relative;z-index:2}
-@media (max-width:1200px){.hero h1{font-size:52px}.chip.c3,.chip.c6{display:none}.chip.c1{left:16px;top:60px;--w:200px;--h:133px}.chip.c4{right:16px;top:50px;--w:190px;--h:126px}.chip.c2{left:24px;top:500px;--w:150px;--h:100px}.chip.c5{right:24px;top:auto;bottom:40px;--w:150px;--h:100px}}
+@media (max-width:1200px){.hero h1{font-size:52px}.chip.c3,.chip.c6{display:none}.chip.c1{left:calc(50% - 298px);top:60px;--w:200px;--h:133px}.chip.c4{left:calc(50% + 105px);right:auto;top:50px;--w:190px;--h:126px}.chip.c2{left:24px;top:500px;--w:150px;--h:100px}.chip.c5{left:auto;right:24px;top:auto;bottom:40px;--w:150px;--h:100px}}
 @media (max-width:900px){
   .hero{height:auto;min-height:600px;padding:150px 0 160px;gap:20px}
   .hero h1{font-size:35px;padding:0 20px}
   .chip img{border-radius:8px}
   .chip.c2,.chip.c3,.chip.c6{display:none}
   .chip.c1{left:0;top:12px;--w:157px;--h:104px}
-  .chip.c4{right:0;top:30px;--w:146px;--h:98px}
-  .chip.c5{right:8px;top:auto;bottom:16px;--w:168px;--h:112px;display:block}
+  .chip.c4{left:auto;right:0;top:30px;--w:146px;--h:98px}
+  .chip.c5{left:auto;right:8px;top:auto;bottom:16px;--w:168px;--h:112px;display:block}
 }
 
 /* Why now */
@@ -298,10 +298,14 @@
 }
 
 /* Tool pit: tool names drop in as balls, bounce and settle; people can drag, flick or tap them */
-.pit{position:relative;height:440px;margin-top:40px;overflow:hidden;user-select:none;-webkit-user-select:none}
+#why-now{position:relative}
+#why-now.has-over{padding-bottom:130px}
+.pit{position:relative;align-self:center;width:100vw;max-width:100vw;height:440px;margin-top:-24px;overflow:hidden;user-select:none;-webkit-user-select:none}
+.pit.over{position:absolute;left:50%;margin:0 0 0 -50vw;pointer-events:none}
+.pit.over .pb{pointer-events:auto}
 .pit-in{position:absolute;inset:0}
 .pb{position:absolute;left:0;top:0;width:var(--d);height:var(--d);border-radius:999px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-weight:700;letter-spacing:-0.01em;line-height:1.05;font-size:max(11px,calc(var(--d) * .15));cursor:grab;touch-action:pan-y;visibility:hidden;will-change:transform;box-shadow:0 8px 22px rgba(43,33,64,.12)}
 .pb.on{visibility:visible}
 .pb.grab{cursor:grabbing;z-index:3}
 .pb.b0{background:var(--ink);color:#fff}.pb.b1{background:var(--accent);color:var(--ink)}.pb.b2{background:var(--sky);color:#fff}.pb.b3{background:var(--yellow);color:var(--ink)}.pb.b4{background:var(--mint);color:var(--ink)}.pb.b5{background:#fff;color:var(--ink)}.pb.b6{background:var(--band);color:var(--ink)}
-@media (max-width:900px){.pit{height:380px;margin-top:24px}}
+@media (max-width:900px){.pit{height:380px;margin-top:-16px}}
