@@ -75,25 +75,29 @@ body[data-home]{
 .routes-head .lede{font-size:18px;line-height:1.55;color:var(--body);max-width:720px}
 .routes-head .lead-in{font-size:19px;font-weight:600;color:var(--ink);margin-top:4px}
 
-.carousel{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden}
-.carousel-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  scroll-padding-left:max(var(--gutter), calc((100vw - var(--measure))/2 + var(--gutter)));
-  padding:6px max(var(--gutter),24px) 6px max(var(--gutter), calc((100vw - var(--measure))/2 + var(--gutter)))}
-.carousel-track::-webkit-scrollbar{display:none}
-.carousel-track:focus-visible{outline:2px solid var(--sky);outline-offset:-2px}
-.rcard{flex:0 0 clamp(300px,36vw,500px);scroll-snap-align:start;display:flex;flex-direction:column;gap:18px}
-.rcard-art{aspect-ratio:7/5;border-radius:24px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.rcard-art svg{width:100%;height:100%;display:block}
-.rcard-text h3{font-size:22px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px}
-.rcard-text p{font-size:17px;line-height:1.5;color:var(--body);max-width:360px}
+/* two small boxes over one large box; the large box holds the tools ball pit */
+.routes-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:2px}
+.rbox{position:relative;overflow:hidden;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px}
+.rbox h3{font-size:22px;font-weight:600;letter-spacing:-0.01em}
+.rbox>p{font-size:16px;line-height:1.5;color:var(--body);max-width:40ch}
+.rbox-ico{width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;margin-bottom:2px}
+.rbox-ico svg{width:34px;height:34px}
+.rbox.large{grid-column:1 / -1;padding:0;min-height:380px}
+.rbox-label{position:absolute;top:28px;left:28px;z-index:2;max-width:min(60%,440px);pointer-events:none}
+.rbox-label h3{font-size:22px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px}
+.rbox-label p{font-size:16px;line-height:1.5;color:var(--body)}
+.tools-pit{position:absolute;inset:0;z-index:1;user-select:none;-webkit-user-select:none}
+.tools-pit-in{position:absolute;inset:0}
 .art-agency{background:#E7E3FB}.art-inhouse{background:#FBE7DD}.art-tools{background:#F0EAFC}
 
-.carousel-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:4px}
-.cbtn{width:48px;height:48px;border-radius:999px;border:0;background:#EAE5F6;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,opacity .2s}
-.cbtn:hover:not(:disabled){background:#DED6F0}
-.cbtn:disabled{opacity:.35;cursor:default}
-.cbtn:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
-.cbtn svg{width:20px;height:20px}
+/* tool balls */
+.pb{position:absolute;left:0;top:0;width:var(--d);height:var(--d);border-radius:999px;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px 3px;font-weight:700;letter-spacing:-0.01em;line-height:1.05;font-size:max(10px,calc(var(--d)*.15));cursor:grab;touch-action:pan-y;visibility:hidden;will-change:transform;box-shadow:0 6px 16px rgba(34,26,82,.14)}
+.pb.on{visibility:visible}
+.pb.pop{animation:popin .3s ease-out}
+@keyframes popin{from{opacity:0;scale:.6}to{opacity:1;scale:1}}
+.pb.grab{cursor:grabbing;z-index:3}
+.pb.b0{background:var(--ink);color:#fff}.pb.b1{background:var(--accent);color:#fff}.pb.b2{background:var(--sky);color:#fff}.pb.b3{background:var(--yellow);color:var(--ink)}.pb.b4{background:var(--mint);color:var(--ink)}.pb.b5{background:#fff;color:var(--ink)}.pb.b6{background:var(--band);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.pb.pop{animation:none}}
 
 .routes-foot{display:flex;flex-direction:column;gap:20px;text-align:left;max-width:720px}
 .routes-foot p{font-size:18px;line-height:1.55;color:var(--body)}
@@ -102,9 +106,14 @@ body[data-home]{
   .routes-sec{padding-top:80px;gap:22px}
   .routes-head .lede,.routes-foot p{font-size:16px}
   .routes-head .lead-in{font-size:17px}
-  .rcard-text p{font-size:15px}
+  .rbox{padding:22px}
+  .rbox>p,.rbox-label p{font-size:15px}
   .routes-foot .callout{font-size:17px;padding:18px 20px}
-  .carousel-nav{display:none}
+}
+@media (max-width:640px){
+  .routes-grid{grid-template-columns:1fr}
+  .rbox.large{min-height:300px}
+  .rbox-label{max-width:72%}
 }
 
 /* ---------- Your business → brand (strikethrough + surfaces) ---------- */

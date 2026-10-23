@@ -60,17 +60,15 @@
       <p class="kicker">This is for you if</p>
       <div class="icp">
         <div class="icp-card">
-          <span class="icp-n">01</span>
           <h3>Business owner</h3>
           <p>Your business turns over £250k to £2.5m.</p>
         </div>
         <div class="icp-card">
-          <span class="icp-n">02</span>
           <h3>Certified coach</h3>
           <p>With a practice built on your name.</p>
         </div>
       </div>
-      <p class="turn">Either way, the work is good. Marketing is the thing that keeps slipping down the list.</p>
+      <p class="turn">Either way, marketing is the thing that keeps slipping down the list.</p>
     </section>
 
     <section id="nobody" class="routes-sec">
@@ -79,30 +77,23 @@
         <p class="lede">The founder is serving clients. The team is delivering. So marketing just happens. A quick ChatGPT prompt in a spare hour, no vision, no system behind it. And it shows.</p>
         <p class="lead-in">You've tried the routes.</p>
       </div>
-      <div class="carousel">
-        <ul class="carousel-track" id="routes-track" tabindex="0" aria-label="Routes you've tried">
-          <li class="rcard">
-            <div class="rcard-art art-agency">
-              <svg viewBox="0 0 280 200" aria-hidden="true"><rect x="48" y="40" width="184" height="94" rx="18" fill="#fff"/><path d="M94 134v26l26-26z" fill="#fff"/><rect x="70" y="66" width="140" height="10" rx="5" fill="#C9C2EC"/><rect x="70" y="86" width="118" height="10" rx="5" fill="#C9C2EC"/><rect x="70" y="106" width="86" height="10" rx="5" fill="#ED8A6B"/></svg>
-            </div>
-            <div class="rcard-text"><h3>The agency</h3><p>Wrote from the outside, and it read like it.</p></div>
-          </li>
-          <li class="rcard">
-            <div class="rcard-art art-inhouse">
-              <svg viewBox="0 0 280 200" aria-hidden="true"><circle cx="104" cy="74" r="28" fill="#fff"/><path d="M66 150v-6a38 38 0 0 1 76 0v6z" fill="#fff"/><circle cx="194" cy="118" r="30" fill="#ED8A6B"/><path d="M180 118l9 9 17-19" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="rcard-text"><h3>The in-house hire</h3><p>Still needed you in the room for every sign-off.</p></div>
-          </li>
-          <li class="rcard">
-            <div class="rcard-art art-tools">
-              <svg viewBox="0 0 280 200" aria-hidden="true"><rect x="70" y="52" width="44" height="44" rx="12" fill="#6E6BE6"/><rect x="122" y="52" width="44" height="44" rx="12" fill="#ED8A6B"/><rect x="174" y="52" width="44" height="44" rx="12" fill="#E29AD2"/><rect x="70" y="116" width="44" height="44" rx="12" fill="#F4C197"/><rect x="122" y="116" width="44" height="44" rx="12" fill="#CFC8EE" opacity=".5"/><rect x="174" y="116" width="44" height="44" rx="12" fill="#CFC8EE" opacity=".5"/></svg>
-            </div>
-            <div class="rcard-text"><h3>The tools</h3><p>A chatbot, a CRM, three dashboards. Half unopened by month three.</p></div>
-          </li>
-        </ul>
-        <div class="wrap carousel-nav">
-          <button type="button" class="cbtn" id="routes-prev" aria-label="Previous route"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button type="button" class="cbtn" id="routes-next" aria-label="Next route"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="wrap routes-grid">
+        <div class="rbox small art-agency">
+          <div class="rbox-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4.5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#6E6BE6"/></svg></div>
+          <h3>The agency</h3>
+          <p>Wrote from the outside, and it read like it.</p>
+        </div>
+        <div class="rbox small art-inhouse">
+          <div class="rbox-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="#ED8A6B"/><path d="M4 21a8 8 0 0 1 16 0z" fill="#ED8A6B"/></svg></div>
+          <h3>The in-house hire</h3>
+          <p>Still needed you in the room for every sign-off.</p>
+        </div>
+        <div class="rbox large art-tools">
+          <div class="rbox-label">
+            <h3>The tools</h3>
+            <p>A chatbot, a CRM, three dashboards. Half unopened by month three.</p>
+          </div>
+          <div class="tools-pit" id="tools-pit" aria-hidden="true"><div class="tools-pit-in" id="tools-pit-in"></div></div>
         </div>
       </div>
       <div class="wrap routes-foot">
