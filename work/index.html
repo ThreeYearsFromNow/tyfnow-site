@@ -22,81 +22,198 @@
 <meta name="twitter:description" content="We run one client's whole system in the open: what we tested, what moved, what we're trying next.">
 <meta name="twitter:image" content="https://www.threeyearsfromnow.com/img/og.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "CollectionPage", "url": "https://www.threeyearsfromnow.com/work", "name": "Work", "isPartOf": {"@id": "https://www.threeyearsfromnow.com/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.threeyearsfromnow.com/"}, {"@type": "ListItem", "position": 2, "name": "Work", "item": "https://www.threeyearsfromnow.com/work"}]}]}</script>
-<link rel="preload" href="/fonts/InterTight-var.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/css/site.css">
-<link rel="stylesheet" href="/css/pages.css">
+<link rel="preload" href="/fonts/InterVariable-latin.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/css/v06-base.css">
+<link rel="stylesheet" href="/css/v06-work.css">
+<link rel="stylesheet" href="/css/v06-chrome.css">
 </head>
 <body>
-<div id="site">
-  <header class="site-header wrap">
-    <a href="/" class="logo">#TYFNOW</a>
-    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
-    <nav id="nav">
-      <a href="/how-we-work">How we work</a>
-      <a href="/work" aria-current="page">Work</a>
-      <a href="/blog">Blog</a>
-      <a href="/contact" data-track="nav_contact">Contact</a>
+<div class="util">Three Years From Now <span aria-hidden="true">·</span> Growth studio</div>
+
+<header class="hdr">
+  <div class="hdr-wrap">
+    <div class="hdr-in">
+      <a class="brand" href="/" aria-label="TYFNOW, Three Years From Now, home">
+        <span class="brand-w">TYFNOW</span>
+        <span class="brand-s">Three Years From Now</span>
+      </a>
+      <nav class="hdr-nav" aria-label="Primary">
+        <a class="hdr-link" href="/">Home</a>
+        <a class="hdr-link" href="/how-we-work">How we work</a>
+        <a class="hdr-link" href="/work" aria-current="page">Work</a>
+        <a class="hdr-cta" href="/contact" data-track="nav_contact">Tell us what's not working</a>
+      </nav>
+      <button class="hdr-menu" type="button" aria-controls="hdr-mob" aria-expanded="false">Menu</button>
+    </div>
+    <nav class="hdr-mob" id="hdr-mob" aria-label="Primary, mobile" hidden>
+      <a class="hdr-link" href="/">Home</a>
+      <a class="hdr-link" href="/how-we-work">How we work</a>
+      <a class="hdr-link" href="/work" aria-current="page">Work</a>
+      <a class="hdr-cta" href="/contact" data-track="nav_contact_mobile">Tell us what's not working</a>
     </nav>
-  </header>
-  <main class="wrap">
+  </div>
+</header>
 
-<section class="page-head">
-  <h1>The work, as it's built</h1>
-  <p class="sub">We run one client's whole system in the open: what we tested, what moved, what we're trying next. No gloss, no invented numbers.</p>
-</section>
+<main>
 
-<section class="work-block">
-  <div class="case" aria-label="Anonymised client system">
-    <div class="case-grid">
-      <div class="case-cell"><span class="case-k">What we tested</span><div class="ph">Placeholder — the live detail follows as the system is built</div></div>
-      <div class="case-cell"><span class="case-k">What moved</span><div class="ph">Placeholder — the live detail follows as the system is built</div></div>
-      <div class="case-cell"><span class="case-k">What we're trying next</span><div class="ph">Placeholder — the live detail follows as the system is built</div></div>
+  <!-- Hero -->
+  <section class="hero-work" aria-labelledby="h-work">
+    <div class="wrap">
+      <div class="head w-f349c4">
+        <span class="eyebrow">03 / The work</span>
+        <h1 id="h-work"><span class="br">The work,</span> <span class="br violet">as it's built.</span></h1>
+        <p class="hero-p">We run one client's whole system in the open: what we tested, what moved, what we're trying next. No gloss. No invented numbers.</p>
+        <p class="strap">Real work · Real learning · No make-believe metrics</p>
+      </div>
     </div>
-  </div>
-  <p class="line">The client stays unnamed here. If you want the full picture, including who it's for and a word with them, <a href="/contact">ask us</a>.</p>
-  <p class="work-more"><a href="/contact" class="btn" data-track="work_ask_to_see">Ask to see it</a></p>
-</section>
+  </section>
 
-<section class="work-block">
-  <p class="group-label">Before TYFNOW, the work that built it</p>
-  <div class="tiles">
-    <figure class="tile"><img src="/img/todaytix.jpg" alt="TodayTix campaign artwork" width="960" height="823" loading="lazy"><figcaption class="t">TodayTix</figcaption></figure>
-    <figure class="tile"><img src="/img/amex-puppet.jpg" alt="Sock puppet at a desk in front of a city skyline" width="961" height="823" loading="lazy"><figcaption class="t">American Express</figcaption></figure>
-    <figure class="tile"><img src="/img/amex-business.jpg" alt="American Express small business campaign artwork" width="961" height="823" loading="lazy"><figcaption class="t">American Express</figcaption></figure>
-    <figure class="tile"><img src="/img/wardrobe.jpg" alt="Open wardrobe, styled for a campaign" width="960" height="822" loading="lazy"><figcaption class="t"><!-- caption pending: believed IKEA Space Solutions --></figcaption></figure>
-    <figure class="tile"><img src="/img/helmet.jpg" alt="Helmet, campaign artwork" width="961" height="822" loading="lazy"><figcaption class="t"><!-- caption pending: client to confirm --></figcaption></figure>
-  </div>
-  <p class="line">Also: Conference Badges, NESO, IKEA, Huawei, Siemens, McCarthy Stone, Nutella, Wetha, Kids Clubs and Velvis. <a href="/contact">Ask about any of them.</a></p>
-</section>
+  <!-- Open client system -->
+  <section class="section live" aria-labelledby="h-live">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Behind the scenes</span>
+        <h2 id="h-live">A whole system. <span class="violet">Out in the open.</span></h2>
+        <p class="intro">[Short intro paragraph: copy to come]</p>
+      </div>
 
-<section class="cta-sec">
-  <div class="card cta-card">
-    <h2>Something not working?</h2>
-    <div class="body">
-      <p>Tell us what it is. We'll tell you straight whether we can fix it.</p>
-      <p>Three years from now, you'll have a system or the same to-do list. The work starts the day you decide.</p>
+      <article class="shell" aria-labelledby="h-shell">
+        <div class="shell-head">
+          <div>
+            <h3 class="shell-title" id="h-shell">Client system / 001</h3>
+            <p class="shell-sub">Anonymised case study · content placeholder</p>
+          </div>
+          <span class="status"><i aria-hidden="true"></i>In development</span>
+        </div>
+        <ol class="case-grid">
+          <li class="case w-e1f1dc">
+            <span class="tiny">01 / Experiment</span>
+            <h3>What we tested</h3>
+            <p class="case-p">[Hypothesis, what changed and why: content to come]</p>
+            <div class="bars" aria-hidden="true">
+              <span class="w-68dae8"></span><span class="w-7f710e"></span><span class="w-681fea"></span><span class="w-a4620a"></span><span class="w-b2e810"></span><span class="w-bf2bb3"></span>
+            </div>
+          </li>
+          <li class="case w-52251e">
+            <span class="tiny w-776fc5">02 / Evidence</span>
+            <h3>What moved</h3>
+            <div class="awaiting"><b aria-hidden="true">—</b><span>Awaiting verified data</span></div>
+            <p class="case-p">[Outcome and context: added only once verified]</p>
+            <div class="bars" aria-hidden="true">
+              <span class="w-c07620"></span><span class="w-13c602"></span><span class="w-cefb02"></span><span class="w-697c55"></span><span class="w-544c6d"></span><span class="w-8aafbe"></span>
+            </div>
+          </li>
+          <li class="case w-dd5241">
+            <span class="tiny w-798721">03 / Next step</span>
+            <h3>What we're trying next</h3>
+            <p class="case-p">[Planned next experiment: content to come]</p>
+            <ul class="tags" aria-label="Cycle">
+              <li>Hypothesis</li><li>Build</li><li>Review</li><li>Repeat</li>
+            </ul>
+          </li>
+        </ol>
+      </article>
+
+      <div class="after">
+        <p class="intro w-42c324">The client stays unnamed here. If you want the full picture, including who it's for and a word with them, ask us.</p>
+        <a class="btn btn-dark" href="/contact" data-track="w_cta_1">Ask to see it <span aria-hidden="true">→</span></a>
+      </div>
     </div>
-    <a href="/contact" class="btn" data-track="work_closing">Start here</a>
-  </div>
-</section>
+  </section>
+
+  <!-- Before TYFNOW -->
+  <section class="section work-past" id="past-work" aria-labelledby="h-past">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">The experience behind TYFNOW</span>
+        <h2 id="h-past">Before TYFNOW, <span class="violet">the work that built it.</span></h2>
+        <p class="intro">Selected work from the years before the studio opened, for brands at every scale.</p>
+      </div>
+
+      <ul class="project-grid">
+        <!-- 1 TodayTix -->
+        <li class="project">
+          <div class="media"><img src="/img/todaytix.jpg" width="960" height="823" alt="TodayTix campaign artwork" loading="lazy" decoding="async"></div>
+          <div class="cap"><h3>TodayTix</h3><p>Selected previous work · details pending</p></div>
+        </li>
+        <!-- 2 Amex 01 -->
+        <li class="project">
+          <div class="media"><img src="/img/amex-puppet.jpg" width="961" height="823" alt="Sock puppet at a desk in front of a city skyline" loading="lazy" decoding="async"></div>
+          <div class="cap"><h3>American Express / 01</h3><p>Selected previous work · details pending</p></div>
+        </li>
+        <!-- 3 Amex 02 -->
+        <li class="project">
+          <div class="media"><img src="/img/amex-business.jpg" width="961" height="823" alt="American Express small business campaign artwork" loading="lazy" decoding="async"></div>
+          <div class="cap"><h3>American Express / 02</h3><p>Selected previous work · details pending</p></div>
+        </li>
+        <!-- 4 Wardrobe -->
+        <li class="project">
+          <div class="media"><img src="/img/wardrobe.jpg" width="960" height="822" alt="Open wardrobe, styled for a campaign" loading="lazy" decoding="async"></div>
+          <div class="cap"><h3>Wardrobe project</h3><p>Selected previous work · caption pending</p></div>
+        </li>
+        <!-- 5 Helmet -->
+        <li class="project">
+          <div class="media"><img src="/img/helmet.jpg" width="961" height="822" alt="Helmet, campaign artwork" loading="lazy" decoding="async"></div>
+          <div class="cap"><h3>Helmet project</h3><p>Selected previous work · caption pending</p></div>
+        </li>
+      </ul>
+
+      <div class="brands">
+        <p>Also: Conference Badges, NESO, IKEA, Huawei, Siemens, McCarthy Stone, Nutella, Wetha, Kids Clubs and Velvis.</p>
+        <p>Ask about any of them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="end-frame" aria-labelledby="h-end">
+    <div class="closer">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="head">
+          <span class="eyebrow">Something not working?</span>
+          <h2 id="h-end">Let's make something <span class="move">move.</span></h2>
+          <p class="intro w-0f5c0b">Tell us what it is. We'll tell you straight whether we can fix it. Three years from now, you'll have a system or the same to-do list. The work starts the day you decide.</p>
+          <a class="btn btn-light w-492fe4" href="/contact" data-track="w_cta_2">Start here <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="f-co">
-        <span class="logo small">#TYFNOW</span>
-        <p class="f-company">Three Years From Now Ltd<br>Company number 17013338<br>Registered office: 259 Sheepcot Lane,<br>Watford, WD25 7DJ</p>
+
+<footer class="foot">
+  <div class="foot-wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="TYFNOW, Three Years From Now, home">
+          <span class="brand-w">TYFNOW</span>
+          <span class="brand-s">Three Years From Now</span>
+        </a>
+        <p class="foot-desc">A growth studio that turns your business into a brand, and keeps it moving forward.</p>
       </div>
-      <nav class="f-nav" aria-label="Footer"><a href="/how-we-work">How we work</a><a href="/work">Work</a><a href="/blog">Blog</a><a href="/contact">Contact</a></nav>
-      <p class="f-copy">&copy; 2026 Three Years From Now Ltd <span aria-hidden="true">&middot;</span> <a href="/privacy">Privacy policy</a> <span aria-hidden="true">&middot;</span> <a href="/terms">Terms</a></p>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/how-we-work">How we work</a>
+        <a href="/work" aria-current="page">Work</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+      </nav>
     </div>
-  </footer>
-</div>
+    <div class="foot-base">
+      <p>Three Years From Now Ltd · Company number 17013338 · Registered office: 259 Sheepcot Lane, Watford WD25 7DJ</p>
+      <p>© 2026 Three Years From Now Ltd · <a href="/privacy">Privacy policy</a> · <a href="/terms">Terms</a></p>
+    </div>
+  </div>
+</footer>
+
 <div id="cookie" class="cookie" role="region" aria-label="Cookies">
   <p>We'd like to count visits with Google Analytics. It records which pages and buttons get used, not what you type. <a href="/privacy">Privacy policy</a>.</p>
-  <button type="button" class="btn" data-accept>Accept</button>
-  <button type="button" class="btn ghost" data-decline>Decline</button>
+  <button type="button" data-accept>Accept</button>
+  <button type="button" data-decline>Decline</button>
 </div>
+
 <script src="/js/site.js"></script>
+<script src="/js/v06.js"></script>
 </body>
 </html>

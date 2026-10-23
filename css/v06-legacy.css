@@ -1,0 +1,48 @@
+/* TYFNOW v06-legacy.css: brings Contact, Privacy, Terms and the blog onto the V06 palette and type
+   without rewriting their layouts. Loaded after site.css and pages.css. 23 Oct 2026. */
+:root{
+  --page:#fdfdfc;
+  --ink:#161716;
+  --ink-card:#1d1c22;
+  --ink-line:#454644;
+  --accent:#161716;
+  --on-accent:#ffffff;
+  --accent-ink:#4f3fd0;
+  --yellow:#7661f6;
+  --band:#eeeaff;
+  --sky:#7661f6;
+  --mint:#bcefe9;
+  --green:#1f6f64;
+  --body:#5f605d;
+  --muted-on-ink:#cbc3ff;
+  --muted2:#5f605d;
+  --rule:#dededb;
+  --globe:#f3f3f1;
+  --cream:#f8f8f6;
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+body{background:var(--page)}
+a:hover{color:var(--accent-ink)}
+:focus-visible{outline-color:#7661f6}
+
+/* V06 type */
+h1,h2,h3{font-weight:570;letter-spacing:-.035em;line-height:1.18}
+.page h1,.stub h1,.page-head h1,.post-head h1{font-size:clamp(45px,4.5vw,64px);line-height:1.16;letter-spacing:-.044em}
+.prose h2{font-size:clamp(24px,2.4vw,28px);font-weight:590;letter-spacing:-.025em}
+.prose h3{font-weight:590;letter-spacing:-.02em}
+.lead{font-size:17px;line-height:1.7}
+.prose{font-size:16px;line-height:1.72}
+@media (max-width:760px){.page h1,.stub h1,.page-head h1,.post-head h1{font-size:clamp(37px,9.1vw,47px);line-height:1.18}.lead{font-size:16px}}
+
+/* V06 buttons */
+.btn{height:auto;min-height:54px;padding:0 23px;font-size:13px;font-weight:600;line-height:1.3;transition:background-color .2s ease,transform .2s ease}
+.btn:hover{filter:none;background:#2e2f2d;color:#fff;transform:translateY(-2px)}
+.btn.outline,.btn.ghost{background:#fff;border:1px solid #d2d2d7;color:var(--ink)}
+.btn.outline:hover,.btn.ghost:hover{background:#eeeaff;border-color:#d2d2d7;color:var(--ink)}
+.btn:disabled:hover{transform:none;background:var(--accent)}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:hover{transform:none}}
+
+/* main content keeps the old .wrap, aligned to the new header gutters */
+main.wrap{max-width:none;width:min(calc(100% - 110px),1280px);padding:0}
+@media (max-width:1000px){main.wrap{width:calc(100% - 68px)}}
+@media (max-width:760px){main.wrap{width:calc(100% - 38px)}}
