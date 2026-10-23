@@ -5,7 +5,7 @@
 .util{height:29px;display:flex;align-items:center;justify-content:center;gap:9px;background:#f3f3f1;border-bottom:1px solid #dededb;font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-size:10px;font-weight:650;letter-spacing:.15em;text-transform:uppercase;color:#454644}
 
 /* header */
-.hdr{position:sticky;top:0;z-index:20;background:rgba(253,253,252,.86);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid #dededb;font-family:Inter,"Helvetica Neue",Arial,sans-serif}
+.hdr{position:sticky;top:0;z-index:20;background:rgba(253,253,252,.62);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border-bottom:0;font-family:Inter,"Helvetica Neue",Arial,sans-serif}
 .hdr-wrap,.foot-wrap{width:min(calc(100% - 110px),1280px);margin-inline:auto}
 @media (max-width:1000px){.hdr-wrap,.foot-wrap{width:calc(100% - 68px)}}
 @media (max-width:760px){.hdr-wrap,.foot-wrap{width:calc(100% - 38px)}}

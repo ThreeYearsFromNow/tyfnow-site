@@ -260,7 +260,6 @@ h1,h2,h3{font-weight:570;letter-spacing:-.035em}
 .h-a1e47a{gap:28px!important}
 .h-a5f6f6{font-size:12px!important;color:#c9c7d4!important}
 .h-a5f75a{width:46%!important}
-.h-a72275{background:#f6f6f7!important}
 .h-a813ca{background:#f2f0ff!important}
 .h-aa58ca{max-width:560px!important}
 .h-b05ade{margin-left:auto!important;margin-right:auto!important}
@@ -333,3 +332,13 @@ main>section:not(.close-out):not(.end-frame):not(#contact)+section:not(.close-ou
 .h-hero{font-size:clamp(40px,3.9vw,56px);max-width:1000px;line-height:1.14}
 @media (max-width:760px){.h-hero{font-size:clamp(29px,7.6vw,38px);line-height:1.18}}
 @media (max-width:400px){.h-hero{font-size:29px}}
+
+/* F164 "Who owns marketing inside your business?" on one line wherever it fits */
+#nobody-h{max-width:none}
+@media (min-width:1100px){#nobody-h{white-space:nowrap}}
+/* F161 the hero runs up behind the see-through nav, so the tiles pass under it instead of being cut at its edge */
+.hero{margin-top:-85px;padding-top:181px}
+.hero--b{padding-top:205px}
+@media (max-width:760px){.hero{margin-top:-70px;padding-top:142px}.hero--b{padding-top:180px}}
+/* soft fade at the foot of the floating hero so tiles dissolve into the page instead of being cut */
+.hero--b::after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(253,253,252,0) 0%,#fdfdfc 92%)}
