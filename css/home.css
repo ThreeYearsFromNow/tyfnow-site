@@ -1,6 +1,6 @@
-/* TYFNOW home.css: "Who owns marketing?" home. v39 (23 Oct 2026):
-   home-only palette (gradient inspiration), Calendly-scale type, edge-to-edge panels.
-   Palette is scoped to body[data-home] so only the home page re-themes. */
+/* TYFNOW home.css: "Who owns marketing?" home. v40 (23 Oct 2026).
+   Palette + Calendly-scale type kept from v39. Hero thumbnails (pit removed),
+   ICP cards, routes carousel (right-bleed), brand-surfaces strip. */
 
 body[data-home]{
   --page:#F8F6FD;
@@ -25,30 +25,31 @@ body[data-home]{
 
 .card{width:100%;border-radius:28px}
 
-/* ---------- Hero (full-bleed gradient, tool pit as backdrop) ---------- */
+/* ---------- Hero (full-bleed gradient, portfolio thumbnails) ---------- */
 .hero{position:relative;overflow:hidden;min-height:78vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:112px var(--gutter) 56px;
   background:
     radial-gradient(80% 60% at 82% 8%, rgba(110,107,230,.20), transparent 60%),
     radial-gradient(72% 70% at 6% 98%, rgba(237,138,107,.17), transparent 55%),
     linear-gradient(175deg,#FCFAFF 0%,#F0EAFC 55%,#E7E2FB 100%)}
-.hero-text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:24px;pointer-events:none;max-width:680px}
-.hero-text>*{pointer-events:auto}
+.hero-text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:24px;max-width:680px}
 .hero h1{font-size:clamp(32px,4.8vw,58px);max-width:720px;line-height:1.04}
 .hero .sub{font-size:clamp(17px,1.9vw,21px);line-height:1.45;font-weight:500;max-width:560px;color:var(--body)}
 .hero-text .btn{margin-top:6px}
-@media (max-width:900px){.hero{min-height:620px;justify-content:flex-start;padding:100px 24px 32px}.hero-text{gap:20px}}
 
-/* Tool pit: tool-name balls fall in and settle around the hero text; drag, flick or tap them */
-.pit{position:absolute;inset:0;z-index:1;pointer-events:none;user-select:none;-webkit-user-select:none}
-.pit .pb{pointer-events:auto}
-.pit-in{position:absolute;inset:0}
-.pb{position:absolute;left:0;top:0;width:var(--d);height:var(--d);border-radius:999px;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px 3px;font-weight:700;letter-spacing:-0.01em;line-height:1.05;font-size:max(11px,calc(var(--d) * .14));cursor:grab;touch-action:pan-y;visibility:hidden;will-change:transform;box-shadow:0 8px 22px rgba(34,26,82,.14)}
-.pb.on{visibility:visible}
-.pb.pop{animation:popin .3s ease-out}
-@keyframes popin{from{opacity:0;scale:.6}to{opacity:1;scale:1}}
-.pb.grab{cursor:grabbing;z-index:3}
-.pb.b0{background:var(--ink);color:#fff}.pb.b1{background:var(--accent);color:#fff}.pb.b2{background:var(--sky);color:#fff}.pb.b3{background:var(--yellow);color:var(--ink)}.pb.b4{background:var(--mint);color:var(--ink)}.pb.b5{background:#fff;color:var(--ink)}.pb.b6{background:var(--band);color:var(--ink)}
-@media (prefers-reduced-motion:reduce){.pb.pop{animation:none}}
+/* scattered, tilted thumbnails behind the text */
+.thumbs{position:absolute;inset:0;z-index:1;pointer-events:none}
+.thumb{position:absolute;width:var(--w);aspect-ratio:4/3;object-fit:cover;border-radius:16px;box-shadow:0 16px 36px rgba(34,26,82,.16)}
+.thumb.t1{--w:190px;left:3%;top:13%;transform:rotate(-6deg)}
+.thumb.t2{--w:205px;left:1%;top:49%;transform:rotate(4deg)}
+.thumb.t3{--w:170px;left:9%;bottom:9%;transform:rotate(-3deg)}
+.thumb.t4{--w:188px;right:4%;top:15%;transform:rotate(5deg)}
+.thumb.t5{--w:208px;right:1%;top:50%;transform:rotate(-5deg)}
+.thumb.t6{--w:174px;right:8%;bottom:11%;transform:rotate(4deg)}
+@media (max-width:1200px){.thumb.t3,.thumb.t6{display:none}.thumb.t2,.thumb.t5{--w:170px}}
+@media (max-width:900px){
+  .hero{min-height:560px;justify-content:center;padding:112px 24px 56px}
+  .thumb{display:none}
+}
 
 /* ---------- Generic centred section ---------- */
 .sec{padding-top:120px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px}
@@ -56,43 +57,74 @@ body[data-home]{
 .kicker{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);margin:0}
 @media (max-width:900px){.sec{padding-top:80px;gap:20px}}
 
-/* ---------- This is for you if ---------- */
-.for-you .lines{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:760px;margin:0 auto}
-.for-you .a{font-size:clamp(21px,2.6vw,30px);font-weight:600;letter-spacing:-0.02em;line-height:1.18}
-.for-you .turn{font-size:clamp(17px,1.8vw,20px);line-height:1.45;color:var(--body);max-width:600px;margin-top:6px}
+/* ---------- This is for you if — two ICP cards ---------- */
+.for-you{padding-top:120px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px}
+.icp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;width:100%;max-width:840px}
+.icp-card{text-align:left;padding:32px;border-radius:24px;background:#fff;border:1px solid var(--rule);box-shadow:0 10px 30px rgba(34,26,82,.05);display:flex;flex-direction:column;gap:8px}
+.icp-n{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--accent-ink)}
+.icp-card h3{font-size:clamp(21px,2.3vw,27px);font-weight:600;letter-spacing:-0.01em;margin-top:4px}
+.icp-card p{font-size:17px;line-height:1.45;color:var(--body)}
+.for-you .turn{font-size:clamp(17px,1.8vw,20px);line-height:1.45;color:var(--body);max-width:600px}
+@media (max-width:900px){.for-you{padding-top:80px;gap:22px}}
+@media (max-width:700px){.icp{grid-template-columns:1fr}.icp-card{padding:24px}}
 
-/* ---------- Nobody owns it (reading column) ---------- */
-.owns{padding-top:120px;display:flex;flex-direction:column;align-items:center}
-.owns .col{width:100%;max-width:720px;text-align:left;display:flex;flex-direction:column;gap:22px}
-.owns h2{font-size:clamp(26px,3.4vw,40px);text-align:left;max-width:none;line-height:1.05;margin-bottom:2px}
-.owns p{font-size:18px;line-height:1.55;color:var(--body)}
-.owns .lead-in{font-size:19px;font-weight:600;color:var(--ink);margin-top:6px}
-.owns .close{font-size:19px;line-height:1.5;font-weight:500;color:var(--ink)}
-.routes{list-style:none;margin:0;padding:0}
-.routes li{padding:18px 0;border-top:1px solid var(--rule);font-size:17px;line-height:1.5;color:var(--body)}
-.routes li:last-child{border-bottom:1px solid var(--rule)}
+/* ---------- Nobody owns it — routes carousel ---------- */
+.routes-sec{padding-top:120px;display:flex;flex-direction:column;gap:28px}
+.routes-head{display:flex;flex-direction:column;gap:14px;text-align:left;align-items:flex-start}
+.routes-head h2{font-size:clamp(26px,3.4vw,40px);line-height:1.05;max-width:720px}
+.routes-head .lede{font-size:18px;line-height:1.55;color:var(--body);max-width:720px}
+.routes-head .lead-in{font-size:19px;font-weight:600;color:var(--ink);margin-top:4px}
+
+.carousel{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden}
+.carousel-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  scroll-padding-left:max(var(--gutter), calc((100vw - var(--measure))/2 + var(--gutter)));
+  padding:6px max(var(--gutter),24px) 6px max(var(--gutter), calc((100vw - var(--measure))/2 + var(--gutter)))}
+.carousel-track::-webkit-scrollbar{display:none}
+.carousel-track:focus-visible{outline:2px solid var(--sky);outline-offset:-2px}
+.rcard{flex:0 0 clamp(300px,36vw,500px);scroll-snap-align:start;display:flex;flex-direction:column;gap:18px}
+.rcard-art{aspect-ratio:7/5;border-radius:24px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.rcard-art svg{width:100%;height:100%;display:block}
+.rcard-text h3{font-size:22px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px}
+.rcard-text p{font-size:17px;line-height:1.5;color:var(--body);max-width:360px}
+.art-agency{background:#E7E3FB}.art-inhouse{background:#FBE7DD}.art-tools{background:#F0EAFC}
+
+.carousel-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:4px}
+.cbtn{width:48px;height:48px;border-radius:999px;border:0;background:#EAE5F6;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,opacity .2s}
+.cbtn:hover:not(:disabled){background:#DED6F0}
+.cbtn:disabled{opacity:.35;cursor:default}
+.cbtn:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.cbtn svg{width:20px;height:20px}
+
+.routes-foot{display:flex;flex-direction:column;gap:20px;text-align:left;max-width:720px}
+.routes-foot p{font-size:18px;line-height:1.55;color:var(--body)}
+.routes-foot .callout{position:relative;font-size:20px;line-height:1.5;font-weight:500;color:var(--ink);padding:20px 24px;border-radius:18px;background:var(--band)}
 @media (max-width:900px){
-  .owns{padding-top:80px}
-  .owns .col{gap:18px}
-  .owns p,.owns .close{font-size:16px}
-  .owns .lead-in{font-size:17px}
-  .routes li{padding:14px 0;font-size:15px}
+  .routes-sec{padding-top:80px;gap:22px}
+  .routes-head .lede,.routes-foot p{font-size:16px}
+  .routes-head .lead-in{font-size:17px}
+  .rcard-text p{font-size:15px}
+  .routes-foot .callout{font-size:17px;padding:18px 20px}
+  .carousel-nav{display:none}
 }
 
-/* ---------- Your business → brand (strikethrough) ---------- */
+/* ---------- Your business → brand (strikethrough + surfaces) ---------- */
 .flip-sec{padding-top:120px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px}
 .flip-sec h2{font-size:clamp(26px,3.4vw,42px);max-width:820px;line-height:1.18;padding-top:.6em}
 .flip{position:relative;display:inline-block}
 .flip .was{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--accent);color:var(--muted2)}
 .flip .is{position:absolute;left:50%;bottom:90%;transform:translateX(-50%);white-space:nowrap;color:var(--accent-ink);font-weight:700}
-.flip-sec .body{max-width:680px;display:flex;flex-direction:column;gap:18px}
-.flip-sec .body p{font-size:18px;line-height:1.55;color:var(--body)}
+.flip-lead{max-width:680px;font-size:18px;line-height:1.55;color:var(--body)}
+.surfaces{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:700px}
+.surf{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:14px;background:#fff;border:1px solid var(--rule);font-weight:600;font-size:16px;color:var(--ink)}
+.surf::before{content:"";width:9px;height:9px;border-radius:999px;background:var(--dot,var(--accent))}
+.surf.s1{--dot:var(--sky)}.surf.s2{--dot:var(--accent)}.surf.s3{--dot:var(--mint)}.surf.s4{--dot:var(--yellow)}
 .flip-sec .btn{margin-top:6px}
 @media (max-width:900px){
   .flip-sec{padding-top:80px}
   .flip-sec h2{padding-top:.75em}
   .flip .was{text-decoration-thickness:2px}
-  .flip-sec .body p{font-size:16px}
+  .flip-lead{font-size:16px}
+  .surf{font-size:15px;padding:11px 16px}
 }
 
 /* ---------- Plant now (closing) — edge to edge, gradient ---------- */

@@ -41,7 +41,14 @@
 
   <main>
     <section class="hero" id="top">
-      <div class="pit" id="pit" aria-hidden="true"><div class="pit-in" id="pit-in"></div></div>
+      <div class="thumbs" aria-hidden="true">
+        <img class="thumb t1" src="/img/todaytix-480.jpg" width="480" height="411" loading="eager" alt="">
+        <img class="thumb t2" src="/img/amex-puppet-480.jpg" width="480" height="411" loading="eager" alt="">
+        <img class="thumb t3" src="/img/wardrobe-480.jpg" width="480" height="411" loading="lazy" alt="">
+        <img class="thumb t4" src="/img/amex-business-480.jpg" width="480" height="411" loading="eager" alt="">
+        <img class="thumb t5" src="/img/sporthopod-480.jpg" width="480" height="411" loading="eager" alt="">
+        <img class="thumb t6" src="/img/helmet-480.jpg" width="480" height="411" loading="lazy" alt="">
+      </div>
       <div class="hero-text">
         <h1>Who owns marketing inside your business?</h1>
         <p class="sub">We are a growth studio that turns your business into a brand, whilst building the system that keeps it moving forward.</p>
@@ -49,35 +56,71 @@
       </div>
     </section>
 
-    <section id="for-you" class="sec for-you wrap">
+    <section id="for-you" class="for-you wrap">
       <p class="kicker">This is for you if</p>
-      <div class="lines">
-        <p class="a">Your business turns over £250k to £2.5m. Or you're a certified coach, with a practice built on your name.</p>
-        <p class="turn">Either way, the work is good. Marketing is the thing that keeps slipping down the list.</p>
+      <div class="icp">
+        <div class="icp-card">
+          <span class="icp-n">01</span>
+          <h3>Business owner</h3>
+          <p>Your business turns over £250k to £2.5m.</p>
+        </div>
+        <div class="icp-card">
+          <span class="icp-n">02</span>
+          <h3>Certified coach</h3>
+          <p>With a practice built on your name.</p>
+        </div>
       </div>
+      <p class="turn">Either way, the work is good. Marketing is the thing that keeps slipping down the list.</p>
     </section>
 
-    <section id="nobody" class="owns wrap">
-      <div class="col">
+    <section id="nobody" class="routes-sec">
+      <div class="wrap routes-head">
         <h2>Nobody owns it</h2>
-        <p>The founder is serving clients. The team is delivering. So marketing just happens. A quick ChatGPT prompt in a spare hour, no vision, no system behind it. And it shows.</p>
+        <p class="lede">The founder is serving clients. The team is delivering. So marketing just happens. A quick ChatGPT prompt in a spare hour, no vision, no system behind it. And it shows.</p>
         <p class="lead-in">You've tried the routes.</p>
-        <ul class="routes">
-          <li>The agency wrote from the outside, and it read like it.</li>
-          <li>The in-house hire still needed you in the room for every sign-off.</li>
-          <li>The tools stacked up. A chatbot, a CRM, three dashboards. Half unopened by month three.</li>
+      </div>
+      <div class="carousel">
+        <ul class="carousel-track" id="routes-track" tabindex="0" aria-label="Routes you've tried">
+          <li class="rcard">
+            <div class="rcard-art art-agency">
+              <svg viewBox="0 0 280 200" aria-hidden="true"><rect x="48" y="40" width="184" height="94" rx="18" fill="#fff"/><path d="M94 134v26l26-26z" fill="#fff"/><rect x="70" y="66" width="140" height="10" rx="5" fill="#C9C2EC"/><rect x="70" y="86" width="118" height="10" rx="5" fill="#C9C2EC"/><rect x="70" y="106" width="86" height="10" rx="5" fill="#ED8A6B"/></svg>
+            </div>
+            <div class="rcard-text"><h3>The agency</h3><p>Wrote from the outside, and it read like it.</p></div>
+          </li>
+          <li class="rcard">
+            <div class="rcard-art art-inhouse">
+              <svg viewBox="0 0 280 200" aria-hidden="true"><circle cx="104" cy="74" r="28" fill="#fff"/><path d="M66 150v-6a38 38 0 0 1 76 0v6z" fill="#fff"/><circle cx="194" cy="118" r="30" fill="#ED8A6B"/><path d="M180 118l9 9 17-19" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="rcard-text"><h3>The in-house hire</h3><p>Still needed you in the room for every sign-off.</p></div>
+          </li>
+          <li class="rcard">
+            <div class="rcard-art art-tools">
+              <svg viewBox="0 0 280 200" aria-hidden="true"><rect x="70" y="52" width="44" height="44" rx="12" fill="#6E6BE6"/><rect x="122" y="52" width="44" height="44" rx="12" fill="#ED8A6B"/><rect x="174" y="52" width="44" height="44" rx="12" fill="#E29AD2"/><rect x="70" y="116" width="44" height="44" rx="12" fill="#F4C197"/><rect x="122" y="116" width="44" height="44" rx="12" fill="#CFC8EE" opacity=".5"/><rect x="174" y="116" width="44" height="44" rx="12" fill="#CFC8EE" opacity=".5"/></svg>
+            </div>
+            <div class="rcard-text"><h3>The tools</h3><p>A chatbot, a CRM, three dashboards. Half unopened by month three.</p></div>
+          </li>
         </ul>
+        <div class="wrap carousel-nav">
+          <button type="button" class="cbtn" id="routes-prev" aria-label="Previous route"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="cbtn" id="routes-next" aria-label="Next route"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="wrap routes-foot">
         <p>You're already producing the material. Every client call, every talk you give, every voice note on the drive home. What's missing is a system that catches it and puts it in front of the right people.</p>
-        <p class="close">That's what we're for. A vision, a direction, something measured, and a system that runs whether you're watching or not.</p>
+        <p class="callout">That's what we're for. A vision, a direction, something measured, and a system that runs whether you're watching or not.</p>
       </div>
     </section>
 
     <section id="brand" class="flip-sec wrap">
       <h2 aria-label="Your brand, showing up and moving forward">Your <span class="flip"><span class="is" aria-hidden="true">brand</span><span class="was">business</span></span>, showing up and moving forward</h2>
-      <div class="body">
-        <p>You hand us a business. We turn it into a brand, the thing people recognise and come back to, then we keep it moving forward.</p>
-        <p>Everything you put out is that brand showing up: your website, your content, your app, the answers people find when they search for you. We build it and run it as one piece, not five tools you're left holding together.</p>
+      <p class="flip-lead">You hand us a business. We turn it into a brand, the thing people recognise and come back to, then we keep it moving forward.</p>
+      <div class="surfaces" aria-hidden="true">
+        <span class="surf s1">Website</span>
+        <span class="surf s2">Content</span>
+        <span class="surf s3">App</span>
+        <span class="surf s4">Search answers</span>
       </div>
+      <p class="flip-lead">Everything you put out is that brand showing up: your website, your content, your app, the answers people find when they search for you. We build it and run it as one piece, not five tools you're left holding together.</p>
       <a href="/how-we-work" class="btn outline">See how we work</a>
     </section>
 
