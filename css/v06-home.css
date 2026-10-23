@@ -342,3 +342,11 @@ main>section:not(.close-out):not(.end-frame):not(#contact)+section:not(.close-ou
 @media (max-width:760px){.hero{margin-top:-70px;padding-top:142px}.hero--b{padding-top:180px}}
 /* soft fade at the foot of the floating hero so tiles dissolve into the page instead of being cut */
 .hero--b::after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(253,253,252,0) 0%,#fdfdfc 92%)}
+
+/* F165 audience cards: a small-business shopfront and a coach portrait, single-weight line drawings with one flat grey accent */
+.aud{justify-content:space-between}
+.aud-ill{display:block;width:150px;height:150px;overflow:visible;margin-left:-8px}
+.aud-ill .ill-line *{vector-effect:non-scaling-stroke}
+.aud-ill .ill-line{fill:none;stroke:#3f403e;stroke-width:2.75px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.aud-ill .ill-fill{fill:rgba(22,23,22,.1);stroke:none}
+@media (max-width:760px){.aud-ill{width:116px;height:116px}}
