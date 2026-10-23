@@ -208,3 +208,7 @@ h1,h2,h3{font-weight:570;letter-spacing:-.035em}
 .w-dd5241{background:#e7f4ef!important}
 .w-e1f1dc{background:#f6f6f4!important}
 .w-f349c4{gap:26px!important}
+
+/* F153 all headlines in ink, no coloured words (white on the dark closing card) */
+h1 .violet,h2 .violet{color:inherit}
+.closer h2 .move{color:inherit}

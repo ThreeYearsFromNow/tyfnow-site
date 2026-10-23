@@ -270,3 +270,6 @@ h1,h2,h3{font-weight:570;letter-spacing:-.035em}
 .hw-f349c4{gap:26px!important}
 .hw-f49ae8{left:50%!important;top:3.5%!important}
 .hw-fbb76b{background:#fff!important}
+
+/* F153 all headlines in ink, no coloured words */
+h1 .v,h2 .v{color:inherit}
