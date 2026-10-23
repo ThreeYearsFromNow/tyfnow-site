@@ -212,3 +212,6 @@ h1,h2,h3{font-weight:570;letter-spacing:-.035em}
 /* F153 all headlines in ink, no coloured words (white on the dark closing card) */
 h1 .violet,h2 .violet{color:inherit}
 .closer h2 .move{color:inherit}
+
+/* F155 thin hairline between sections, like the footer; boxed sections (closing cards, contact panel) keep their own spacing */
+main>section:not(.close-out):not(.end-frame):not(#contact)+section:not(.close-out):not(.end-frame):not(#contact){border-top:1px solid #dededb}

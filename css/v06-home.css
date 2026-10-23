@@ -277,7 +277,6 @@ h1,h2,h3{font-weight:570;letter-spacing:-.035em}
 .h-d4b4bf{width:40%!important;background:#161716!important}
 .h-d4e2e1{border-radius:10px!important;background:#fff!important;padding:12px!important;display:flex!important;flex-direction:column!important;gap:6px!important;box-shadow:0 10px 24px -16px rgba(60,80,0,.5)!important}
 .h-d61044{width:76px!important;height:146px!important;border-radius:16px!important;background:#fff!important;border:4px solid #161716!important;padding:12px 8px!important;display:flex!important;flex-direction:column!important;gap:6px!important}
-.h-d6a883{padding-top:40px!important}
 .h-d7a786{width:82%!important;display:flex!important;flex-direction:column!important;gap:10px!important}
 .h-d7ef4c{font-weight:620!important}
 .h-da3115{flex:1!important;padding:12px!important;display:flex!important;flex-direction:column!important;gap:6px!important;align-items:center!important}
@@ -298,3 +297,6 @@ h1,h2,h3{font-weight:570;letter-spacing:-.035em}
 /* F153 all headlines in ink, no coloured words */
 h1 .hl,h2 .hl{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:inherit}
 .new{color:#161716}
+
+/* F155 thin hairline between sections, like the footer; boxed sections (closing cards, contact panel) keep their own spacing */
+main>section:not(.close-out):not(.end-frame):not(#contact)+section:not(.close-out):not(.end-frame):not(#contact){border-top:1px solid #dededb}
