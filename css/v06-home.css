@@ -300,3 +300,9 @@ h1 .hl,h2 .hl{background:none;-webkit-background-clip:border-box;background-clip
 
 /* F155 thin hairline between sections, like the footer; boxed sections (closing cards, contact panel) keep their own spacing */
 main>section:not(.close-out):not(.end-frame):not(#contact)+section:not(.close-out):not(.end-frame):not(#contact){border-top:1px solid #dededb}
+
+/* F156 trial: Conference Badges before/after in place of the hero thumbnails; violet glow peeking out from behind */
+.hero-case{position:relative;width:100%;max-width:1040px;margin:84px auto 0;isolation:isolate}
+.hero-case::before{content:"";position:absolute;z-index:-1;left:-3%;right:-3%;top:-7%;bottom:-11%;border-radius:48px;background:radial-gradient(ellipse 70% 75% at 50% 55%,#9a86ff 0%,#b9abff 45%,rgba(199,186,255,0) 78%);filter:blur(26px);opacity:.9}
+.hero-case img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 30px 60px -34px rgba(40,28,110,.55)}
+@media (max-width:760px){.hero-case{margin-top:52px}.hero-case img{border-radius:14px}.hero-case::before{filter:blur(18px)}}
