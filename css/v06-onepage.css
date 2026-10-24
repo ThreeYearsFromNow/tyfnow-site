@@ -273,3 +273,18 @@ main{overflow-x:clip}
 .op-row-pay{padding:24px 22px;gap:10px}
 .op-pay-h{font-size:clamp(24px,2.2vw,30px);line-height:1.15;letter-spacing:-.03em;font-weight:590;color:#161716}
 .op-pay-sub{font-size:17px;line-height:1.45;color:#454644;margin-bottom:4px}
+
+/* Section 5 (round 3): the ink bucket holds the push row and the pills; the payoff sits under both buckets */
+.op-bucket-ink .op-rows{flex:none}
+.op-bucket-ink .op-rows>.op-row{flex:none}
+.op-tick-ink{margin-top:auto;padding-top:14px}
+.op-tick-ink .op-tick-row li{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+.op-tick-ink .op-tick-row li:nth-child(4n+1){background:#fff;color:#161716;box-shadow:none}
+.op-payoff{margin:72px auto 0;max-width:900px;text-align:center;text-wrap:balance}
+.op-payoff b{display:block;font-size:clamp(34px,3.8vw,54px);line-height:1.12;letter-spacing:-.04em;font-weight:570;color:#161716}
+.op-payoff span{display:block;margin-top:12px;font-size:clamp(17px,1.5vw,21px);line-height:1.5;color:#5f605d}
+@media (max-width:760px){.op-payoff{margin-top:52px}}
+
+/* the running pills never widen the buckets */
+@media (max-width:1000px){.op-buckets{grid-template-columns:minmax(0,1fr)}}
+.op-bucket,.op-row,.op-tick{min-width:0}
