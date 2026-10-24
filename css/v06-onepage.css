@@ -288,3 +288,10 @@ main{overflow-x:clip}
 /* the running pills never widen the buckets */
 @media (max-width:1000px){.op-buckets{grid-template-columns:minmax(0,1fr)}}
 .op-bucket,.op-row,.op-tick{min-width:0}
+
+/* Section 5 (round 4): the pills run straight across the ink bucket, edge to edge, no fade */
+.op-tick-bleed{margin:auto -34px 0;padding-top:24px;-webkit-mask-image:none;mask-image:none}
+@media (max-width:760px){.op-tick-bleed{margin-left:-16px;margin-right:-16px}}
+.op-bucket-ink{overflow:hidden}
+/* Consistency: no icon; the letters that repeat are underlined */
+.op-v-consistency u{text-decoration-color:#2f9e8f}
