@@ -134,13 +134,9 @@
 <!-- 05 "You run the business" heading, then two buckets (grey: your business/brand with the pills; white: the values) -->
 <section class="sec" id="brand" aria-labelledby="brand-h">
 <div class="wrap op-bk-wrap" id="how-we-work">
-<div class="head op-bk-top">
-<h2 class="h-sec" id="brand-h">You run the business</h2>
-<p class="lead">(or start others that have been waiting to take off)</p>
-</div>
 <div class="op-buckets op-buckets-open">
 <div class="op-bucket op-bucket-grey op-bk-open">
-<h3 class="h-brand op-bk-brand"><span class="sr">Your brand, shaped and paced to your needs</span><span aria-hidden="true"><span class="nw">Your <span class="swap"><span class="old">business<svg class="scribble" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 15 C 22 11, 41 16, 63 12 S 104 9, 128 13 S 171 10, 198 8"></path><path d="M8 13 C 46 12, 92 15, 138 11 S 182 12, 195 11"></path></svg></span><span class="new">brand</span></span>,</span> shaped and paced to your needs</span></h3>
+<h2 class="h-brand op-bk-brand" id="brand-h"><span class="sr">Your brand, shaped and paced to your needs</span><span aria-hidden="true"><span class="nw">Your <span class="swap"><span class="old">business<svg class="scribble" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 15 C 22 11, 41 16, 63 12 S 104 9, 128 13 S 171 10, 198 8"></path><path d="M8 13 C 46 12, 92 15, 138 11 S 182 12, 195 11"></path></svg></span><span class="new">brand</span></span>,</span> shaped and paced to your needs</span></h2>
 <p class="op-bk-sub">Marketing stalls because nobody is behind it. We hold the whole picture and bring the next move, month after month</p>
 <p class="sr-only">What we take on: brand identity, art direction, creative, production, project management, websites, landing pages, product demo videos, ad creative, email campaigns, social content, on-brand imagery, app builds, and search and AI visibility.</p>
 <div class="op-tick op-tick-grey op-tick-bleed" aria-hidden="true">
@@ -216,7 +212,7 @@
 </div>
 <div class="op-next">
 <h3 class="h-small">What happens next</h3>
-<ol class="op-steps">
+<ol class="op-steps op-steps-list">
 <li>You tell us what's not working</li>
 <li>We tell you straight whether we can fix it and where we'd start</li>
 <li>The first piece of work goes live and the roadmap grows from there</li>
@@ -228,12 +224,11 @@
 <!-- 09 Close and contact: one card -->
 <section class="close-out" id="contact" aria-labelledby="plant-h">
 <div class="closer">
-<div class="ring h-85aa29" aria-hidden="true"></div>
-<div class="ring h-8221fe" aria-hidden="true"></div>
+<canvas class="cl-mosaic" id="cl-mosaic" aria-hidden="true"></canvas>
 <div class="wrap h-def3bf op-close">
 <div class="op-close-text">
 <h2 class="h-close" id="plant-h">The best time to plant a tree was three years ago. The next best time is now</h2>
-<p class="lead">The time passes either way. Make it count.</p>
+<p class="lead">The time passes either way.</p>
 </div>
 <div class="op-form-panel">
 <h3 class="h-card" id="form-h">Tell us what's not working</h3>
@@ -301,5 +296,6 @@
 <script src="/js/work-call.js"></script>
 <script src="/js/values-motion.js"></script>
 <script src="/js/offer-head.js"></script>
+<script src="/js/close-mosaic.js"></script>
 </body>
 </html>
