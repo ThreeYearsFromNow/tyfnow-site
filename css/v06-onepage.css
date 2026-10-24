@@ -161,3 +161,32 @@ section[id]{scroll-margin-top:96px}
    The self-hosted Inter subset has no cv08, so one glyph comes from a tiny Inter Tight subset (fonts/inter-i-serif.woff, OFL). */
 @font-face{font-family:"TYFNOW I";font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-i-serif.woff) format("woff");unicode-range:U+0049}
 .rg-sec,.rg-sec h2,.rg-sec h3{font-family:"TYFNOW I",Inter,"Inter Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-feature-settings:"cv08" 1}
+
+/* Section 5: pills run across in two rows, opposite directions (thumbnails removed) */
+.op-tick{margin-top:40px;display:flex;flex-direction:column;gap:10px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.op-tick-row{list-style:none;margin:0;padding:0;display:flex;width:max-content}
+.op-tick-row li{flex:none;margin-right:10px;padding:11px 18px;border-radius:999px;font-size:14px;font-weight:550;color:#161716;background:#fff;box-shadow:inset 0 0 0 1px #dededb;white-space:nowrap}
+.op-tick-row .t-l{background:#eeeaff;box-shadow:none}
+.op-tick-row .t-p{background:#ffe1d9;box-shadow:none}
+.op-tick-row .t-m{background:#bcefe9;box-shadow:none}
+.op-tick-row .t-g{background:#dfff9b;box-shadow:none}
+@media (prefers-reduced-motion:no-preference){
+  .op-tick-row{animation:op-tick 46s linear infinite}
+  .op-tick-rev{animation-direction:reverse;animation-duration:52s}
+  @keyframes op-tick{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+}
+
+/* Section 6b: the five principles, back from the old How we work page */
+.op-vals{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+@media (max-width:1000px){.op-vals{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.op-vals{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:400px){.op-vals{grid-template-columns:1fr}}
+.op-val{border-radius:17px;background:#fff;border:1px solid #dededb;padding:24px 22px 26px;display:flex;flex-direction:column;gap:12px;text-align:left}
+.op-val-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;line-height:1}
+.op-val-ic svg{display:block}
+.op-ic-l{background:#eeeaff;color:#4f3fd0}
+.op-ic-p{background:#ffe1d9;color:#a53a27}
+.op-ic-m{background:#bcefe9;color:#1f6f64}
+.op-ic-g{background:#dfff9b;color:#3f5a00}
+.op-ic-q{font-size:30px;padding-top:10px}
+.op-ic-v{background:#f2f0ff;color:#4f3fd0}

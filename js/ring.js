@@ -16,21 +16,20 @@
 
   /* [source, task, heading] ; headings: 0 Website, 1 App, 2 Search and AI answers, 3 Content */
   var POOL = [
-    ['Site audit', 'Error 404s', 0], ['Crawler', '18 broken links', 0], ['SEO audit', 'Meta data missing', 0], ['Analytics', 'Slow on mobile', 0],
-    ['Analytics', 'Form drop-offs', 0], ['Accessibility', 'Alt text missing', 0],
-    ['App store', 'Clunky booking', 1], ['Analytics', 'Login drop-off', 1], ['User test', 'Outdated screens', 1], ['Crash log', 'Crash at checkout', 1],
-    ['Search Console', 'Page not indexed', 2], ['Merchant Centre', 'Feed errors', 2], ['AI search', 'Not cited by AI', 2], ['Business Profile', 'Listings outdated', 2],
-    ['SEO audit', 'Schema missing', 2],
-    ['LinkedIn', 'Posting stalled', 3], ['Google reviews', 'Review unanswered', 3], ['Sales call', 'No case studies', 3], ['Events', 'Event not promoted', 3],
-    ['Drive', 'Video unedited', 3]
+    ['Site audit', 'Error 404s', 0], ['Owner', 'Homepage feels dated', 0], ['Crawler', '18 broken links', 0], ['Customers', 'Enquiries have dropped', 0],
+    ['SEO audit', 'Meta data missing', 0],
+    ['App store', 'Clunky booking', 1], ['Team', 'App feels slow', 1], ['Crash log', 'Crash at checkout', 1],
+    ['Search Console', 'Page not indexed', 2], ['Owner', 'Nobody finds us online', 2], ['AI search', 'Not cited by AI', 2],
+    ['Team', 'Posting has gone quiet', 3], ['Google reviews', 'Review unanswered', 3], ['Owner', 'Need a launch campaign', 3], ['Sales call', 'No case studies', 3]
   ];
+  for (var q = POOL.length - 1; q > 0; q--) { var j = Math.floor(Math.random() * (q + 1)), tmp = POOL[q]; POOL[q] = POOL[j]; POOL[j] = tmp; } /* new mix each visit */
   var OUT = [['Website', 'f-web'], ['App', 'f-app'], ['Search and AI answers', 'f-search'], ['Content', 'f-content']];
   var OUT_S = [['Website', 'f-web'], ['App', 'f-app'], ['Search', 'f-search'], ['Content', 'f-content']];
   var DISC = ['Creative', 'Production', 'Workflow', 'Testing'];
 
-  /* geometry: a wide ring with ten tasks in rows, or a smaller ring with four on phones */
-  var WIDE = { vb: [1040, 640], c: [520, 320], rin: 230, rout: 292, core: 104, xy: [[0, -165], [-105, -110], [105, -110], [-150, -55], [150, -55], [-150, 55], [150, 55], [-105, 110], [105, 110], [0, 165]], out: OUT };
-  var NARROW = { vb: [340, 380], c: [170, 190], rin: 134, rout: 148, core: 48, narrow: true, chip: 36, xy: [[0, -90], [0, -46], [0, 46], [0, 90]], out: OUT_S };
+  /* geometry: a wide ring with six tasks, or a smaller ring with two on phones */
+  var WIDE = { vb: [1040, 640], c: [520, 320], rin: 230, rout: 292, core: 104, xy: [[0, -150], [-128, -72], [128, 72], [0, 150], [-128, 72], [128, -72]], out: OUT };
+  var NARROW = { vb: [340, 380], c: [170, 190], rin: 134, rout: 148, core: 48, narrow: true, chip: 36, xy: [[0, -72], [0, 72]], out: OUT_S };
   var G, svg, outs = [], counts = [0, 0, 0, 0], slots = [], disc = [], pi = 0, rot = 0;
 
   function el(n, a, p) { var e = D.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
