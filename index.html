@@ -206,7 +206,7 @@
 </div>
 </section>
 
-<!-- 07 The work: Conference Badges, then the call CTA (business email only). "Before TYFNOW" is turned off for now -->
+<!-- 07 The work: Conference Badges, then the call CTA (email + business website). "Before TYFNOW" is turned off for now -->
 <section class="sec" id="work" aria-labelledby="work-h">
 <div class="wrap">
 <div class="head">
@@ -220,8 +220,10 @@
 <form id="call-form" class="op-call-form" name="work-call" method="POST" action="/" data-netlify="true" netlify-honeypot="website" novalidate aria-label="Walk through the project on a call">
 <input type="hidden" name="form-name" value="work-call">
 <input type="text" name="website" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
-<label class="sr-only" for="w-email">Business email</label>
-<input id="w-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Business email" required aria-describedby="w-note">
+<label class="sr-only" for="w-email">Email</label>
+<input id="w-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Email" required aria-describedby="w-note">
+<label class="sr-only" for="w-site">Business website</label>
+<input id="w-site" name="business_website" type="text" inputmode="url" autocomplete="url" placeholder="Business website" required aria-describedby="w-note">
 <button type="submit" id="w-send" class="btn btn-dark">Walk through the project on a call <span aria-hidden="true">→</span></button>
 </form>
 <p id="w-note" class="op-call-note" aria-live="polite">Used only to send you the invite. <a href="/privacy">Privacy policy</a></p>
@@ -302,7 +304,7 @@
 <input type="hidden" name="form-name" value="contact">
 <div class="op-f"><label for="c-name">Name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
 <div class="op-f"><label for="c-email">Email</label><input id="c-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
-<div class="op-f"><label for="c-business">Business (optional)</label><input id="c-business" name="business" type="text" autocomplete="organization"></div>
+<div class="op-f"><label for="c-site">Business website</label><input id="c-site" name="business_website" type="text" inputmode="url" autocomplete="url" pattern="\s*\S+\.\S+\s*" required></div>
 <div class="op-f"><label for="c-message">What's not working?</label><textarea id="c-message" name="message" required aria-describedby="c-help"></textarea><span class="op-help" id="c-help">Business problems only. Please don't include health or other sensitive personal details.</span></div>
 <input type="text" name="website" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
 <input type="hidden" name="consent" value="">
