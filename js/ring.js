@@ -49,6 +49,9 @@
     });
     el('circle', { 'class': 'rg-in', cx: G.c[0], cy: G.c[1], r: G.rin }, svg);
     el('circle', { 'class': 'rg-link', cx: G.c[0], cy: G.c[1], r: G.rin, pathLength: 360 }, svg); /* marching dots linking the four headings */
+    /* spokes: dotted lines from the TYFNOW core out to each heading, dots travelling outwards */
+    var sg = el('g', {}, svg), r0 = G.core / 2 + (G.narrow ? 4 : 8);
+    for (var k = 0; k < 4; k++) { var a = pt(r0, -90 + k * 90), b = pt(G.rin, -90 + k * 90); el('line', { 'class': 'rg-spoke', x1: a[0], y1: a[1], x2: b[0], y2: b[1] }, sg); }
     G.tg = el('g', {}, svg);
     var h = G.core;
     el('rect', { 'class': 'rg-core', x: G.c[0] - h / 2, y: G.c[1] - h / 2, width: h, height: h, rx: h * 0.23 }, svg);
