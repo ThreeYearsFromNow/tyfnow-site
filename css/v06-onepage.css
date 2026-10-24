@@ -257,3 +257,19 @@ main{overflow-x:clip}
 .op-v-candour u{text-decoration-color:#8fb31c}
 .op-v-craft u{text-decoration-color:#7661f6}
 @media (min-width:1001px){.op-bucket-paper .op-creed{margin-top:auto;margin-bottom:auto}}
+
+/* Section 5: the headline lives in the ink bucket; the pills run underneath */
+.op-buckets{margin-top:0}
+.op-bk-brand{font-size:clamp(30px,3.1vw,42px);line-height:1.18;letter-spacing:-.035em;max-width:none;padding:.4em 4px 0;text-align:left;color:#fff}
+.op-bucket-ink .old{color:#8e8e95}
+.op-bucket-ink .scribble path{stroke:#fff}
+.op-bucket-ink .new{color:#fff}
+.op-bucket-ink .op-bk-sub{color:#c9c9c5;max-width:520px}
+.op-tick{margin-top:56px}
+/* the rows build to a payoff: context, next move, then you run the business */
+.op-rows{gap:24px}
+.op-rows>.op-row{position:relative}
+.op-rows>.op-row+.op-row::before{content:"↓";position:absolute;left:50%;top:-21px;transform:translateX(-50%);font-size:14px;line-height:1;color:#8e8e8a}
+.op-row-pay{padding:24px 22px;gap:10px}
+.op-pay-h{font-size:clamp(24px,2.2vw,30px);line-height:1.15;letter-spacing:-.03em;font-weight:590;color:#161716}
+.op-pay-sub{font-size:17px;line-height:1.45;color:#454644;margin-bottom:4px}
