@@ -56,3 +56,14 @@
     setTimeout(function () { try { name.focus({ preventScroll: true }); } catch (x) { name.focus(); } }, 700);
   });
 })();
+
+/* Header (24 Oct): full width at the top of the page, a centred floating bar once the page scrolls */
+(function () {
+  'use strict';
+  var h = document.querySelector('.hdr');
+  if (!h) return;
+  var on = null, tick = false;
+  function upd() { tick = false; var m = window.scrollY > 40; if (m !== on) { on = m; h.classList.toggle('is-min', m); } }
+  window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+  upd();
+})();

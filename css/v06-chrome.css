@@ -55,3 +55,27 @@
 @media (min-width:900px){.cookie{left:auto;max-width:560px}}
 
 .sr-only{position:absolute;left:0;top:0;margin:-1px;padding:0;border:0;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Header (24 Oct, round 6, after Amplemarket): transparent and full width at the top, links sit beside the logo.
+   Once the page scrolls (.is-min, set in v06.js) it tucks into a centred floating bar: frosted off-white,
+   1px white edge, 12px corners, soft layered shadow. */
+.hdr{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;pointer-events:none}
+.hdr-wrap{pointer-events:none}
+.hdr-in,.hdr-mob{pointer-events:auto}
+.hdr-in{height:72px;justify-content:flex-start;gap:36px;margin-inline:auto;max-width:100%;padding:0;border:1px solid transparent;border-radius:12px;transition:max-width .35s cubic-bezier(.23,1,.32,1),height .35s cubic-bezier(.23,1,.32,1),padding .35s cubic-bezier(.23,1,.32,1),margin .35s cubic-bezier(.23,1,.32,1),background-color .35s ease,box-shadow .35s ease,border-color .35s ease}
+.hdr-nav{gap:2px}
+.hdr-link{min-height:40px;padding:0 12px;border-radius:8px;font-size:14px;font-weight:500;color:#161716}
+.hdr-link:hover{background:#efeeec;color:#161716}
+.hdr-link[aria-current="page"],.hdr-link.is-active{background:#e9e8e5;color:#161716;font-weight:500}
+.brand-s{transition:opacity .25s ease,max-height .3s ease;max-height:12px;overflow:hidden}
+.hdr.is-min .hdr-in{max-width:620px;height:52px;margin-top:20px;padding:4px 4px 4px 16px;gap:24px;background:rgba(251,250,249,.85);-webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px);border-color:#fff;box-shadow:0 1px 3px rgba(17,17,17,.05),0 6px 6px rgba(17,17,17,.04),0 13px 8px rgba(17,17,17,.03),0 24px 9px rgba(17,17,17,.01)}
+.hdr.is-min .hdr-nav{margin-left:auto}
+.hdr.is-min .brand-s{opacity:0;max-height:0}
+.hdr.is-min .brand{gap:0}
+@media (max-width:760px){
+  .hdr-in{height:64px;justify-content:space-between}
+  .hdr.is-min .hdr-in{max-width:none;height:52px;margin-top:10px;padding:4px 4px 4px 14px}
+  .hdr-mob:not([hidden]){margin-top:8px;padding:6px;border-radius:12px;background:rgba(251,250,249,.94);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid #fff;box-shadow:0 6px 6px rgba(17,17,17,.04),0 13px 8px rgba(17,17,17,.03)}
+}
+.hdr-menu{min-height:40px;border-radius:8px;font-weight:500;font-size:14px}
+@media (prefers-reduced-motion:reduce){.hdr-in,.brand-s{transition:none}}

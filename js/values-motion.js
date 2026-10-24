@@ -1,5 +1,5 @@
 /* TYFNOW values-motion.js: slow motion in three of the value icons (24 Oct 2026).
-   Curiosity runs in CSS (the question mark tips anticlockwise, then hangs from the top like a hook).
+   Curiosity runs in CSS (its o is an eye that looks around and blinks).
    Creativity's three lines become a tipi tent, then a simple hourglass, then the asterisk again.
    Craft's diamond folds its top in to a heart, then becomes a crown, then the diamond again.
    Runs only while the values are on screen. Reduced motion: the icons stay still. */
@@ -32,7 +32,7 @@
   var t0 = 0, running = false, raf = 0, paused = 0;
   function frame(now) {
     if (!running) return;
-    var cycle = HOLD + MORPH, n = CRE.length, t = now - t0, step = Math.floor(t / cycle) % n, inStep = t % cycle;
+    var cycle = HOLD + MORPH, n = CRE.length, t = Math.max(0, now - t0), step = Math.floor(t / cycle) % n, inStep = t % cycle;
     var k = inStep < HOLD ? 0 : ease((inStep - HOLD) / MORPH), from = step, to = (step + 1) % n;
     setCre(CRE[from].map(function (l, i) { return mix(l, CRE[to][i], k); }));
     /* craft runs half a beat behind creativity, so the two never change together */

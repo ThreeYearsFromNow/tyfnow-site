@@ -331,3 +331,29 @@ main{overflow-x:clip}
 .op-v-consistency u.u-n{text-decoration-color:#ff816d}
 .op-v-consistency u.u-s{text-decoration-color:#2f9e8f}
 .op-eye::after{content:"";position:absolute;left:-.1em;right:-.1em;top:calc(100% + .28em);height:2px;background:#7661f6}
+
+/* Typography (24 Oct, round 6, in line with Amplemarket): regular-weight headlines with tight tracking and
+   short line-heights, a larger intro in ink, plain-weight buttons. Inter Variable throughout.
+   Hero 56 · section 44 · bucket/close 36–44 · card 24 · small 18 · intro 20 · body 16 · button 14/500 */
+:root{--type-hero:clamp(38px,4.2vw,56px);--type-section:clamp(32px,3.2vw,44px);--type-emphasis:clamp(30px,2.6vw,36px);--type-closing:clamp(32px,3.2vw,44px);--type-intro:20px;--type-body:16px;--type-card:24px}
+h1,h2,h3{font-weight:400}
+.h-hero{font-size:var(--type-hero);line-height:1.04;letter-spacing:-.05em;font-weight:400}
+.h-sec,.h-cap{font-size:var(--type-section);line-height:1.1;letter-spacing:-.04em;font-weight:400}
+.h-close{font-size:var(--type-closing);line-height:1.1;letter-spacing:-.04em;font-weight:400}
+.h-card{font-size:var(--type-card);line-height:1.15;letter-spacing:-.025em;font-weight:400}
+.aud .h-card{font-size:24px}
+.h-small{font-size:18px;line-height:1.3;letter-spacing:-.01em;font-weight:400}
+.lead{font-size:var(--type-intro);line-height:1.35;letter-spacing:-.02em;color:#161716}
+.body{font-size:var(--type-body);line-height:1.5;letter-spacing:-.005em;color:#454644}
+.op-bk-h,.op-bk-brand{font-size:var(--type-emphasis);line-height:1.1;letter-spacing:-.035em;font-weight:400}
+.op-bk-sub{font-size:16px;line-height:1.45;letter-spacing:-.005em}
+.op-creed{font-weight:400;letter-spacing:-.025em}
+.same-tools-turn{font-weight:500}
+.rg-elr b{font-weight:500}
+.btn{font-size:14px;font-weight:500;min-height:46px;padding:0 20px;letter-spacing:-.005em}
+.op-call-form .btn,.op-call-form input:not(.sr-only){min-height:46px}
+@media (max-width:760px){
+  :root{--type-hero:clamp(34px,9vw,42px);--type-section:clamp(30px,8vw,36px);--type-emphasis:clamp(28px,7.4vw,32px);--type-closing:clamp(30px,8vw,36px);--type-intro:18px;--type-card:22px}
+  .h-hero{line-height:1.06;letter-spacing:-.045em}
+  .aud .h-card{font-size:22px}
+}
