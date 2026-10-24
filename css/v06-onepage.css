@@ -478,3 +478,11 @@ main{overflow-x:clip}
 .op-tl.is-live .op-term.is-in .op-dot-grey{background:#b8b8b4;box-shadow:none}
 .op-tl.is-live .op-term.is-in .op-dot-mint{background:#2f9e8f;box-shadow:none}
 @media (max-width:760px){.op-tl .op-term{padding:22px 0 22px 36px}.op-tl .op-term .op-dot{top:calc(22px + .56em - 6px)}}
+/* Timeline centred (wider screens): rail down the middle, title to its left, detail to its right */
+@media (min-width:761px){
+  .op-tl .op-term{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:96px;padding-left:0}
+  .op-tl .op-term h3{text-align:right}
+  .op-tl .op-term .body{max-width:440px}
+  .op-tl .op-term .op-dot{left:calc(50% - 6px)}
+  .op-tl-rail{left:calc(50% - 1px)}
+}
