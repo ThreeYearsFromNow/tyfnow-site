@@ -18,7 +18,7 @@
     'Descript', 'Jasper', 'Later', 'Stripe', 'Claude', 'Gemini', 'Copilot', 'Midjourney', 'Perplexity', 'CapCut',
     'Linktree', 'Webflow', 'WordPress', 'Zoom', 'Teams', 'Dropbox', 'Sprout Social', 'ActiveCampaign', 'Pipedream'];
   var LOGOS = {}; /* e.g. { canva: true } once /img/tools/canva.svg exists */
-  var TONES = ['t-white', 't-white', 't-white', 't-white', 't-ink', 't-ink', 't-ink', 't-g1']; /* round 9: mostly white and black, one light grey */
+  var TONES = ['t-white', 't-white', 't-white', 't-g1', 't-g1', 't-g2', 't-g2', 't-g3']; /* round 9: white and light greys, no black */
 
   var balls = [], W = 0, H = 0, block = null, target = 40, top = 0; /* top: where balls enter (below the text on narrow screens) */
   var trap = 0, phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
@@ -51,14 +51,15 @@
   function spawn() {
     if (!queue.length) queue = shuffled();
     var name = queue.pop();
-    var longest = name.split(' ').reduce(function (m, w) { return Math.max(m, w.length); }, 1);
+    var oneLine = name.length <= 16; /* short names, Google Analytics included, sit on one line */
+    var longest = oneLine ? name.length : name.split(' ').reduce(function (m, w) { return Math.max(m, w.length); }, 1);
     var r = wide() ? rnd(42, 70) : rnd(28, 42);
     r = Math.min(wide() ? 78 : 52, Math.max(r, longest * (wide() ? 4.2 : 3.6))); /* long names get a ball big enough to read */
     var el = document.createElement('span');
     el.className = 'ball ' + TONES[Math.floor(Math.random() * TONES.length)];
     var s = slug(name);
     if (LOGOS[s]) { var img = document.createElement('img'); img.src = '/img/tools/' + s + '.svg'; img.alt = ''; el.appendChild(img); }
-    else { var lab = document.createElement('span'); lab.className = 'ball-l'; lab.textContent = name; el.appendChild(lab); }
+    else { var lab = document.createElement('span'); lab.className = 'ball-l' + (oneLine ? ' is-one' : ''); lab.textContent = name; el.appendChild(lab); }
     el.style.width = el.style.height = (r * 2) + 'px';
     el.style.fontSize = Math.max(10, Math.min(16, r / 3.6, (r * 2 * 0.8) / (longest * 0.6))).toFixed(1) + 'px';
     pit.appendChild(el);
