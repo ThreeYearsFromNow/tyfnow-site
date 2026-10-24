@@ -176,13 +176,26 @@ section[id]{scroll-margin-top:96px}
   @keyframes op-tick{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
 }
 
-/* Section 6b: the five principles, back from the old How we work page */
-.op-vals{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-@media (max-width:1000px){.op-vals{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:700px){.op-vals{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:400px){.op-vals{grid-template-columns:1fr}}
-.op-val{border-radius:17px;background:#fff;border:1px solid #dededb;padding:24px 22px 26px;display:flex;flex-direction:column;gap:12px;text-align:left}
-.op-val-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;line-height:1}
+/* Section 6: How we work and the values, two buckets side by side */
+.op-buckets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+@media (max-width:1000px){.op-buckets{grid-template-columns:1fr;max-width:640px;margin-inline:auto}}
+.op-bucket{border-radius:22px;background:#f3f3f1;padding:30px 26px 26px;display:flex;flex-direction:column;gap:18px;text-align:left}
+@media (max-width:760px){.op-bucket{padding:24px 14px 16px;border-radius:18px}}
+.op-bk-h{font-size:clamp(26px,2.4vw,32px);line-height:1.2;letter-spacing:-.03em;font-weight:570;padding:0 4px}
+.op-rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.op-row{border-radius:16px;background:#fff;border:1px solid #dededb;padding:18px 18px;display:flex;flex-direction:column;gap:12px}
+.op-row-dark{background:#1d1c22;border-color:#1d1c22}
+.op-row-dark h3{color:#fff}
+.op-row .op-mi{flex-direction:row;flex-wrap:wrap;gap:6px}
+.op-row .op-mi li{padding:8px 12px;font-size:14px}
+.op-row-dark .op-mi li{background:rgba(255,255,255,.1);color:#fff}
+.op-bucket .op-loop{margin:0;max-width:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.op-bucket .op-loop li{padding:16px 16px;border-radius:14px}
+@media (max-width:520px){.op-bucket .op-loop{grid-template-columns:1fr}}
+.op-vals{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;flex:1}
+.op-val{border-radius:16px;background:#fff;border:1px solid #dededb;padding:16px 18px;display:flex;align-items:center;gap:16px;text-align:left;flex:1}
+.op-val div{display:flex;flex-direction:column;gap:3px}
+.op-val-ic{flex:none;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;line-height:1}
 .op-val-ic svg{display:block}
 .op-ic-l{background:#eeeaff;color:#4f3fd0}
 .op-ic-p{background:#ffe1d9;color:#a53a27}
@@ -190,3 +203,13 @@ section[id]{scroll-margin-top:96px}
 .op-ic-g{background:#dfff9b;color:#3f5a00}
 .op-ic-q{font-size:30px;padding-top:10px}
 .op-ic-v{background:#f2f0ff;color:#4f3fd0}
+
+/* Section 5 pills: black and white */
+.op-tick-row li,.op-tick-row .t-l,.op-tick-row .t-p,.op-tick-row .t-m,.op-tick-row .t-g{background:#fff;color:#161716;box-shadow:inset 0 0 0 1px #c9c9c5}
+.op-tick-row li:nth-child(4n+1){background:#161716;color:#fff;box-shadow:none}
+
+/* Footer: no line above it on the one-page site */
+.foot{border-top:0}
+
+/* nothing animated (balls, hero tiles) can push the page sideways */
+main{overflow-x:clip}

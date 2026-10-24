@@ -1,6 +1,6 @@
 /* TYFNOW tools-pit.js: section 3 on Home, "Your competitors have the same tools as you" (F174, reworked F182).
    Tool balls drop across the whole section and pile up around the text, which acts as a solid block so it is
-   never covered. They arrive in a steady flow with random bursts, bounce around, and drop through an always-open trapdoor in the middle of the floor, behind the next section, so they never pile up.
+   never covered. When the section is full they hold, a trapdoor opens in the middle of the floor and they fall through it, behind the next section, and it starts again.
    Runs only while on screen, pauses in background tabs, and shows nothing when reduced motion is on or JS is off.
    Logos: drop an official SVG at /img/tools/<slug>.svg and add the slug to LOGOS; the ball then shows the logo.
    We do not draw brand marks ourselves. 24 Oct 2026.
@@ -21,10 +21,10 @@
   var TONES = ['t-white', 't-white', 't-white', 't-lilac', 't-mint', 't-peach', 't-lime', 't-ink'];
 
   var balls = [], W = 0, H = 0, block = null, target = 40, top = 0; /* top: where balls enter (below the text on narrow screens) */
-  var trap = 1, running = false, raf = 0, last = 0, queue = [];
+  var trap = 0, phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
   var FALL = 900, G = 1700, AIR = 0.9985, GAP = 18, MU = 0.18, ITER = 6, SLEEP = 14;
   /* restitution falls with impact speed: hard drops bounce, slow touches settle instead of jittering */
-  function rest(v) { v = Math.abs(v); return v > 700 ? 0.74 : v > 250 ? 0.64 : v > 80 ? 0.48 : 0.2; } /* lively bounce */
+  function rest(v) { v = Math.abs(v); return v > 700 ? 0.5 : v > 250 ? 0.32 : v > 80 ? 0.16 : 0; }
 
   function rnd(a, b) { return a + Math.random() * (b - a); }
   function slug(n) { return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
@@ -45,7 +45,6 @@
     /* if there is no real space either side of the text, balls drop into the space beneath it instead */
     top = (block.l < 70 && W - block.r < 70) ? block.b : 0;
     var free = top ? W * (H - top) : W * H - Math.max(0, (block.r - block.l) * (H - block.t));
-    trap = Math.max(70, W * 0.12); /* half-width of the always-open trapdoor */
     target = Math.max(10, Math.floor(free * 0.62 / (Math.PI * rAvg * rAvg))); /* names can repeat in a big fill: everyone has the same tools */
   }
 
@@ -70,7 +69,7 @@
     else if (roll < 0.9 && sideR > r) x = rnd(block.r + r, W - r);
     else x = rnd(r, W - r);
     if (top) x = rnd(r, W - r);
-    balls.push({ el: el, r: r, m: r * r, x: x, y: top ? top + r + 2 : -r - rnd(0, 40), vx: rnd(-170, 170), vy: rnd(40, 160), a: rnd(-25, 25), w: rnd(-2, 2) });
+    balls.push({ el: el, r: r, m: r * r, x: x, y: top ? top + r + 2 : -r - rnd(0, 40), vx: rnd(-90, 90), vy: rnd(70, 170), a: rnd(-25, 25), w: rnd(-2, 2) });
   }
 
   /* tangential friction at a contact point, and spin that matches rolling (w = v / r) */
@@ -112,7 +111,7 @@
       if (a.x < a.r) { a.x = a.r; a.vx = -a.vx * rest(a.vx); contact(a, 1, 0, 0, 0, 1); }
       if (a.x > W - a.r) { a.x = W - a.r; a.vx = -a.vx * rest(a.vx); contact(a, -1, 0, 0, 0, 1); }
       if (floor && a.y > H - a.r && solid(a)) { a.y = H - a.r; a.vy = -a.vy * rest(a.vy); contact(a, 0, -1, 0, 0, 1); }
-      if (floor === 'gap' && a.y > H - a.r - 3 && a.y < H) a.vx += (a.x < W / 2 ? 1 : -1) * 280 * dt; /* the floor tips gently towards the trapdoor */
+      if (floor === 'gap' && a.y > H - a.r - 3 && a.y < H) a.vx += (a.x < W / 2 ? 1 : -1) * 520 * dt; /* the floor tips towards the trapdoor */
       hitBlock(a); /* the text stays solid even while the floor is open */
       if (top && a.y - a.r < top) { a.y = top + a.r; if (a.vy < 0) a.vy = 0; }
     }
@@ -152,21 +151,33 @@
     }
   }
 
-  /* steady flow with random bursts; the trapdoor in the middle of the floor is always open, so balls bounce
-     around for a while and drop through it instead of piling up */
-  var nextAt = 0, burst = 0, nextBurst = 0;
-  function cap() { return wide() ? 22 : 12; }
+  function full() {
+    if (balls.length >= target) return true;
+    for (var i = 0; i < balls.length; i++) {
+      var b = balls[i];
+      if (b.x > block.l && b.x < block.r) continue; /* a ball resting on the headline is not the pile */
+      if (b.y > top && b.y - b.r < top + 10 && Math.abs(b.vy) < 60) return true; /* the pile has reached the top */
+    }
+    return false;
+  }
+
   function tick(now) {
     if (!running) return;
     var dt = Math.min(0.033, (now - last) / 1000 || 0.016); last = now;
-    if (!nextBurst) nextBurst = now + rnd(5000, 9000);
-    if (now > nextBurst) { burst = Math.floor(rnd(5, 9)); nextBurst = now + rnd(6000, 11000); }
-    if (now > nextAt && balls.length < cap()) {
-      spawn();
-      if (burst > 0) { burst--; nextAt = now + rnd(90, 160); } else nextAt = now + rnd(550, 1100);
+    if (phase === 'fill') {
+      if (now - lastSpawn > 150) { spawn(); lastSpawn = now; }
+      if (full()) { phase = 'hold'; phaseAt = now; }
+    } else if (phase === 'hold' && now - phaseAt > 1800) {
+      phase = 'drain'; phaseAt = now; trap = Math.max(70, W * 0.11);
+    } else if (phase === 'drain') {
+      if (now - phaseAt > 2500) trap = Math.min(W / 2 + 60, trap + W * 0.0015); /* the trapdoor widens until everything is through */
+      balls = balls.filter(function (b) { if (b.y - b.r > H + FALL) { b.el.remove(); return false; } return true; });
+      if (!balls.length) { phase = 'pause'; phaseAt = now; trap = 0; }
+    } else if (phase === 'pause' && now - phaseAt > 800) {
+      phase = 'fill'; lastSpawn = 0; queue = shuffled(); measure();
     }
-    balls = balls.filter(function (b) { if (b.y - b.r > H + FALL) { b.el.remove(); return false; } return true; });
-    step(dt / 2, 'gap'); step(dt / 2, 'gap');
+    var fl = phase === 'drain' ? 'gap' : true;
+    step(dt / 2, fl); step(dt / 2, fl);
     draw();
     raf = window.requestAnimationFrame(tick);
   }
