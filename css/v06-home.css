@@ -367,3 +367,9 @@ h1 .hl,h2 .hl{background:none;-webkit-background-clip:border-box;background-clip
 .ball.t-lime{background:#dfff9b}
 .ball.t-ink{background:#161716;color:#fdfdfc;box-shadow:0 8px 16px -10px rgba(22,23,22,.45)}
 @media (max-width:760px){.pit.pit-live{height:320px}}
+
+/* F176 longer audience titles: keep the turnover band together, balance the lines */
+.nw{white-space:nowrap}
+.aud .h-card{font-size:22px;text-wrap:balance}
+section[aria-labelledby="for-h"] .grid2{max-width:1180px}
+@media (min-width:1151px){section[aria-labelledby="for-h"] .aud-ill{width:190px;height:132px}}
