@@ -373,3 +373,12 @@ h1 .hl,h2 .hl{background:none;-webkit-background-clip:border-box;background-clip
 .aud .h-card{font-size:22px;text-wrap:balance}
 section[aria-labelledby="for-h"] .grid2{max-width:1180px}
 @media (min-width:1151px){section[aria-labelledby="for-h"] .aud-ill{width:190px;height:132px}}
+
+/* F182 section 3: "Your competitors have the same tools as you". Tool balls drop across the whole section and pile up around the text (js/tools-pit.js) */
+.same-tools{position:relative;overflow:hidden;min-height:clamp(620px,78vh,760px);display:flex;align-items:center}
+.same-tools .wrap{position:relative;z-index:1}
+.same-tools-text{max-width:760px;margin-inline:auto}
+.same-tools-text .lead{max-width:640px}
+.same-tools-turn{margin-top:6px;font-size:19px;font-weight:590;letter-spacing:-.02em;color:#161716}
+.pit-section{position:absolute;inset:0;z-index:0;height:auto;margin:0;border-radius:0;background:none;pointer-events:none}
+@media (max-width:760px){.same-tools{min-height:640px;align-items:flex-start;padding-top:70px}.same-tools-turn{font-size:17px}}
