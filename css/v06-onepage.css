@@ -502,3 +502,11 @@ main{overflow-x:clip}
 .op-tl-live .op-tl-seg.is-in+.op-values{transition-delay:.05s}
 @media (max-width:760px){.op-values{padding:30px 16px}}
 .op-tl2>.op-tl-seg:last-child{margin-bottom:0}
+
+/* Round 9h: values sentence sits open on the page, no box; balls in the accent colours again */
+.op-values{background:none;box-shadow:none;border:0;border-radius:0;padding:40px 0 0}
+@media (max-width:760px){.op-values{padding:28px 0 0}}
+.ball.t-lilac{background:#eeeaff}
+.ball.t-mint{background:#bcefe9}
+.ball.t-peach{background:#ffe1d9}
+.ball.t-lime{background:#dfff9b}

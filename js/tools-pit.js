@@ -18,7 +18,7 @@
     'Descript', 'Jasper', 'Later', 'Stripe', 'Claude', 'Gemini', 'Copilot', 'Midjourney', 'Perplexity', 'CapCut',
     'Linktree', 'Webflow', 'WordPress', 'Zoom', 'Teams', 'Dropbox', 'Sprout Social', 'ActiveCampaign', 'Pipedream'];
   var LOGOS = {}; /* e.g. { canva: true } once /img/tools/canva.svg exists */
-  var TONES = ['t-white', 't-white', 't-white', 't-g1', 't-g1', 't-g2', 't-g2', 't-g3']; /* round 9: white and light greys, no black */
+  var TONES = ['t-white', 't-white', 't-white', 't-lilac', 't-mint', 't-peach', 't-lime', 't-lilac', 't-peach']; /* round 9: colour back, no black */
 
   var balls = [], W = 0, H = 0, block = null, target = 40, top = 0; /* top: where balls enter (below the text on narrow screens) */
   var trap = 0, phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
