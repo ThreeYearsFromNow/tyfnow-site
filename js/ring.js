@@ -1,9 +1,8 @@
 /* TYFNOW ring.js: section 4 on the one-page Home, "HumanAIse context to build better" (24 Oct 2026).
    A soft gradient drifts behind the whole section, edge to edge: greens while Human leads, violet and lilac while
    AI leads, blending slowly as the lead swaps every few seconds. Only the leading word in the headline is coloured.
-   Inside the TYFNOW ring, task chips (illustrative issues, not client data) light up in the leading colour. After each
-   Human-then-AI turn, two tasks finish, fly to their heading (Website, App, Search and AI answers, Content) and its
-   tally goes up; tallies start at zero each visit, a demo count, not a claim. No task shows twice at once.
+   Inside the TYFNOW ring, task chips (illustrative issues, not client data) flash in the leading colour, hold a
+   moment, then fly to their heading (Website, App, Search and AI answers, Content) and its tally goes up; tallies start at zero each visit, a demo count, not a claim. No task shows twice at once.
    The outer ring of disciplines turns slowly. Runs only while on screen and the tab is visible.
    Reduced motion: still ring and gradient, no swaps. No JS: the four headings as tags. */
 (function () {
@@ -128,24 +127,24 @@
   /* ---------- the lead: Human, then AI, then two tasks land ---------- */
   var who = 'h', mix = 0, target = 0, time = 0, since = 0, sinceTw = 0, last = 0, running = false, raf = 0;
   function setLead(w) { who = w; target = w === 'a' ? 1 : 0; sec.classList.toggle('lead-h', w === 'h'); sec.classList.toggle('lead-a', w === 'a'); }
-  function twinkle() {
-    var s = slots[Math.floor(Math.random() * slots.length)]; if (!s || s.busy) return;
-    var cls = who === 'h' ? 'is-h' : 'is-a'; s.g.classList.add(cls);
-    setTimeout(function () { s.g.classList.remove(cls); }, 800);
+  /* flash, hold, send: a task lights in the leading colour, holds a moment, then flies to its heading */
+  function flashSend() {
+    var free = slots.map(function (s, i) { return s && !s.busy ? i : -1; }).filter(function (i) { return i >= 0; });
+    if (!free.length) return;
+    var i = free[Math.floor(Math.random() * free.length)], s = slots[i];
+    s.busy = true; s.g.classList.add(who === 'h' ? 'is-h' : 'is-a');
+    setTimeout(function () { send(i, s); }, 450);
   }
-  function land() {
-    var idx = slots.map(function (_, i) { return i; }).sort(function () { return Math.random() - .5; }).slice(0, 2);
-    idx.forEach(function (i) {
-      var s = slots[i]; if (!s || s.busy) return; s.busy = true;
-      var o = outs[s.o], from = s.pos, st = performance.now(); G.fly.appendChild(s.g);
-      (function f(now) {
-        var k = Math.min(1, (now - st) / 750), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
-        s.g.setAttribute('transform', 'translate(' + (from[0] + (o.p[0] - from[0]) * e) + ',' + (from[1] + (o.p[1] - from[1]) * e) + ') rotate(' + (s.tilt * (1 - e)) + ') scale(' + (1 - .65 * e) + ')');
-        s.g.style.opacity = 1 - e * .85;
-        if (k < 1) requestAnimationFrame(f);
-        else { s.g.remove(); slots[i] = null; counts[s.o]++; setOut(s.o); setTimeout(function () { if (G.xy[i]) mk(i, false); }, 300); }
-      })(st);
-    });
+  function send(i, s) {
+    if (!s.g.parentNode) return; /* rebuilt while waiting (resize) */
+    var o = outs[s.o], from = s.pos, st = performance.now(); G.fly.appendChild(s.g);
+    (function f(now) {
+      var k = Math.min(1, (now - st) / 650), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      s.g.setAttribute('transform', 'translate(' + (from[0] + (o.p[0] - from[0]) * e) + ',' + (from[1] + (o.p[1] - from[1]) * e) + ') rotate(' + (s.tilt * (1 - e)) + ') scale(' + (1 - .65 * e) + ')');
+      s.g.style.opacity = 1 - e * .85;
+      if (k < 1) requestAnimationFrame(f);
+      else { s.g.remove(); if (slots[i] === s) slots[i] = null; counts[s.o]++; setOut(s.o); setTimeout(function () { if (G.xy[i] && !slots[i]) mk(i, false); }, 350); }
+    })(st);
   }
   function frame(now) {
     if (!running) return;
@@ -153,8 +152,8 @@
     time += dt; mix += (target - mix) * Math.min(1, dt * .9); rot += dt * 4;
     place(); paint();
     since += dt; sinceTw += dt;
-    if (sinceTw > .5) { sinceTw = 0; twinkle(); }
-    if (since > 4.5) { since = 0; if (who === 'a') land(); setLead(who === 'a' ? 'h' : 'a'); }
+    if (sinceTw > (G.narrow ? 1.8 : 1.2)) { sinceTw = 0; flashSend(); }
+    if (since > 4.5) { since = 0; setLead(who === 'a' ? 'h' : 'a'); }
     raf = requestAnimationFrame(frame);
   }
   function start() { if (running || reduce) return; running = true; last = performance.now(); raf = requestAnimationFrame(frame); }
