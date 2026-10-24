@@ -242,3 +242,18 @@ main{overflow-x:clip}
   @keyframes op-q{0%,18%{transform:none}30%,44%{transform:rotate(-90deg)}56%,62%{transform:none}72%,86%{transform:translateY(-6px) rotate(8deg)}98%,100%{transform:none}}
   @keyframes op-q-dot{0%,64%{opacity:1}70%,88%{opacity:0}96%,100%{opacity:1}}
 }
+
+/* Values bucket: one sentence, the five values underlined, each led by its moving icon */
+.op-bucket-paper{justify-content:flex-start}
+.op-creed{margin:8px 0 0;padding:0 4px;font-size:clamp(23px,2.6vw,36px);line-height:2;font-weight:500;letter-spacing:-.02em;color:#161716;text-wrap:pretty}
+.op-v{white-space:nowrap}
+.op-v .op-val-ic{display:inline-flex;vertical-align:-.32em;width:1.45em;height:1.45em;border-radius:.4em;margin-right:.3em;font-size:inherit}
+.op-v .op-ico{width:.86em;height:.86em}
+.op-v .op-ic-q{padding-top:0}
+.op-v u{text-decoration-thickness:2px;text-underline-offset:.22em}
+.op-v-curiosity u{text-decoration-color:#7661f6}
+.op-v-creativity u{text-decoration-color:#ff816d}
+.op-v-consistency u{text-decoration-color:#2f9e8f}
+.op-v-candour u{text-decoration-color:#8fb31c}
+.op-v-craft u{text-decoration-color:#7661f6}
+@media (min-width:1001px){.op-bucket-paper .op-creed{margin-top:auto;margin-bottom:auto}}
