@@ -12,13 +12,19 @@
   if (!pit || !text || !window.requestAnimationFrame) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var NAMES = ['ChatGPT', 'Canva', 'HubSpot', 'Mailchimp', 'Notion', 'Zapier', 'Slack', 'Trello', 'Asana', 'Hootsuite',
-    'Buffer', 'Squarespace', 'Wix', 'Shopify', 'Calendly', 'Typeform', 'Xero', 'Semrush', 'Google Analytics', 'Meta Ads',
-    'Klaviyo', 'Airtable', 'Miro', 'Figma', 'Loom', 'Grammarly', 'Monday', 'ClickUp', 'Pipedrive', 'Gamma', 'Lovable',
-    'Descript', 'Jasper', 'Later', 'Stripe', 'Claude', 'Gemini', 'Copilot', 'Midjourney', 'Perplexity', 'CapCut',
-    'Linktree', 'Webflow', 'WordPress', 'Zoom', 'Teams', 'Dropbox', 'Sprout Social', 'ActiveCampaign', 'Pipedream'];
+  /* client-facing marketing, web, content and AI tools only (internal ops tools such as Dropbox, Zoom or Xero removed, round 9) */
+  var NAMES = ['ChatGPT', 'Canva', 'HubSpot', 'Mailchimp', 'Hootsuite', 'Buffer', 'Squarespace', 'Wix', 'Shopify', 'Calendly',
+    'Typeform', 'Semrush', 'Google Analytics', 'Meta Ads', 'Klaviyo', 'Figma', 'Grammarly', 'Pipedrive', 'Gamma', 'Lovable',
+    'Descript', 'Jasper', 'Later', 'Claude', 'Gemini', 'Copilot', 'Perplexity', 'CapCut', 'Linktree', 'Webflow', 'WordPress',
+    'Sprout Social', 'ActiveCampaign',
+    /* AI image and video generation */
+    'Midjourney', 'Runway', 'Sora', 'Veo', 'Kling', 'Pika', 'Luma', 'Synthesia', 'HeyGen', 'ElevenLabs', 'Adobe Firefly',
+    'Ideogram', 'Leonardo', 'Krea', 'Flux', 'Higgsfield', 'Suno', 'Stable Diffusion', 'Recraft', 'Freepik'];
   var LOGOS = {}; /* e.g. { canva: true } once /img/tools/canva.svg exists */
-  var TONES = ['t-white', 't-white', 't-white', 't-lilac', 't-mint', 't-peach', 't-lime', 't-lilac', 't-peach']; /* round 9: colour back, no black */
+  /* a new mix of colours on every visit: white plus four picked at random from the accent set */
+  var POOL = ['t-lilac', 't-mint', 't-peach', 't-lime', 't-sky', 't-butter', 't-coral', 't-violet', 't-rose'];
+  for (var pi = POOL.length - 1; pi > 0; pi--) { var pj = Math.floor(Math.random() * (pi + 1)), pt = POOL[pi]; POOL[pi] = POOL[pj]; POOL[pj] = pt; }
+  var TONES = ['t-white', 't-white'].concat(POOL.slice(0, 4), POOL.slice(0, 4));
 
   var balls = [], W = 0, H = 0, block = null, target = 40, top = 0; /* top: where balls enter (below the text on narrow screens) */
   var trap = 0, phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
