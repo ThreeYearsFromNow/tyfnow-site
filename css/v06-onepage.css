@@ -108,39 +108,50 @@ section[id]{scroll-margin-top:96px}
 @media (max-width:760px){.same-tools{padding-top:90px;min-height:660px}}
 .ball-l,.ball img{display:block;will-change:transform}
 
-/* ===== Section 4: HumanAIse ring over a moving gradient (js/ring.js) ===== */
-.rg-sec{position:relative;z-index:2} /* sits above section 3, so draining balls fall behind this card */
-.rg-card{position:relative;overflow:hidden;isolation:isolate;background:#fdf6f2;border-radius:24px;padding:56px 40px 36px}
-@media (max-width:760px){.rg-card{padding:40px 14px 22px;border-radius:18px}}
+/* ===== Section 4: HumanAIse ring over a moving gradient, edge to edge (js/ring.js) ===== */
+.rg-sec{position:relative;z-index:2;overflow:hidden;isolation:isolate;background:#f3f8ee} /* above section 3, so draining balls fall behind it */
 .rg-bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block}
 .rg-head{gap:16px}
 .rg-head .lead{max-width:620px;color:#3f403e}
-/* Headline exception (24 Oct 2026, experiment): the one headline allowed coloured words. The word leading is at full strength */
-.rg-w{transition:color .8s ease}
-.rg-w-h{color:#e0573f}.rg-w-a{color:#5b45e8}
-.rg-card.lead-h .rg-w-a{color:#a898f4}
-.rg-card.lead-a .rg-w-h{color:#f2a08f}
-.rg-stage{position:relative;max-width:760px;margin:20px auto 0}
+/* Headline exception (24 Oct 2026, experiment): the one headline allowed a coloured word.
+   Only the word leading is coloured; the other stays ink */
+.rg-w{color:#161716;transition:color .8s ease}
+.rg-sec.lead-h .rg-w-h{color:#2f8a4a}
+.rg-sec.lead-a .rg-w-a{color:#5b45e8}
+.rg-stage{position:relative;max-width:1000px;margin:24px auto 0}
 .rg-svg{display:block;width:100%;height:auto;overflow:visible}
-.rg-fallback{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.rg-fallback li{padding:9px 14px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #161716;font-size:14px;font-weight:600}
+.rg-fallback,.rg-key{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px}
+.rg-fallback li{padding:5px 9px;border-radius:6px;font-size:13px;font-weight:650}
 .rg-live .rg-fallback{display:none}
-/* svg parts */
-.rg-in{fill:rgba(255,255,255,.5);stroke:rgba(255,255,255,.9);stroke-width:1.5}
-.rg-out{fill:none;stroke:rgba(22,23,22,.25);stroke-width:1;stroke-dasharray:3 5}
+.rg-key{font-size:14px;color:#454644}
+.rg-key li{display:inline-flex;align-items:center;gap:8px}
+.rg-key li::before{content:"";width:12px;height:12px;border-radius:4px;background:var(--k)}
+.rg-sec .f-web{--k:#7661f6;--tb:#eeeaff;--tc:#4f3fd0}
+.rg-sec .f-app{--k:#161716;--tb:#161716;--tc:#fdfdfc}
+.rg-sec .f-search{--k:#ff816d;--tb:#ffe1d9;--tc:#a53a27}
+.rg-sec .f-content{--k:#2f9e8f;--tb:#dff3ec;--tc:#1f6f64}
+.rg-fallback li{background:var(--tb);color:var(--tc)}
+/* svg parts (old signal typography: uppercase source, 13.5px task; tinted tags) */
+.rg-in{fill:rgba(255,255,255,.42);stroke:rgba(255,255,255,.95);stroke-width:1.5}
+.rg-out{fill:none;stroke:rgba(22,23,22,.22);stroke-width:1;stroke-dasharray:3 5}
 .rg-core{fill:#161716}
-.rg-core-t{fill:#fff;font-size:13px;font-weight:800;letter-spacing:-.04em}
-.rg-dp{fill:rgba(255,255,255,.85);stroke:rgba(22,23,22,.15);stroke-width:.5}
-.rg-dt{fill:#454644;font-size:11px;font-weight:500}
-.rg-op{fill:#fff;stroke:#161716;stroke-width:1}
-.rg-ot{fill:#161716;font-size:13px;font-weight:600}
-.rg-on{fill:#161716;font-size:13px;font-weight:700}
-.rg-tp{fill:#fff;stroke:rgba(22,23,22,.2);stroke-width:.75;transition:fill .35s,stroke .35s}
-.rg-tt{fill:#161716;font-size:11px;font-weight:550;transition:fill .35s}
+.rg-core-t{fill:#fff;font-size:21px;font-weight:800;letter-spacing:-.05em}
+.rg-dp{fill:rgba(253,253,252,.88);stroke:#dededb;stroke-width:1}
+.rg-dt{fill:#454644;font-size:12px;font-weight:550}
+.rg-tag{fill:var(--tb)}
+.rg-tagt{fill:var(--tc);font-size:13px;font-weight:650;letter-spacing:.01em}
+.rg-tagn{fill:var(--tc);font-weight:800}
+.rg-chip{fill:#fdfdfc;stroke:#dededb;stroke-width:1;transition:fill .35s,stroke .35s}
+.rg-src{fill:#5f605d;font-size:10px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;transition:fill .35s}
+.rg-txt{fill:#161716;font-size:13.5px;font-weight:550;transition:fill .35s}
 .rg-task{transition:opacity .5s}
-.rg-task.is-h .rg-tp{fill:#ff816d;stroke:#ff816d}.rg-task.is-h .rg-tt{fill:#4a1b0c}
-.rg-task.is-a .rg-tp{fill:#7661f6;stroke:#7661f6}.rg-task.is-a .rg-tt{fill:#fff}
 .rg-task.is-new{opacity:0}
+.rg-task.is-h .rg-chip{fill:#dcf3d2;stroke:#7cc46e}.rg-task.is-h .rg-src{fill:#2f6b38}.rg-task.is-h .rg-txt{fill:#173f1f}
+.rg-task.is-a .rg-chip{fill:#e4defe;stroke:#7661f6}.rg-task.is-a .rg-src{fill:#4f3fd0}.rg-task.is-a .rg-txt{fill:#2a1f86}
+.rg-svg.is-narrow .rg-core-t{font-size:10.5px}
+.rg-svg.is-narrow .rg-src{font-size:9.5px}
+.rg-svg.is-narrow .rg-txt{font-size:12.5px}
+.rg-svg.is-narrow .rg-tagt{font-size:12px}
 
 /* Section 3 drain: balls fall out through the bottom of the section and pass behind section 4's card */
 .same-tools{overflow:visible}
@@ -149,5 +160,4 @@ section[id]{scroll-margin-top:96px}
 /* Capital I with serifs in section 4, so "HumanAIse" and "AI" never read as "Alse" or "Al".
    The self-hosted Inter subset has no cv08, so one glyph comes from a tiny Inter Tight subset (fonts/inter-i-serif.woff, OFL). */
 @font-face{font-family:"TYFNOW I";font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-i-serif.woff) format("woff");unicode-range:U+0049}
-.rg-card,.rg-card h2,.rg-card h3{font-family:"TYFNOW I",Inter,"Inter Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-feature-settings:"cv08" 1}
-.rg-svg.is-narrow .rg-core-t{font-size:10.5px}
+.rg-sec,.rg-sec h2,.rg-sec h3{font-family:"TYFNOW I",Inter,"Inter Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-feature-settings:"cv08" 1}
