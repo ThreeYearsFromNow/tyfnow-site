@@ -452,19 +452,29 @@ main{overflow-x:clip}
 .op-values .op-creed{margin:12px auto 0;max-width:900px;text-align:center}
 @media (max-width:760px){.op-values{margin-top:48px}}
 
-/* Round 9b: balls in greys and black, with a soft top-left highlight */
-.ball{font-weight:560;color:#161716;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 58%),#fff;box-shadow:inset 0 0 0 1px rgba(22,23,22,.08),inset 0 -6px 12px -6px rgba(22,23,22,.12),0 10px 18px -12px rgba(22,23,22,.45)}
-.ball.t-g1{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.75) 0,rgba(255,255,255,0) 58%),#ececea}
-.ball.t-g2{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.55) 0,rgba(255,255,255,0) 58%),#cfcfcc}
-.ball.t-g3{color:#fdfdfc;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 58%),#5f605d;box-shadow:inset 0 -6px 12px -6px rgba(0,0,0,.3),0 10px 18px -12px rgba(22,23,22,.55)}
-.ball.t-ink{color:#fdfdfc;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.16) 0,rgba(255,255,255,0) 58%),#161716;box-shadow:inset 0 -6px 12px -6px rgba(0,0,0,.4),0 10px 18px -12px rgba(22,23,22,.6)}
+/* Round 9c: balls mostly white and black, no stroke, bigger (sizes in js/tools-pit.js) */
+.ball{font-weight:560;color:#161716;background:#fff;box-shadow:0 12px 24px -14px rgba(22,23,22,.35),0 2px 6px -3px rgba(22,23,22,.12)}
+.ball.t-g1{background:#ececea}
+.ball.t-ink{color:#fdfdfc;background:#161716;box-shadow:0 12px 24px -14px rgba(22,23,22,.55)}
 
-/* What happens next: a plain numbered list, no boxes */
-.op-steps.op-steps-list{display:flex;flex-direction:column;align-items:stretch;gap:0;max-width:640px;margin:0 auto;counter-reset:step;text-align:left}
-.op-steps-list li{counter-increment:step;display:flex;gap:16px;align-items:baseline;max-width:none;width:100%;padding:12px 0;border-radius:0;background:none;box-shadow:none;font-size:var(--type-body,16px);line-height:1.45;text-wrap:pretty}
-.op-steps-list li::before,.op-steps-list li+li::before{content:counter(step) ".";position:static;transform:none;flex:none;min-width:1.4em;font-size:inherit;color:rgba(22,23,22,.6)}
-@media (max-width:1000px){.op-steps.op-steps-list{gap:0}.op-steps-list li+li::before{left:auto;top:auto}}
-
-/* Close: the rings go; the gradient becomes a mosaic of tiles (js/close-mosaic.js), the CSS gradient stays as fallback */
-.cl-mosaic{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+/* Close: the rings go; the gradient drifts like section 4's (js/close-gradient.js); the CSS gradient stays as fallback */
+.cl-grad{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
 .closer>.wrap{z-index:1}
+
+/* Offer terms as a timeline: a rail on the left fills as you scroll, each term arrives as the rail reaches it (js/offer-timeline.js) */
+.op-tl{position:relative}
+.op-tl .op-term{position:relative;padding:28px 0 28px 48px;border:0}
+.op-tl .op-term:last-child{border:0}
+.op-tl .op-term h3{display:block}
+.op-tl .op-term .op-dot{position:absolute;left:0;top:calc(28px + .56em - 6px);width:12px;height:12px;transform:none;transition:background-color .35s,box-shadow .35s}
+.op-tl-rail{position:absolute;left:5px;width:2px;top:0;height:0;background:#dededb;border-radius:2px;overflow:hidden}
+.op-tl-fill{position:absolute;inset:0;background:#161716;transform-origin:top;transform:scaleY(1)}
+.op-tl.is-live .op-tl-fill{transform:scaleY(0)}
+.op-tl.is-live .op-term h3,.op-tl.is-live .op-term .body{opacity:0;transform:translateY(18px);transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)}
+.op-tl.is-live .op-term .body{transition-delay:.08s}
+.op-tl.is-live .op-term .op-dot{background:#fdfdfc;box-shadow:inset 0 0 0 2px #c9c9c5}
+.op-tl.is-live .op-term.is-in h3,.op-tl.is-live .op-term.is-in .body{opacity:1;transform:none}
+.op-tl.is-live .op-term.is-in .op-dot-violet{background:#7661f6;box-shadow:none}
+.op-tl.is-live .op-term.is-in .op-dot-grey{background:#b8b8b4;box-shadow:none}
+.op-tl.is-live .op-term.is-in .op-dot-mint{background:#2f9e8f;box-shadow:none}
+@media (max-width:760px){.op-tl .op-term{padding:22px 0 22px 36px}.op-tl .op-term .op-dot{top:calc(22px + .56em - 6px)}}

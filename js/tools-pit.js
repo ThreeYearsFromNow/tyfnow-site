@@ -18,7 +18,7 @@
     'Descript', 'Jasper', 'Later', 'Stripe', 'Claude', 'Gemini', 'Copilot', 'Midjourney', 'Perplexity', 'CapCut',
     'Linktree', 'Webflow', 'WordPress', 'Zoom', 'Teams', 'Dropbox', 'Sprout Social', 'ActiveCampaign', 'Pipedream'];
   var LOGOS = {}; /* e.g. { canva: true } once /img/tools/canva.svg exists */
-  var TONES = ['t-white', 't-white', 't-white', 't-g1', 't-g1', 't-g2', 't-g3', 't-ink', 't-ink']; /* round 9: greys and black */
+  var TONES = ['t-white', 't-white', 't-white', 't-white', 't-ink', 't-ink', 't-ink', 't-g1']; /* round 9: mostly white and black, one light grey */
 
   var balls = [], W = 0, H = 0, block = null, target = 40, top = 0; /* top: where balls enter (below the text on narrow screens) */
   var trap = 0, phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
@@ -41,7 +41,7 @@
       l = Math.min(l, c.left); rr = Math.max(rr, c.right); tt = Math.min(tt, c.top); bb = Math.max(bb, c.bottom);
     });
     block = { l: l - p.left - GAP, r: rr - p.left + GAP, t: tt - p.top - GAP, b: bb - p.top + GAP };
-    var rAvg = wide() ? 40 : 28;
+    var rAvg = wide() ? 54 : 35;
     /* if there is no real space either side of the text, balls drop into the space beneath it instead */
     top = (block.l < 70 && W - block.r < 70) ? block.b : 0;
     var free = top ? W * (H - top) : W * H - Math.max(0, (block.r - block.l) * (H - block.t));
@@ -52,15 +52,15 @@
     if (!queue.length) queue = shuffled();
     var name = queue.pop();
     var longest = name.split(' ').reduce(function (m, w) { return Math.max(m, w.length); }, 1);
-    var r = wide() ? rnd(30, 52) : rnd(22, 34);
-    r = Math.min(wide() ? 58 : 46, Math.max(r, longest * (wide() ? 3.5 : 3.3))); /* long names get a ball big enough to read */
+    var r = wide() ? rnd(42, 70) : rnd(28, 42);
+    r = Math.min(wide() ? 78 : 52, Math.max(r, longest * (wide() ? 4.2 : 3.6))); /* long names get a ball big enough to read */
     var el = document.createElement('span');
     el.className = 'ball ' + TONES[Math.floor(Math.random() * TONES.length)];
     var s = slug(name);
     if (LOGOS[s]) { var img = document.createElement('img'); img.src = '/img/tools/' + s + '.svg'; img.alt = ''; el.appendChild(img); }
     else { var lab = document.createElement('span'); lab.className = 'ball-l'; lab.textContent = name; el.appendChild(lab); }
     el.style.width = el.style.height = (r * 2) + 'px';
-    el.style.fontSize = Math.max(8.5, Math.min(13, r / 3.4, (r * 2 * 0.8) / (longest * 0.6))).toFixed(1) + 'px';
+    el.style.fontSize = Math.max(10, Math.min(16, r / 3.6, (r * 2 * 0.8) / (longest * 0.6))).toFixed(1) + 'px';
     pit.appendChild(el);
     /* drop mostly into the open space either side of the text */
     var x, sideL = block.l - r, sideR = W - block.r - r;
