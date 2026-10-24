@@ -1,6 +1,6 @@
 /* TYFNOW tools-pit.js: section 3 on Home, "Your competitors have the same tools as you" (F174, reworked F182).
    Tool balls drop across the whole section and pile up around the text, which acts as a solid block so it is
-   never covered. When the section is full they hold, the floor gives way, they fall out and it starts again.
+   never covered. When the section is full they hold, a trapdoor opens in the middle of the floor and they fall through it, behind the next section, and it starts again.
    Runs only while on screen, pauses in background tabs, and shows nothing when reduced motion is on or JS is off.
    Logos: drop an official SVG at /img/tools/<slug>.svg and add the slug to LOGOS; the ball then shows the logo.
    We do not draw brand marks ourselves. 24 Oct 2026.
@@ -21,8 +21,8 @@
   var TONES = ['t-white', 't-white', 't-white', 't-lilac', 't-mint', 't-peach', 't-lime', 't-ink'];
 
   var balls = [], W = 0, H = 0, block = null, target = 40, top = 0; /* top: where balls enter (below the text on narrow screens) */
-  var phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
-  var G = 1700, AIR = 0.9985, GAP = 18, MU = 0.18, ITER = 6, SLEEP = 14;
+  var trap = 0, phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
+  var FALL = 900, G = 1700, AIR = 0.9985, GAP = 18, MU = 0.18, ITER = 6, SLEEP = 14;
   /* restitution falls with impact speed: hard drops bounce, slow touches settle instead of jittering */
   function rest(v) { v = Math.abs(v); return v > 700 ? 0.5 : v > 250 ? 0.32 : v > 80 ? 0.16 : 0; }
 
@@ -99,6 +99,8 @@
     if (ny < -0.6 && Math.abs(a.vx) < 40) a.vx += (a.x < (block.l + block.r) / 2 ? -1 : 1) * 6; /* a ball resting on the headline rolls off, it does not sit there */
   }
 
+  /* floor: true = closed; 'gap' = a trapdoor opens in the middle and balls drop through it, behind the next section */
+  function solid(a) { return !(trap && Math.abs(a.x - W / 2) < trap - a.r * 0.35); }
   function step(dt, floor) {
     var i, j, a, b;
     for (i = 0; i < balls.length; i++) {
@@ -108,7 +110,8 @@
       a.a += a.w * dt * 57.2958;
       if (a.x < a.r) { a.x = a.r; a.vx = -a.vx * rest(a.vx); contact(a, 1, 0, 0, 0, 1); }
       if (a.x > W - a.r) { a.x = W - a.r; a.vx = -a.vx * rest(a.vx); contact(a, -1, 0, 0, 0, 1); }
-      if (floor && a.y > H - a.r) { a.y = H - a.r; a.vy = -a.vy * rest(a.vy); contact(a, 0, -1, 0, 0, 1); }
+      if (floor && a.y > H - a.r && solid(a)) { a.y = H - a.r; a.vy = -a.vy * rest(a.vy); contact(a, 0, -1, 0, 0, 1); }
+      if (floor === 'gap' && a.y > H - a.r - 3 && a.y < H) a.vx += (a.x < W / 2 ? 1 : -1) * 520 * dt; /* the floor tips towards the trapdoor */
       hitBlock(a); /* the text stays solid even while the floor is open */
       if (top && a.y - a.r < top) { a.y = top + a.r; if (a.vy < 0) a.vy = 0; }
     }
@@ -131,12 +134,12 @@
           }
         }
       }
-      for (i = 0; i < balls.length; i++) { a = balls[i]; if (floor && a.y > H - a.r) a.y = H - a.r; hitBlock(a); }
+      for (i = 0; i < balls.length; i++) { a = balls[i]; if (floor && a.y > H - a.r && a.y < H && solid(a)) a.y = H - a.r; hitBlock(a); }
     }
     /* settle: near-still balls stop instead of trembling in the pile */
     for (i = 0; i < balls.length; i++) {
       a = balls[i];
-      if (floor && Math.abs(a.vx) < SLEEP && Math.abs(a.vy) < SLEEP * 2) { a.vx *= 0.6; a.w *= 0.6; }
+      if (floor === true && Math.abs(a.vx) < SLEEP && Math.abs(a.vy) < SLEEP * 2) { a.vx *= 0.6; a.w *= 0.6; }
     }
   }
 
@@ -165,15 +168,16 @@
       if (now - lastSpawn > 150) { spawn(); lastSpawn = now; }
       if (full()) { phase = 'hold'; phaseAt = now; }
     } else if (phase === 'hold' && now - phaseAt > 1800) {
-      phase = 'drain'; phaseAt = now;
-      balls.forEach(function (b) { b.vy -= rnd(80, 240); b.vx += rnd(-60, 60); b.w += rnd(-3, 3); });
+      phase = 'drain'; phaseAt = now; trap = Math.max(70, W * 0.11);
     } else if (phase === 'drain') {
-      balls = balls.filter(function (b) { if (b.y - b.r > H + 20) { b.el.remove(); return false; } return true; });
-      if (!balls.length) { phase = 'pause'; phaseAt = now; }
+      if (now - phaseAt > 2500) trap = Math.min(W / 2 + 60, trap + W * 0.0015); /* the trapdoor widens until everything is through */
+      balls = balls.filter(function (b) { if (b.y - b.r > H + FALL) { b.el.remove(); return false; } return true; });
+      if (!balls.length) { phase = 'pause'; phaseAt = now; trap = 0; }
     } else if (phase === 'pause' && now - phaseAt > 800) {
       phase = 'fill'; lastSpawn = 0; queue = shuffled(); measure();
     }
-    step(dt / 2, phase !== 'drain'); step(dt / 2, phase !== 'drain');
+    var fl = phase === 'drain' ? 'gap' : true;
+    step(dt / 2, fl); step(dt / 2, fl);
     draw();
     raf = window.requestAnimationFrame(tick);
   }
