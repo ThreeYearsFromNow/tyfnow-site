@@ -463,37 +463,28 @@ main{overflow-x:clip}
 .cl-grad{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
 .closer>.wrap{z-index:1}
 
-/* Offer terms as a timeline: a rail on the left fills as you scroll, each term arrives as the rail reaches it (js/offer-timeline.js) */
-.op-tl{position:relative}
-.op-tl .op-term{position:relative;padding:28px 0 28px 48px;border:0}
-.op-tl .op-term:last-child{border:0}
-.op-tl .op-term h3{display:block}
-.op-tl .op-term .op-dot{position:absolute;left:0;top:calc(28px + .56em - 6px);width:12px;height:12px;transform:none;transition:background-color .35s,box-shadow .35s}
-.op-tl-rail{position:absolute;left:5px;width:2px;top:0;height:0;background:#dededb;border-radius:2px;overflow:hidden}
-.op-tl-fill{position:absolute;inset:0;background:#161716;transform-origin:top;transform:scaleY(1)}
-.op-tl.is-live .op-tl-fill{transform:scaleY(0)}
-.op-tl.is-live .op-term h3,.op-tl.is-live .op-term .body{opacity:0;transform:translateY(18px);transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)}
-.op-tl.is-live .op-term .body{transition-delay:.08s}
-.op-tl.is-live .op-term .op-dot{background:#fdfdfc;box-shadow:inset 0 0 0 2px #c9c9c5}
-.op-tl.is-live .op-term.is-in h3,.op-tl.is-live .op-term.is-in .body{opacity:1;transform:none}
-.op-tl.is-live .op-term.is-in .op-dot-violet{background:#7661f6;box-shadow:none}
-.op-tl.is-live .op-term.is-in .op-dot-grey{background:#b8b8b4;box-shadow:none}
-.op-tl.is-live .op-term.is-in .op-dot-mint{background:#2f9e8f;box-shadow:none}
-@media (max-width:760px){.op-tl .op-term{padding:22px 0 22px 36px}.op-tl .op-term .op-dot{top:calc(22px + .56em - 6px)}}
-/* Timeline centred (wider screens): rail down the middle, title to its left, detail to its right */
-@media (min-width:761px){
-  .op-tl .op-term{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:96px;padding-left:0}
-  .op-tl .op-term h3{text-align:right}
-  .op-tl .op-term .body{max-width:440px}
-  .op-tl .op-term .op-dot{left:calc(50% - 6px)}
-  .op-tl-rail{left:calc(50% - 1px)}
-}
-
 /* Round 9d */
 /* section 5 pills start further in, fading at both ends */
-.op-bk-open .op-tick-bleed{width:auto;max-width:1100px;margin:48px auto 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.op-bk-open .op-tick-bleed{width:auto;max-width:820px;margin:48px auto 0;-webkit-mask-image:none;mask-image:none}
 @media (max-width:760px){.op-bk-open .op-tick-bleed{margin:36px 0 0}}
 /* qualify icons in colour, like the values tiles */
 .aud-ic{box-shadow:none}
 .aud-ic-van{background:#dff5f0;color:#1f7a6e}
 .aud-ic-call{background:#f2f0ff;color:#4f3fd0}
+
+/* Round 9e: pills colour by position within each set of seven, so the pattern repeats exactly and the loop has no jump */
+.op-bk-open .op-tick-grey .op-tick-row li,.op-bk-open .op-tick-grey .op-tick-row li:nth-child(4n+1){background:#f3f3f1;color:#161716}
+.op-bk-open .op-tick-grey .op-tick-row li:nth-child(7n+1),.op-bk-open .op-tick-grey .op-tick-row li:nth-child(7n+5){background:#161716;color:#fff}
+
+/* Offer as a centred timeline: dot, title, detail, then a line down to the next, each arriving in turn on scroll (js/offer-timeline.js) */
+.op-tl2{max-width:640px;margin:64px auto 0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.op-tl-step{display:flex;flex-direction:column;align-items:center;gap:12px}
+.op-tl-step .op-dot{position:static;width:14px;height:14px;transform:none}
+.op-tl-step .h-card{margin:4px 0 0}
+.op-tl-step .body{margin:0;max-width:520px}
+.op-tl-seg{display:block;width:2px;height:80px;margin:28px 0;border-radius:2px;background:#161716;transform-origin:top}
+@media (max-width:760px){.op-tl2{margin-top:44px}.op-tl-seg{height:56px;margin:20px 0}}
+.op-tl2.is-live .op-tl-p{opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)}
+.op-tl2.is-live .op-dot.op-tl-p{transform:scale(.4)}
+.op-tl2.is-live .op-tl-seg{opacity:1;transform:scaleY(0)}
+.op-tl2.is-live .op-tl-p.is-in{opacity:1;transform:none}
