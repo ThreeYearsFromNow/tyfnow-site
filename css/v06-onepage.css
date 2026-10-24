@@ -427,3 +427,27 @@ main{overflow-x:clip}
 .op-bucket-grey .op-bk-brand{padding-top:.4em}
 .op-bucket-grey .op-tick{overflow:hidden}
 
+
+/* Round 9: section 5 opens up, no box; the values move under the offer */
+.op-buckets-open{display:block;margin-top:0}
+.op-bk-open{background:none;border-radius:0;padding:0;overflow:visible;align-items:center;text-align:center;gap:14px}
+.op-bk-open .op-bk-brand{padding:1.1em 0 0;text-align:center}
+.op-bk-open .op-bk-sub{max-width:560px;margin-inline:auto}
+.op-bk-open .op-tick-bleed{width:100vw;margin:48px calc(50% - 50vw) 0;padding-top:0}
+.op-bk-open .op-tick-grey .op-tick-row li{background:#f3f3f1}
+.op-bk-open .op-tick-grey .op-tick-row li:nth-child(4n+1){background:#161716}
+@media (max-width:760px){.op-bk-open .op-tick-bleed{margin-top:36px}}
+
+/* Offer: the three terms as open rows, title left, detail right */
+.op-terms{max-width:1100px;margin:56px auto 0;text-align:left}
+.op-term{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:baseline;padding:30px 0;border-top:1px solid #dededb}
+.op-term:last-child{border-bottom:1px solid #dededb}
+.op-term h3{display:flex;align-items:baseline;gap:14px;margin:0}
+.op-term .op-dot{position:static;flex:none;transform:translateY(-.15em)}
+.op-term .body{margin:0;max-width:560px}
+@media (max-width:760px){.op-term{grid-template-columns:1fr;gap:8px;padding:22px 0}}
+
+/* Values bucket now sits in the offer, between the terms and what happens next */
+.op-values{max-width:1100px;margin:72px auto 0;text-align:center;align-items:center}
+.op-values .op-creed{margin:12px auto 0;max-width:900px;text-align:center}
+@media (max-width:760px){.op-values{margin-top:48px}}
