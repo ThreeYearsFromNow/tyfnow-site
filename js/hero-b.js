@@ -35,7 +35,9 @@
   var keep = { l: tr.left - hr.left - 16, r: tr.right - hr.left + 16, t: tr.top - hr.top - 16, b: tr.bottom - hr.top + 16 };
   var spare = shuffle((wide ? DESK : MOB).slice()).filter(function (s) { return slots.indexOf(s) < 0; });
   function place(s, w, h) {
-    var x = (s[0] + rnd(-2, 2)) / 100 * hr.width, y = (s[1] + rnd(-2, 2)) / 100 * hr.height;
+    /* pulled towards the centre (24 Oct): 80% of the way out across, 90% up and down */
+    var px = 50 + (s[0] - 50) * (wide ? 0.8 : 0.9), py = 50 + (s[1] - 50) * (wide ? 0.9 : 1);
+    var x = (px + rnd(-2, 2)) / 100 * hr.width, y = (py + rnd(-2, 2)) / 100 * hr.height;
     var half = Math.max(w, h) * 0.62; /* rotated tile, generous bounding box */
     var clear = x + half < keep.l || x - half > keep.r || y + half < keep.t || y - half > keep.b;
     return clear ? { x: x, y: y } : null;

@@ -55,19 +55,25 @@
     var og = el('g', {}, svg);
     G.out.forEach(function (o, i) {
       var p = pt(G.rin, -90 + i * 90), g = el('g', { 'class': o[1], transform: 'translate(' + p[0] + ',' + p[1] + ')' }, og);
-      var r = el('rect', { 'class': 'rg-tag', height: 30, rx: 7, y: -15 }, g), t = el('text', { 'class': 'rg-tagt', 'text-anchor': 'middle', y: 4.5 }, g);
-      outs.push({ p: p, r: r, t: t, name: o[0] }); setOut(i);
+      var r = el('rect', { 'class': 'rg-tag', height: 32, rx: 8, y: -16 }, g), t = el('text', { 'class': 'rg-tagt', y: 4.5 }, g);
+      var nb = el('rect', { 'class': 'rg-nbox', height: 22, rx: 6, y: -11 }, g), nt = el('text', { 'class': 'rg-tagn', 'text-anchor': 'middle', y: 4.5 }, g);
+      t.textContent = o[0];
+      outs.push({ p: p, r: r, t: t, nb: nb, nt: nt, name: o[0] }); setOut(i);
     });
     G.fly = el('g', {}, svg);
     G.xy.forEach(function (_, i) { mk(i, true); });
     place();
   }
 
-  /* heading tag with its tally in bold */
+  /* black heading tag; its tally sits in its own small light box on the right */
   function setOut(i) {
-    var o = outs[i]; o.t.textContent = o.name + '  ';
-    var n = el('tspan', { 'class': 'rg-tagn' }, o.t); n.textContent = counts[i];
-    var w = len(o.t, 90) + 22; o.r.setAttribute('x', -w / 2); o.r.setAttribute('width', w);
+    var o = outs[i]; o.nt.textContent = counts[i];
+    var tw = len(o.t, o.name.length * 7), nw = Math.max(22, len(o.nt, 8) + 12);
+    var w = 12 + tw + 8 + nw + 5, x0 = -w / 2;
+    o.r.setAttribute('x', x0); o.r.setAttribute('width', w);
+    o.t.setAttribute('x', x0 + 12);
+    o.nb.setAttribute('x', x0 + 12 + tw + 8); o.nb.setAttribute('width', nw);
+    o.nt.setAttribute('x', x0 + 12 + tw + 8 + nw / 2);
   }
 
   function showing() { return slots.filter(Boolean).map(function (s) { return s.k; }); }

@@ -313,3 +313,21 @@ main{overflow-x:clip}
 .op-case::before{pointer-events:none}
 @media (max-width:760px){.op-call{margin-top:48px}}
 .op-call-form[hidden],.op-call-note[hidden]{display:none}
+
+/* Section 4 (24 Oct, round 6): heading tags all black; each tally sits in its own small light box */
+.rg-tag{fill:#161716}
+.rg-tagt{fill:#fff}
+.rg-nbox{fill:#fdfdfc}
+.rg-tagn{fill:#161716;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.rg-fallback li{background:#161716;color:#fff}
+
+/* Values: curiosity has no icon; its "o" is an eye that looks around. Consistency: each repeated letter pair shares one underline colour */
+.op-eye{position:relative;display:inline-block;width:.56em;height:.56em;margin:0 .03em;border:.085em solid currentColor;border-radius:50%;vertical-align:-.02em;box-sizing:border-box;animation:op-blink 7s ease-in-out infinite}
+.op-pupil{position:absolute;left:50%;top:50%;width:.2em;height:.2em;margin:-.1em 0 0 -.1em;border-radius:50%;background:currentColor;animation:op-look 9s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes op-look{0%,10%{transform:translate(0,0)}16%,30%{transform:translate(.11em,-.02em)}36%,48%{transform:translate(-.11em,-.03em)}54%,64%{transform:translate(-.07em,.09em)}70%,82%{transform:translate(.08em,-.08em)}90%,100%{transform:translate(0,0)}}
+@keyframes op-blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.12)}}
+@media (prefers-reduced-motion:reduce){.op-eye,.op-pupil{animation:none}}
+.op-v-consistency u.u-c{text-decoration-color:#7661f6}
+.op-v-consistency u.u-n{text-decoration-color:#ff816d}
+.op-v-consistency u.u-s{text-decoration-color:#2f9e8f}
+.op-eye::after{content:"";position:absolute;left:-.1em;right:-.1em;top:calc(100% + .28em);height:2px;background:#7661f6}
