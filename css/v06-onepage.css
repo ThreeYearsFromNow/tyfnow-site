@@ -97,3 +97,13 @@ section[id]{scroll-margin-top:96px}
 .op-success:focus{outline:3px solid #2f9e8f;outline-offset:2px}
 .op-email{margin-top:6px;font-size:14px;color:#5f605d}
 .op-form[hidden]{display:none}
+
+/* Section 2: illustration on the left, text on the right */
+.aud-ill{order:0}
+@media (min-width:1151px){.aud{grid-template-columns:auto minmax(0,1fr);column-gap:28px}}
+@media (max-width:1150px){.aud-ill{justify-self:start}}
+
+/* Section 3: copy sits at the top like every other section; the balls land on the headline and pile below */
+.same-tools{align-items:flex-start;padding-top:124px;min-height:clamp(680px,86vh,820px)}
+@media (max-width:760px){.same-tools{padding-top:90px;min-height:660px}}
+.ball-l,.ball img{display:block;will-change:transform}

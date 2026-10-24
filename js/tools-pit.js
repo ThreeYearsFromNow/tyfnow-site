@@ -3,7 +3,8 @@
    never covered. When the section is full they hold, the floor gives way, they fall out and it starts again.
    Runs only while on screen, pauses in background tabs, and shows nothing when reduced motion is on or JS is off.
    Logos: drop an official SVG at /img/tools/<slug>.svg and add the slug to LOGOS; the ball then shows the logo.
-   We do not draw brand marks ourselves. 24 Oct 2026. */
+   We do not draw brand marks ourselves. 24 Oct 2026.
+   One-page round: mass by size, friction and rolling spin, softer settling, so the pile moves like real balls. */
 (function () {
   'use strict';
   var pit = document.querySelector('.pit-section');
@@ -21,7 +22,9 @@
 
   var balls = [], W = 0, H = 0, block = null, target = 40, top = 0; /* top: where balls enter (below the text on narrow screens) */
   var phase = 'fill', phaseAt = 0, lastSpawn = 0, running = false, raf = 0, last = 0, queue = [];
-  var G = 2000, E = 0.4, AIR = 0.999, GAP = 18;
+  var G = 1700, AIR = 0.9985, GAP = 18, MU = 0.18, ITER = 6, SLEEP = 14;
+  /* restitution falls with impact speed: hard drops bounce, slow touches settle instead of jittering */
+  function rest(v) { v = Math.abs(v); return v > 700 ? 0.5 : v > 250 ? 0.32 : v > 80 ? 0.16 : 0; }
 
   function rnd(a, b) { return a + Math.random() * (b - a); }
   function slug(n) { return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
@@ -55,7 +58,7 @@
     el.className = 'ball ' + TONES[Math.floor(Math.random() * TONES.length)];
     var s = slug(name);
     if (LOGOS[s]) { var img = document.createElement('img'); img.src = '/img/tools/' + s + '.svg'; img.alt = ''; el.appendChild(img); }
-    else el.textContent = name;
+    else { var lab = document.createElement('span'); lab.className = 'ball-l'; lab.textContent = name; el.appendChild(lab); }
     el.style.width = el.style.height = (r * 2) + 'px';
     el.style.fontSize = Math.max(8.5, Math.min(13, r / 3.4, (r * 2 * 0.8) / (longest * 0.6))).toFixed(1) + 'px';
     pit.appendChild(el);
@@ -66,7 +69,16 @@
     else if (roll < 0.9 && sideR > r) x = rnd(block.r + r, W - r);
     else x = rnd(r, W - r);
     if (top) x = rnd(r, W - r);
-    balls.push({ el: el, r: r, x: x, y: top ? top + r + 2 : -r - rnd(0, 40), vx: rnd(-60, 60), vy: rnd(60, 180) });
+    balls.push({ el: el, r: r, m: r * r, x: x, y: top ? top + r + 2 : -r - rnd(0, 40), vx: rnd(-90, 90), vy: rnd(70, 170), a: rnd(-25, 25), w: rnd(-2, 2) });
+  }
+
+  /* tangential friction at a contact point, and spin that matches rolling (w = v / r) */
+  function contact(a, nx, ny, ovx, ovy, share) {
+    var tx = -ny, ty = nx;
+    var slip = (a.vx - ovx) * tx + (a.vy - ovy) * ty - a.w * a.r; /* surface speed at the contact (clockwise spin positive) */
+    var f = slip * MU * share;
+    a.vx -= f * tx; a.vy -= f * ty;
+    a.w += f / a.r * 2; /* solid disc: friction turns slide into roll */
   }
 
   /* push a ball out of the text block (circle vs rectangle) */
@@ -83,36 +95,48 @@
     var push = a.r - d;
     a.x += nx * push; a.y += ny * push;
     var vn = a.vx * nx + a.vy * ny;
-    if (vn < 0) { a.vx -= (1 + E) * vn * nx; a.vy -= (1 + E) * vn * ny; }
-    if (ny < -0.6) a.vx += (a.x < (block.l + block.r) / 2 ? -1 : 1) * 14; /* nudge off the top of the text, down the sides */
+    if (vn < 0) { var e = rest(vn); a.vx -= (1 + e) * vn * nx; a.vy -= (1 + e) * vn * ny; contact(a, nx, ny, 0, 0, 1); }
+    if (ny < -0.6 && Math.abs(a.vx) < 40) a.vx += (a.x < (block.l + block.r) / 2 ? -1 : 1) * 6; /* a ball resting on the headline rolls off, it does not sit there */
   }
 
   function step(dt, floor) {
     var i, j, a, b;
     for (i = 0; i < balls.length; i++) {
       a = balls[i];
-      a.vy += G * dt; a.vx *= AIR;
+      a.vy += G * dt; a.vx *= AIR; a.w *= 0.995;
       a.x += a.vx * dt; a.y += a.vy * dt;
-      if (a.x < a.r) { a.x = a.r; a.vx = -a.vx * E; }
-      if (a.x > W - a.r) { a.x = W - a.r; a.vx = -a.vx * E; }
-      if (floor && a.y > H - a.r) { a.y = H - a.r; a.vy = -a.vy * E; a.vx *= 0.9; if (Math.abs(a.vy) < 30) a.vy = 0; }
+      a.a += a.w * dt * 57.2958;
+      if (a.x < a.r) { a.x = a.r; a.vx = -a.vx * rest(a.vx); contact(a, 1, 0, 0, 0, 1); }
+      if (a.x > W - a.r) { a.x = W - a.r; a.vx = -a.vx * rest(a.vx); contact(a, -1, 0, 0, 0, 1); }
+      if (floor && a.y > H - a.r) { a.y = H - a.r; a.vy = -a.vy * rest(a.vy); contact(a, 0, -1, 0, 0, 1); }
       hitBlock(a); /* the text stays solid even while the floor is open */
       if (top && a.y - a.r < top) { a.y = top + a.r; if (a.vy < 0) a.vy = 0; }
     }
-    for (var k = 0; k < 3; k++) {
+    for (var k = 0; k < ITER; k++) {
       for (i = 0; i < balls.length; i++) {
         a = balls[i];
         for (j = i + 1; j < balls.length; j++) {
           b = balls[j];
           var dx = b.x - a.x, dy = b.y - a.y, min = a.r + b.r, d2 = dx * dx + dy * dy;
           if (d2 >= min * min || d2 === 0) continue;
-          var d = Math.sqrt(d2), nx = dx / d, ny = dy / d, push = (min - d) / 2;
-          a.x -= nx * push; a.y -= ny * push; b.x += nx * push; b.y += ny * push;
+          var d = Math.sqrt(d2), nx = dx / d, ny = dy / d, over = min - d, mt = a.m + b.m;
+          /* heavier (bigger) balls move less */
+          a.x -= nx * over * (b.m / mt); a.y -= ny * over * (b.m / mt);
+          b.x += nx * over * (a.m / mt); b.y += ny * over * (a.m / mt);
           var rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
-          if (rel < 0) { var imp = -(1 + E) * rel / 2; a.vx -= imp * nx; a.vy -= imp * ny; b.vx += imp * nx; b.vy += imp * ny; }
+          if (rel < 0 && k === 0) {
+            var imp = -(1 + rest(rel)) * rel / (1 / a.m + 1 / b.m);
+            a.vx -= imp / a.m * nx; a.vy -= imp / a.m * ny; b.vx += imp / b.m * nx; b.vy += imp / b.m * ny;
+            contact(a, -nx, -ny, b.vx, b.vy, b.m / mt); contact(b, nx, ny, a.vx, a.vy, a.m / mt);
+          }
         }
       }
       for (i = 0; i < balls.length; i++) { a = balls[i]; if (floor && a.y > H - a.r) a.y = H - a.r; hitBlock(a); }
+    }
+    /* settle: near-still balls stop instead of trembling in the pile */
+    for (i = 0; i < balls.length; i++) {
+      a = balls[i];
+      if (floor && Math.abs(a.vx) < SLEEP && Math.abs(a.vy) < SLEEP * 2) { a.vx *= 0.6; a.w *= 0.6; }
     }
   }
 
@@ -120,6 +144,7 @@
     for (var i = 0; i < balls.length; i++) {
       var b = balls[i];
       b.el.style.transform = 'translate(' + (b.x - b.r).toFixed(1) + 'px,' + (b.y - b.r).toFixed(1) + 'px)';
+      b.el.firstChild.style.transform = 'rotate(' + b.a.toFixed(1) + 'deg)'; /* the label turns, the shadow stays put */
     }
   }
 
@@ -127,6 +152,7 @@
     if (balls.length >= target) return true;
     for (var i = 0; i < balls.length; i++) {
       var b = balls[i];
+      if (b.x > block.l && b.x < block.r) continue; /* a ball resting on the headline is not the pile */
       if (b.y > top && b.y - b.r < top + 10 && Math.abs(b.vy) < 60) return true; /* the pile has reached the top */
     }
     return false;
@@ -140,7 +166,7 @@
       if (full()) { phase = 'hold'; phaseAt = now; }
     } else if (phase === 'hold' && now - phaseAt > 1800) {
       phase = 'drain'; phaseAt = now;
-      balls.forEach(function (b) { b.vy -= rnd(80, 240); b.vx += rnd(-60, 60); });
+      balls.forEach(function (b) { b.vy -= rnd(80, 240); b.vx += rnd(-60, 60); b.w += rnd(-3, 3); });
     } else if (phase === 'drain') {
       balls = balls.filter(function (b) { if (b.y - b.r > H + 20) { b.el.remove(); return false; } return true; });
       if (!balls.length) { phase = 'pause'; phaseAt = now; }
