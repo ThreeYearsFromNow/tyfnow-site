@@ -103,9 +103,12 @@ section[id]{scroll-margin-top:96px}
 @media (min-width:1151px){.aud{grid-template-columns:auto minmax(0,1fr);column-gap:28px}}
 @media (max-width:1150px){.aud-ill{justify-self:start}}
 
-/* Section 3: copy sits at the top like every other section; the balls land on the headline and pile below */
-.same-tools{align-items:flex-start;padding-top:124px;min-height:clamp(680px,86vh,820px)}
-@media (max-width:760px){.same-tools{padding-top:90px;min-height:660px}}
+/* Section 3: copy block sits in the centre of the section (R8.1); the balls fall, pile and drain around it */
+.same-tools{align-items:center;justify-content:center;padding-block:96px;min-height:clamp(680px,86vh,820px)}
+.same-tools .wrap{width:100%}
+.same-tools-text{text-align:center}
+.same-tools-text .lead{margin-inline:auto}
+@media (max-width:760px){.same-tools{align-items:center;padding-block:72px;min-height:660px}}
 .ball-l,.ball img{display:block;will-change:transform}
 
 /* ===== Section 4: HumanAIse ring over a moving gradient, edge to edge (js/ring.js) ===== */
