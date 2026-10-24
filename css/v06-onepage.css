@@ -114,89 +114,93 @@ section[id]{scroll-margin-top:96px}
 .rg-card .head{gap:16px}
 .rg-card .lead{max-width:620px}
 @media (max-width:760px){.rg-card{padding:40px 16px 28px;border-radius:18px}}
-.rg-stage{position:relative;margin-top:28px}
-:root{--c-web:#7661f6;--c-content:#2f9e8f;--c-search:#ff816d;--c-reach:#8fb31c;--c-app:#161716;--c-road:#454644}
+.rg-stage{position:relative;margin-top:24px}
+:root{--c-web:#7661f6;--c-content:#2f9e8f;--c-search:#ff816d;--c-app:#161716}
+
+/* Human / AI toggle under the sub-line: the thumb slides between the two */
+.rg-toggle{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #dededb;margin-top:4px}
+.rg-toggle::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:#161716}
+.rg-t{position:relative;z-index:1;min-width:84px;padding:9px 18px;font-size:13px;font-weight:600;text-align:center;color:#161716}
+.rg-t-h{color:#fff}
+@media (prefers-reduced-motion:no-preference){
+  .rg-toggle::before{animation:rg-thumb 5s cubic-bezier(.6,0,.3,1) infinite}
+  .rg-t-h{animation:rg-th 5s steps(1) infinite}
+  .rg-t-a{animation:rg-ta 5s steps(1) infinite}
+  @keyframes rg-thumb{0%,40%{transform:translateX(0);background:#161716}50%,90%{transform:translateX(100%);background:#7661f6}100%{transform:translateX(0);background:#161716}}
+  @keyframes rg-th{0%{color:#fff}45%{color:#161716}95%{color:#fff}}
+  @keyframes rg-ta{0%{color:#161716}45%{color:#fff}95%{color:#161716}}
+}
 
 /* drop band: chips land here from the top, then fly to the ring */
 .rg-band{position:relative;height:0}
-.rg-live .rg-band{height:118px}
-.rg-chip{position:absolute;top:8px;display:flex;flex-direction:column;gap:4px;padding:11px 14px 12px 16px;border-radius:12px;background:#fdfdfc;box-shadow:inset 0 0 0 1px #dededb,0 10px 22px -14px rgba(22,23,22,.4);text-align:left;overflow:hidden;will-change:transform,opacity}
-.rg-chip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c)}
+.rg-live .rg-band{height:92px}
+.rg-chip{position:absolute;top:8px;display:flex;flex-direction:column;gap:2px;padding:8px 11px 9px 13px;border-radius:10px;background:#fdfdfc;box-shadow:inset 0 0 0 1px #dededb,0 8px 18px -12px rgba(22,23,22,.4);text-align:left;overflow:hidden;will-change:transform,opacity}
+.rg-chip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
 .rg-cols3{width:calc(33.333% - 12px)}
 .rg-col0{left:0}.rg-col1{left:calc(33.333% + 6px)}.rg-col2{left:calc(66.666% + 12px)}
-.rg-cols3.rg-col0{left:0}
-.rg-biz{font-size:10px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:#5f605d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rg-line{font-size:14px;font-weight:560;line-height:1.35;color:#161716}
+.rg-biz{font-size:9.5px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:#5f605d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rg-line{font-size:13px;font-weight:560;line-height:1.3;color:#161716;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .rg-chip.is-work{background:var(--t)}
 .rg-chip.is-work .rg-line{color:var(--k)}
 @media (max-width:640px){
-  .rg-live .rg-band{height:164px}
-  .rg-chip{left:0;right:0}
-  .rg-row0{top:4px}.rg-row1{top:78px}
+  .rg-live .rg-band{height:162px}
+  .rg-chip{left:0;right:0;padding:6px 10px 7px 12px}
+  .rg-line{font-size:12.5px;display:block;white-space:nowrap;text-overflow:ellipsis}
+  .rg-row0{top:2px}.rg-row1{top:54px}.rg-row2{top:106px}
 }
 .f-web{--c:var(--c-web);--t:#eeeaff;--k:#3d2fb0}
 .f-content{--c:var(--c-content);--t:#dff3ec;--k:#1f6f64}
 .f-search{--c:var(--c-search);--t:#ffe1d9;--k:#a53a27}
-.f-reach{--c:var(--c-reach);--t:#f0ffd0;--k:#3f5a00}
 .f-app{--c:var(--c-app);--t:#e8e8e6;--k:#161716}
-.f-road{--c:var(--c-road);--t:#ececea;--k:#161716}
 
 /* the ring (geometry from the How we work ring: 850 x 580) */
-.rg-ring{position:relative;width:min(780px,100%);aspect-ratio:850/580;margin:34px auto 28px}
+.rg-ring{position:relative;width:min(780px,100%);aspect-ratio:850/580;margin:30px auto 24px}
 .rg-circ{position:absolute;left:50%;top:50%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%)}
-.rg-c-out{width:67.06%;border:1px dashed #c9c8d6}
 .rg-c-in{width:41.76%;background:rgba(238,234,255,.7);border:1px solid rgba(118,97,246,.22)}
-.rg-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:21.41%;aspect-ratio:1;border-radius:50%;background:#1d1c22;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 22px 44px -22px rgba(29,28,34,.65)}
-.rg-core b{font-size:clamp(13px,2.2vw,19px);font-weight:650;letter-spacing:-.03em;color:#fff}
-.rg-core span{font-size:9px;font-weight:650;letter-spacing:.15em;text-transform:uppercase;color:#cbc3ff}
-.rg-os,.rg-ds{position:absolute;inset:0}
-.rg-o,.rg-d{position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:999px}
-.rg-o{padding:9px 10px 9px 14px;background:#fff;box-shadow:inset 0 0 0 1px #dededb,0 8px 18px -12px rgba(22,23,22,.4);font-size:14px;font-weight:600;color:#161716;z-index:2}
+.rg-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:21.41%;aspect-ratio:1;border-radius:50%;background:#1d1c22;display:flex;align-items:center;justify-content:center;box-shadow:0 22px 44px -22px rgba(29,28,34,.65);z-index:1}
+.rg-core b{font-size:clamp(14px,2.3vw,21px);font-weight:800;letter-spacing:-.05em;color:#fff}
+.rg-os{position:absolute;inset:0;z-index:2}
+.rg-o{position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:999px;padding:9px 10px 9px 14px;background:#fff;box-shadow:inset 0 0 0 1px #dededb,0 8px 18px -12px rgba(22,23,22,.4);font-size:14px;font-weight:600;color:#161716}
 .rg-dot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
 .rg-n{display:none;min-width:24px;height:22px;padding:0 7px;border-radius:999px;background:var(--c,#161716);color:#fff;font-size:12px;font-weight:650;align-items:center;justify-content:center}
 .rg-live .rg-n{display:inline-flex}
-.f-reach .rg-n{color:#161716}
 .rg-o.hit .rg-n{animation:rg-bump .5s ease}
 @keyframes rg-bump{40%{transform:scale(1.35)}}
-.rg-d{padding:7px 13px;background:#fdfdfc;box-shadow:inset 0 0 0 1px #dededb;font-size:12.5px;font-weight:550;color:#454644;transition:background-color .25s ease,color .25s ease,box-shadow .25s ease;z-index:1}
-.rg-d.lit{background:#161716;color:#fff;box-shadow:none}
-.rg-d-ai.lit{background:#7661f6}
-/* outputs on the inner ring (pentagon, Website at the top) */
-.rg-p1{left:50%;top:19.4%}.rg-p2{left:69.9%;top:40.5%}.rg-p3{left:62.3%;top:74.8%}.rg-p4{left:37.7%;top:74.8%}.rg-p5{left:30.1%;top:40.5%}
-/* disciplines on the outer ring, AI at the bottom: it runs underneath everything */
-.rg-q1{left:69.7%;top:10.3%}.rg-q2{left:81.9%;top:65.2%}.rg-q3{left:50%;top:99.1%}.rg-q4{left:18.1%;top:65.2%}.rg-q5{left:30.3%;top:10.3%}
+/* outputs on the inner ring: Website top, App right, Search bottom, Content left */
+.rg-p1{left:50%;top:19.4%}.rg-p2{left:70.9%;top:50%}.rg-p3{left:50%;top:80.6%}.rg-p4{left:29.1%;top:50%}
 
-/* roadmap under the ring */
-.rg-road{max-width:780px;margin:0 auto;padding:22px 24px 24px;border-radius:18px;background:#fdfdfc;box-shadow:inset 0 0 0 1px #dededb;text-align:left}
-.rg-road h3{display:flex;align-items:center;gap:10px;--c:var(--c-road)}
-.rg-road h3.hit .rg-n{animation:rg-bump .5s ease}
-.rg-road-list{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;min-height:44px}
-.rg-road-list:empty::before{content:"Bigger questions land here as they come up";font-size:14px;color:#71726f}
-.rg-road-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-radius:11px;background:#f3f3f1}
-.rg-road-q{font-size:14.5px;font-weight:560;color:#161716}
-.rg-status{flex:none;display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;background:#fff;font-size:11px;font-weight:600;color:#454644;white-space:nowrap}
-.rg-status::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff816d}
-@media (prefers-reduced-motion:no-preference){
-  .rg-new{animation:rg-in .45s cubic-bezier(.2,.7,.2,1) both}
-  .rg-status::before{animation:rg-blink 1s ease-in-out infinite}
-  @keyframes rg-in{from{opacity:0;transform:translateY(-8px)}}
-  @keyframes rg-blink{50%{opacity:.25}}
+/* outer ring: disciplines on a dashed circle that turns slowly; the labels stay upright */
+.rg-ds{position:absolute;left:50%;top:50%;width:67.06%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed #c9c8d6}
+.rg-d{position:absolute;transform:translate(-50%,-50%)}
+.rg-dl{display:inline-block;white-space:nowrap;border-radius:999px;padding:7px 13px;background:#fdfdfc;box-shadow:inset 0 0 0 1px #dededb;font-size:12.5px;font-weight:550;color:#454644;transition:background-color .25s ease,color .25s ease,box-shadow .25s ease}
+.rg-d.lit .rg-dl{background:#161716;color:#fff;box-shadow:none}
+.rg-d-ai.lit .rg-dl{background:#7661f6}
+.rg-q1{left:79.4%;top:9.5%}.rg-q2{left:97.6%;top:65.5%}.rg-q3{left:50%;top:100%}.rg-q4{left:2.4%;top:65.5%}.rg-q5{left:20.6%;top:9.5%}
+@media (prefers-reduced-motion:no-preference) and (min-width:641px){
+  .rg-ds{animation:rg-spin 90s linear infinite}
+  .rg-dl{animation:rg-unspin 90s linear infinite}
+  @keyframes rg-spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes rg-unspin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 }
 
 /* tablets: smaller labels on the ring */
-@media (max-width:900px){.rg-o{font-size:12.5px;padding:7px 8px 7px 11px;gap:6px}.rg-d{font-size:11px;padding:5px 10px}.rg-n{height:20px;min-width:20px;font-size:11px}}
+@media (max-width:900px){.rg-o{font-size:12.5px;padding:7px 8px 7px 11px;gap:6px}.rg-dl{font-size:11px;padding:5px 10px}.rg-n{height:20px;min-width:20px;font-size:11px}}
 
 /* phones: the ring becomes a grid of headings, disciplines in a row beneath */
 @media (max-width:640px){
-  .rg-ring{aspect-ratio:auto;width:100%;margin:18px 0 20px;display:flex;flex-direction:column;gap:14px}
+  .rg-ring{aspect-ratio:auto;width:100%;margin:16px 0 4px;display:flex;flex-direction:column;gap:14px}
   .rg-circ,.rg-core{display:none}
-  .rg-os,.rg-ds{position:static;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+  .rg-os{position:static;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;order:-1}
+  .rg-ds{position:static;transform:none;width:auto;aspect-ratio:auto;border:0;border-radius:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
   .rg-o,.rg-d{position:static;transform:none}
   .rg-o{font-size:13px}
-  .rg-road{padding:18px 14px}
-  .rg-road-list li{flex-direction:column;align-items:flex-start;gap:6px}
 }
 
 /* Section 3 drain: balls fall out through the bottom of the section and pass behind section 4's card */
 .same-tools{overflow:visible}
 .pit-section{overflow:visible;clip-path:inset(0 0 -900px 0)}
+
+/* Capital I with serifs in section 4, so "HumanAIse" and "AI" never read as "Alse" or "Al".
+   The self-hosted Inter subset has no cv08, so one glyph comes from a tiny Inter Tight subset (fonts/inter-i-serif.woff, OFL). */
+@font-face{font-family:"TYFNOW I";font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-i-serif.woff) format("woff");unicode-range:U+0049}
+.rg-card,.rg-card h2,.rg-card h3{font-family:"TYFNOW I",Inter,"Inter Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-feature-settings:"cv08" 1}
