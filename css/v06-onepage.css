@@ -412,3 +412,12 @@ main{overflow-x:clip}
 
 /* Offer headline: "What working together" starts at the left edge, "looks like" at the right; they meet as the section scrolls in (offer-head.js) */
 .op-meet span{display:inline-block;will-change:transform}
+
+/* Round 8: section 5 head */
+/* R8.8: "(or start others…)" sits tight under "You run the business" */
+.op-bk-top{gap:6px}
+.op-bk-top .lead{line-height:1.15}
+/* R8.11: the bucket headline moves back up; "brand" may break out above the box. The pill strip keeps its own clip */
+.op-bucket-grey{overflow:visible}
+.op-bucket-grey .op-bk-brand{padding-top:.4em}
+.op-bucket-grey .op-tick{overflow:hidden}
