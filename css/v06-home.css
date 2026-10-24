@@ -411,17 +411,6 @@ section[aria-labelledby="for-h"] .grid2{max-width:1180px}
 .sig-key{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;font-size:13px;color:#454644}
 .sig-key li{display:inline-flex;align-items:center;gap:8px}
 .sig-key li::before{content:"";width:12px;height:12px;border-radius:4px}
-@media (prefers-reduced-motion:no-preference){
-  .sig-live .sig-chip{opacity:0}
-  .sig-live .sig-row{opacity:0;transform:translateX(-10px)}
-  .sig-live .sig-ln{stroke-dashoffset:0;opacity:0}
-  .sig-go .sig-chip{animation:sig-chip .5s ease both}
-  .sig-go .sig-row{animation:sig-row .5s cubic-bezier(.2,.7,.2,1) both}
-  .sig-go .sig-ln{animation:sig-ln .6s ease both}
-  @keyframes sig-chip{from{opacity:0}to{opacity:1}}
-  @keyframes sig-row{to{opacity:1;transform:none}}
-  @keyframes sig-ln{to{opacity:1}}
-}
 @media (max-width:900px){
   .signal-card{padding:40px 20px 28px;border-radius:18px}
   .sig{grid-template-columns:minmax(0,1fr);row-gap:26px;min-height:0;justify-items:center}
@@ -435,5 +424,29 @@ section[aria-labelledby="for-h"] .grid2{max-width:1180px}
   .sig-core::before{top:-22px}.sig-core::after{bottom:-22px}
 }
 .sig-key .f-web::before{background:#7661f6}.sig-key .f-content::before{background:#2f9e8f}.sig-key .f-search::before{background:#ff816d}.sig-key .f-reach::before{background:#8fb31c}
-@media (min-width:901px){.sig-live .sig-in{height:480px}.sig{min-height:480px}}
 @media (max-width:900px){.sig-chip{flex-direction:column;align-items:flex-start;gap:3px;text-align:left}.sig-in{width:100%}.sig-chip{width:100%}}
+
+/* F184 live stream: half the nodes, signals feed through and change the work on the right; roadmap status */
+@media (min-width:901px){.sig-live .sig-in{height:330px}.sig{min-height:330px}}
+.sig-row{min-height:46px}
+.sig-txt{flex:1 1 auto;min-width:0}
+.f-road .sig-tag,.sig-key .f-road::before{background:#161716;color:#fdfdfc}
+.sig-ln.f-road{stroke:#454644}
+.sig-status{flex:none;display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;background:#f3f3f1;font-size:11px;font-weight:600;color:#454644;white-space:nowrap}
+.sig-status::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff816d}
+.sig-status.done{background:#dff3ec;color:#1f6f64}
+.sig-status.done::before{background:#2f9e8f}
+.sig-out{min-height:212px}
+@media (prefers-reduced-motion:no-preference){
+  .sig-status:not(.done)::before{animation:sig-blink 1s ease-in-out infinite}
+  .sig-in-anim{animation:sig-in .45s cubic-bezier(.2,.7,.2,1) both}
+  .sig-out-anim{animation:sig-out .38s ease both}
+  .sig-core.pulse{animation:sig-pulse .5s ease}
+  .sig-chip.sig-in-anim{animation-name:sig-fade}
+  @keyframes sig-blink{50%{opacity:.25}}
+  @keyframes sig-in{from{opacity:0;transform:translateY(-8px)}}
+  @keyframes sig-fade{from{opacity:0}}
+  @keyframes sig-out{to{opacity:0}}
+  @keyframes sig-pulse{40%{transform:scale(1.06)}}
+}
+@media (max-width:900px){.sig-status{font-size:10px;padding:3px 7px}.sig-row{flex-wrap:wrap;row-gap:6px}}
