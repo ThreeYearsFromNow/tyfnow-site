@@ -1,137 +1,165 @@
-/* TYFNOW ring.js: section 4 on the one-page Home (24 Oct 2026). Replaces the signals stream.
-   Signals from a mix of businesses drop in from the top, three at a time, colour-coded by the work they become.
-   Each one turns into the work, then flies to its heading on the inner ring (Website, App, Search and AI answers,
-   Content), whose tally goes up. The disciplines it needs light up on the turning outer ring, AI every time.
-   Never two chips from the same business on screen. Tallies start at zero each visit: a demo count, not a claim.
-   Runs only while on screen and the tab is visible. Reduced motion or no JS: the ring, still.
-   Examples are illustrative signal types, not client data. */
+/* TYFNOW ring.js: section 4 on the one-page Home, "HumanAIse context to build better" (24 Oct 2026).
+   A soft gradient drifts behind the card: coral and peach while Human leads, violet and lilac while AI leads,
+   blending slowly as the lead swaps every few seconds. Inside the TYFNOW ring, task pills (illustrative issues,
+   not client data) light up in the leading colour. After each full Human-then-AI turn, two tasks finish, fly to
+   their heading (Website, App, Search and AI answers, Content) and its tally goes up; tallies start at zero each
+   visit, a demo count, not a claim. The outer ring of disciplines turns slowly.
+   Runs only while on screen and the tab is visible. Reduced motion: still ring, still gradient, no swaps.
+   No JS: the four headings as a list. */
 (function () {
   'use strict';
   var W = window, D = document;
-  var stage = D.getElementById('rg');
-  if (!stage || !stage.animate) return;
-  if (W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var card = D.getElementById('rg-card'), stage = D.getElementById('rg'), cv = D.getElementById('rg-bg');
+  if (!card || !stage || !cv || !cv.getContext) return;
+  var reduce = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
 
-  var band = stage.querySelector('.rg-band');
-  /* [business, source, signal, output, work, disciplines] */
+  /* ---------- tasks: sharp, issue-led, each tied to the heading it lands on ---------- */
   var POOL = [
-    ['Architect practice', 'Website', 'The site feels static', 'web', 'Add motion and project film', ['creative', 'production']],
-    ['Accountancy firm', 'Diary', 'Not doing enough networking', 'content', 'Turn each event into posts and follow-ups', ['workflow', 'creative']],
-    ['Fitness studio', 'App store', 'App UI and UX need updating', 'app', 'Redesign the booking screens', ['creative', 'production']],
-    ['Dental clinic', 'Google reviews', 'New five-star review', 'content', 'Thank them, share it, add it to the site', ['creative']],
-    ['E-commerce brand', 'Merchant Centre', 'Product feed errors flagged', 'search', 'Fix the feed, relist', ['testing']],
-    ['Law firm', 'AI search', 'ChatGPT recommends a competitor', 'search', 'Publish answers AI can quote', ['creative', 'testing']],
-    ['Builder', 'Inbox', 'Same question asked three times', 'web', 'Add it to the FAQ', ['creative']],
-    ['Physio clinic', 'Business Profile', 'Opening hours out of date', 'search', 'Update every listing', ['workflow']],
-    ['Estate agent', 'Analytics', 'Valuation page visits are up', 'web', 'Test a clearer valuation form', ['testing']],
-    ['Restaurant', 'Instagram', 'One post beat all the others', 'content', 'Turn it into a short series', ['creative', 'production']],
-    ['Event supplier', 'Events', 'Trade show announced in your sector', 'content', 'Plan the stand and the event content', ['workflow', 'production']],
-    ['Coach', 'Voice note', 'Idea recorded on the drive home', 'content', "Draft it as this week's post", ['creative']],
-    ['Accountancy firm', 'Search Console', 'Key page dropped from the index', 'search', 'Fix it and resubmit', ['testing']],
-    ['Architect practice', 'Competitor watch', 'A competitor has rebranded', 'web', 'Sharpen your comparison page', ['creative']],
-    ['E-commerce brand', 'Newsletter', 'Open rate dipped', 'content', 'Test a new subject line', ['testing']],
-    ['Dental clinic', 'Website', 'Contact form drop-offs', 'web', 'Shorten the form', ['testing']],
-    ['Law firm', 'Sales call', 'A client mentioned a new problem', 'web', 'Add a service page for it', ['creative']],
-    ['Fitness studio', 'SEO', 'A new search term is climbing', 'search', 'Write the page that owns it', ['creative']],
-    ['Restaurant', 'Bookings', 'Online booking app is clunky', 'app', 'Simplify the booking flow', ['creative', 'testing']],
-    ['Coach', 'Clients', 'Clients ask for a members area', 'app', 'Build a simple client app', ['production', 'workflow']],
-    ['Recruitment agency', 'Analytics', 'Job pages load slowly on phones', 'web', 'Speed up the job pages', ['production', 'testing']],
-    ['Estate agent', 'Clients', 'Viewings booked by phone only', 'app', 'Add viewing booking to the app', ['production', 'workflow']]
+    ['Error 404s', 0], ['18 broken links', 0], ['Meta data missing', 0], ['Slow on mobile', 0], ['Form drop-offs', 0], ['Alt text missing', 0],
+    ['Clunky booking', 1], ['Login drop-off', 1], ['Outdated screens', 1], ['Crash at checkout', 1],
+    ['Page not indexed', 2], ['Feed errors', 2], ['Not cited by AI', 2], ['Listings outdated', 2], ['Schema missing', 2],
+    ['Posting stalled', 3], ['Review unanswered', 3], ['No case studies', 3], ['Event not promoted', 3], ['Video unedited', 3]
   ];
-  var LABEL = { web: 'Website', content: 'Content', search: 'Search and AI answers', app: 'App' };
-  var SPAWN = 1100, DROP = 600, READ = 1300, WORK = 1000, FLY = 750;
+  var OUT = ['Website', 'App', 'Search and AI answers', 'Content'];
+  var OUT_S = ['Website', 'App', 'Search', 'Content'];
+  var DISC = ['Creative', 'Production', 'Workflow', 'Testing'];
 
-  function narrow() { return W.innerWidth <= 640; }
-  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  /* geometry: wide ring with ten tasks in rows inside it, or a smaller ring with four tasks on phones */
+  var WIDE = { vb: [680, 470], c: [340, 235], rin: 160, rout: 215, rcore: 42, xy: [[0, -105], [-72, -70], [72, -70], [-96, -32], [96, -32], [-96, 32], [96, 32], [-72, 70], [72, 70], [0, 105]], out: OUT };
+  var NARROW = { vb: [320, 350], c: [160, 175], rin: 108, rout: 142, rcore: 32, narrow: true, xy: [[-58, -50], [58, -50], [-58, 50], [58, 50]], out: OUT_S };
+  var G, svg, outs = [], counts = [0, 0, 0, 0], slots = [], disc = [], pi = 0, rot = 0;
 
-  var queue = [], live = [], slots = [], timer = 0, running = false;
-  var counts = {};
-
-  function next() {
-    if (queue.length < 8) queue = queue.concat(shuffle(POOL.slice()));
-    var busy = live.map(function (c) { return c.p[0]; });
-    var idx = queue.findIndex(function (p) { return busy.indexOf(p[0]) < 0; });
-    if (idx < 0) return null;
-    return queue.splice(idx, 1)[0];
+  function el(n, a, p) { var e = D.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+  function pt(r, deg) { var a = deg * Math.PI / 180; return [G.c[0] + r * Math.cos(a), G.c[1] + r * Math.sin(a)]; }
+  function pill(parent, text, cls, pad, h, tcls) {
+    var g = el('g', {}, parent), r = el('rect', { 'class': cls, rx: h / 2, height: h }, g), t = el('text', { 'class': tcls, 'text-anchor': 'middle', y: h * 0.18 }, g);
+    t.textContent = text;
+    var w = (t.getComputedTextLength ? t.getComputedTextLength() : text.length * 6.5) + pad * 2;
+    r.setAttribute('x', -w / 2); r.setAttribute('y', -h / 2); r.setAttribute('width', w);
+    return { g: g, r: r, t: t, w: w };
   }
 
-  function slotCount() { return 3; }
-  function freeSlot() {
-    var n = slotCount();
-    for (var i = 0; i < n; i++) if (!slots[i]) return i;
-    return -1;
+  function build() {
+    G = W.innerWidth <= 640 ? NARROW : WIDE;
+    if (svg) svg.remove();
+    outs = []; slots = []; disc = [];
+    svg = el('svg', { 'class': 'rg-svg' + (G.narrow ? ' is-narrow' : ''), viewBox: '0 0 ' + G.vb[0] + ' ' + G.vb[1], role: 'presentation' });
+    stage.appendChild(svg);
+    var dg = el('g', {}, svg);
+    el('circle', { 'class': 'rg-out', cx: G.c[0], cy: G.c[1], r: G.rout }, dg);
+    DISC.forEach(function (d) { disc.push(pill(dg, d, 'rg-dp', 11, 22, 'rg-dt').g); });
+    el('circle', { 'class': 'rg-in', cx: G.c[0], cy: G.c[1], r: G.rin }, svg);
+    var tg = el('g', {}, svg);
+    el('circle', { 'class': 'rg-core', cx: G.c[0], cy: G.c[1], r: G.rcore }, svg);
+    var ct = el('text', { 'class': 'rg-core-t', x: G.c[0], y: G.c[1] + 4.5, 'text-anchor': 'middle' }, svg); ct.textContent = 'TYFNOW';
+    var og = el('g', {}, svg);
+    G.out.forEach(function (name, i) {
+      var p = pt(G.rin, -90 + i * 90), g = el('g', { transform: 'translate(' + p[0] + ',' + p[1] + ')' }, og);
+      var label = pill(g, name, 'rg-op', 14, 30, 'rg-ot');
+      outs.push({ p: p, label: label, name: name });
+      setOut(i);
+    });
+    G.tg = tg; G.fly = el('g', {}, svg);
+    G.xy.forEach(function (_, i) { mk(i, true); });
+    place();
   }
 
-  function el(tag, cls, text) { var e = D.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
-
-  function spawn() {
-    var s = freeSlot(); if (s < 0) return;
-    var p = next(); if (!p) return;
-    var chip = el('div', 'rg-chip f-' + p[3]);
-    chip.appendChild(el('span', 'rg-biz', p[0] + ' · ' + p[1]));
-    var line = el('span', 'rg-line', p[2]);
-    chip.appendChild(line);
-    /* place in its slot: three across the band on desktop, three stacked on phones */
-    var n = slotCount();
-    if (narrow()) { chip.classList.add('rg-row' + s); }
-    else { chip.classList.add('rg-col' + s); chip.classList.add('rg-cols' + n); }
-    band.appendChild(chip);
-    slots[s] = chip;
-    var c = { p: p, chip: chip, slot: s };
-    live.push(c);
-
-    chip.animate([{ transform: 'translateY(-70px)', opacity: 0 }, { transform: 'translateY(6px)', opacity: 1, offset: 0.7 }, { transform: 'translateY(0)', opacity: 1 }],
-      { duration: DROP, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'both' });
-
-    setTimeout(function () { /* the signal becomes the work */
-      chip.classList.add('is-work');
-      line.textContent = LABEL[p[3]] + ': ' + p[4];
-      light(p[5]);
-    }, DROP + READ);
-
-    setTimeout(function () { fly(c); }, DROP + READ + WORK);
+  /* heading label with its tally in bold */
+  function setOut(i) {
+    var o = outs[i], t = o.label.t; t.textContent = o.name + '  ';
+    var n = el('tspan', { 'class': 'rg-on' }, t); n.textContent = counts[i];
+    var w = (t.getComputedTextLength ? t.getComputedTextLength() : 80) + 28; o.label.r.setAttribute('x', -w / 2); o.label.r.setAttribute('width', w);
   }
 
-  function light(ds) {
-    var all = ds.concat(['ai']);
-    all.forEach(function (d) {
-      var t = stage.querySelector('.rg-d[data-d="' + d + '"]'); if (!t) return;
-      t.classList.add('lit');
-      setTimeout(function () { t.classList.remove('lit'); }, WORK + FLY);
+  function mk(i, first) {
+    var p = POOL[pi++ % POOL.length], pos = [G.c[0] + G.xy[i][0], G.c[1] + G.xy[i][1]];
+    var g = el('g', { 'class': 'rg-task' + (first ? '' : ' is-new'), transform: 'translate(' + pos[0] + ',' + pos[1] + ')' }, G.tg);
+    pill(g, p[0], 'rg-tp', 9, 20, 'rg-tt');
+    if (!first) requestAnimationFrame(function () { requestAnimationFrame(function () { g.classList.remove('is-new'); }); });
+    slots[i] = { g: g, o: p[1], pos: pos };
+  }
+
+  function place() {
+    disc.forEach(function (g, i) { var p = pt(G.rout, -45 + i * 90 + rot); g.setAttribute('transform', 'translate(' + p[0] + ',' + p[1] + ')'); });
+  }
+
+  /* ---------- gradient: six soft fields drifting; colours blend from Human to AI ---------- */
+  var cx = cv.getContext('2d'), CW = 0, CH = 0;
+  var BL = [
+    { h: [255, 129, 109], a: [118, 97, 246], r: .55, sx: .21, sy: .17, px: 0, py: 1.3, ox: .25, oy: .3 },
+    { h: [255, 225, 217], a: [238, 234, 255], r: .7, sx: .13, sy: .19, px: 2, py: .4, ox: .75, oy: .25 },
+    { h: [255, 190, 160], a: [155, 123, 255], r: .45, sx: .17, sy: .11, px: 4, py: 2.2, ox: .7, oy: .75 },
+    { h: [223, 255, 155], a: [188, 239, 233], r: .4, sx: .09, sy: .15, px: 1, py: 3.1, ox: .2, oy: .8 },
+    { h: [255, 150, 120], a: [90, 80, 220], r: .35, sx: .23, sy: .2, px: 3, py: 5, ox: .5, oy: .55 },
+    { h: [255, 240, 232], a: [228, 222, 255], r: .6, sx: .11, sy: .07, px: 5, py: .9, ox: .5, oy: .1 }
+  ];
+  function size() { var r = card.getBoundingClientRect(); CW = Math.max(60, Math.round(r.width / 4)); CH = Math.max(60, Math.round(r.height / 4)); cv.width = CW; cv.height = CH; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function paint() {
+    var S = Math.max(CW, CH);
+    cx.globalCompositeOperation = 'source-over';
+    cx.fillStyle = 'rgb(' + [lerp(255, 246, mix), lerp(246, 245, mix), lerp(242, 255, mix)].map(Math.round) + ')';
+    cx.fillRect(0, 0, CW, CH);
+    BL.forEach(function (b, i) {
+      var x = (b.ox + .22 * Math.sin(time * b.sx + b.px)) * CW, y = (b.oy + .2 * Math.cos(time * b.sy + b.py)) * CH, r = b.r * S * (1 + .12 * Math.sin(time * .3 + i));
+      var c = [0, 1, 2].map(function (k) { return Math.round(lerp(b.h[k], b.a[k], mix)); }), g = cx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, 'rgba(' + c + ',.85)'); g.addColorStop(.55, 'rgba(' + c + ',.35)'); g.addColorStop(1, 'rgba(' + c + ',0)');
+      cx.fillStyle = g; cx.fillRect(0, 0, CW, CH);
+    });
+    cx.globalCompositeOperation = 'soft-light';
+    var lx = (.5 + .4 * Math.sin(time * .17)) * CW, ly = (.5 + .4 * Math.cos(time * .13)) * CH, lg = cx.createRadialGradient(lx, ly, 0, lx, ly, S * .6);
+    lg.addColorStop(0, 'rgba(255,255,255,.7)'); lg.addColorStop(1, 'rgba(255,255,255,0)');
+    cx.fillStyle = lg; cx.fillRect(0, 0, CW, CH);
+    cx.globalCompositeOperation = 'source-over';
+  }
+
+  /* ---------- the lead: Human, then AI, then two tasks land ---------- */
+  var who = 'h', mix = 0, target = 0, time = 0, since = 0, sinceTw = 0, last = 0, running = false, raf = 0;
+  function setLead(w) { who = w; target = w === 'a' ? 1 : 0; card.classList.toggle('lead-h', w === 'h'); card.classList.toggle('lead-a', w === 'a'); }
+  function twinkle() {
+    var s = slots[Math.floor(Math.random() * slots.length)]; if (!s || s.busy) return;
+    var cls = who === 'h' ? 'is-h' : 'is-a'; s.g.classList.add(cls);
+    setTimeout(function () { s.g.classList.remove(cls); }, 700);
+  }
+  function land() {
+    var idx = slots.map(function (_, i) { return i; }).sort(function () { return Math.random() - .5; }).slice(0, 2);
+    idx.forEach(function (i) {
+      var s = slots[i]; if (!s || s.busy) return; s.busy = true;
+      var o = outs[s.o], from = s.pos, st = performance.now(); G.fly.appendChild(s.g);
+      (function f(now) {
+        var k = Math.min(1, (now - st) / 700), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        s.g.setAttribute('transform', 'translate(' + (from[0] + (o.p[0] - from[0]) * e) + ',' + (from[1] + (o.p[1] - from[1]) * e) + ') scale(' + (1 - .6 * e) + ')');
+        s.g.style.opacity = 1 - e * .8;
+        if (k < 1) requestAnimationFrame(f);
+        else { s.g.remove(); counts[s.o]++; setOut(s.o); setTimeout(function () { if (G.xy[i]) mk(i, false); }, 300); }
+      })(st);
     });
   }
-
-  function fly(c) {
-    var p = c.p, chip = c.chip;
-    var target = stage.querySelector('.rg-o[data-k="' + p[3] + '"]');
-    var a = chip.getBoundingClientRect(), b = target.getBoundingClientRect();
-    var dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
-    slots[c.slot] = null;
-    var anim = chip.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 }, { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.3)', opacity: 0.15 }],
-      { duration: FLY, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' });
-    anim.onfinish = function () {
-      chip.remove();
-      live = live.filter(function (x) { return x !== c; });
-      bump(target, p[3]);
-    };
+  function frame(now) {
+    if (!running) return;
+    var dt = Math.min(.05, (now - last) / 1000 || .016); last = now;
+    time += dt; mix += (target - mix) * Math.min(1, dt * .9); rot += dt * 4;
+    place(); paint();
+    since += dt; sinceTw += dt;
+    if (sinceTw > .45) { sinceTw = 0; twinkle(); }
+    if (since > 4.5) { since = 0; if (who === 'a') land(); setLead(who === 'a' ? 'h' : 'a'); }
+    raf = requestAnimationFrame(frame);
   }
+  function start() { if (running || reduce) return; running = true; last = performance.now(); raf = requestAnimationFrame(frame); }
+  function stop() { running = false; cancelAnimationFrame(raf); }
 
-  function bump(target, k) {
-    counts[k] = (counts[k] || 0) + 1;
-    var n = target.querySelector('.rg-n'); n.textContent = counts[k];
-    target.classList.remove('hit'); void target.offsetWidth; target.classList.add('hit');
-  }
-
-  function start() { if (running) return; running = true; spawn(); timer = setInterval(spawn, SPAWN); }
-  function stop() { running = false; clearInterval(timer); }
-
+  build(); size(); paint(); setLead('h');
   stage.classList.add('rg-live');
+  var mode = G;
+  W.addEventListener('resize', function () {
+    size(); paint();
+    var want = W.innerWidth <= 640 ? NARROW : WIDE;
+    if (want !== mode) { mode = want; build(); }
+  });
   var visible = false;
   if ('IntersectionObserver' in W) {
-    new IntersectionObserver(function (es) {
-      visible = es[0].isIntersecting;
-      if (visible && !D.hidden) start(); else stop();
-    }, { threshold: 0.2 }).observe(stage);
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible && !D.hidden) start(); else stop(); }, { threshold: 0.1 }).observe(card);
   } else { visible = true; start(); }
   D.addEventListener('visibilitychange', function () { if (D.hidden) stop(); else if (visible) start(); });
 })();
