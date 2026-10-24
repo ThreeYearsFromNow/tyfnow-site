@@ -226,3 +226,19 @@ section[id]{scroll-margin-top:96px}
 
 /* nothing animated (balls, hero tiles) can push the page sideways */
 main{overflow-x:clip}
+
+/* Work: Conference Badges before and after (moved from the hero) */
+.op-case{position:relative;width:100%;max-width:1040px;margin:56px auto 0;isolation:isolate}
+.op-case::before{content:"";position:absolute;z-index:-1;left:-3%;right:-3%;top:-7%;bottom:-14%;border-radius:48px;background:radial-gradient(ellipse 70% 75% at 50% 55%,#9a86ff 0%,#b9abff 45%,rgba(199,186,255,0) 78%);filter:blur(26px);opacity:.75}
+.op-case img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 30px 60px -34px rgba(40,28,110,.55)}
+@media (max-width:760px){.op-case{margin-top:36px}.op-case img{border-radius:14px}}
+
+/* Value icons in motion (js/values-motion.js; Curiosity in CSS) */
+.op-ico{display:block;overflow:visible}
+.op-q{transform-box:view-box;transform-origin:12px 12px}
+@media (prefers-reduced-motion:no-preference){
+  .op-q{animation:op-q 14s cubic-bezier(.6,0,.3,1) infinite}
+  .op-q-dot{animation:op-q-dot 14s ease infinite}
+  @keyframes op-q{0%,18%{transform:none}30%,44%{transform:rotate(-90deg)}56%,62%{transform:none}72%,86%{transform:translateY(-6px) rotate(8deg)}98%,100%{transform:none}}
+  @keyframes op-q-dot{0%,64%{opacity:1}70%,88%{opacity:0}96%,100%{opacity:1}}
+}

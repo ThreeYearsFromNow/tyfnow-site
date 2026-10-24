@@ -5,27 +5,15 @@
   'use strict';
   var hero = document.querySelector('.hero'), box = document.getElementById('hero-float');
   if (!hero || !box) return;
-  var q = new URLSearchParams(window.location.search);
   /* F180: the hero alternates on every visit or refresh, before/after (a) then floating tiles (b), then a again.
      ?hero=a or ?hero=b forces one. Storage is guarded; without it the pick is random. */
-  var forced = q.get('hero'), pick;
-  if (forced === 'a' || forced === 'b') pick = forced;
-  else {
-    var lastSeen = null;
-    try { lastSeen = window.localStorage.getItem('tyfnow_hero'); } catch (e) {}
-    pick = lastSeen === 'a' ? 'b' : lastSeen === 'b' ? 'a' : (Math.random() < 0.5 ? 'a' : 'b');
-    try { window.localStorage.setItem('tyfnow_hero', pick); } catch (e) {}
-  }
-  if (pick === 'a') return;
-
+  /* One-page site (24 Oct 2026): Conference Badges moved to the Work section, so the hero always runs the floating tiles */
   hero.classList.add('hero--b');
   box.hidden = false;
 
   var POOL = [
     { src: '/img/todaytix-480.jpg' }, { src: '/img/amex-puppet-480.jpg' }, { src: '/img/wardrobe-480.jpg' },
-    { src: '/img/amex-business-480.jpg' }, { src: '/img/sporthopod-480.jpg' }, { src: '/img/helmet-480.jpg' },
-    { src: '/img/cb-brand-before-after.webp', pos: '22% 45%' },   /* Conference Badges, before */
-    { src: '/img/cb-brand-before-after.webp', pos: '78% 45%' }    /* Conference Badges, after */
+    { src: '/img/amex-business-480.jpg' }, { src: '/img/sporthopod-480.jpg' }, { src: '/img/helmet-480.jpg' }
   ];
   /* Slots are kept clear of the headline and button. x, y in % of the hero. */
   var DESK = [[7, 14], [21, 8], [37, 5], [63, 5], [79, 9], [93, 15], [4, 42], [15, 33], [86, 34], [96, 46],
