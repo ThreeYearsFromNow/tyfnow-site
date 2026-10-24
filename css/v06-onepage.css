@@ -332,48 +332,72 @@ main{overflow-x:clip}
 .op-v-consistency u.u-s{text-decoration-color:#2f9e8f}
 .op-eye::after{content:"";position:absolute;left:-.1em;right:-.1em;top:calc(100% + .28em);height:2px;background:#7661f6}
 
-/* Qualify (24 Oct, round 6): no colour. Neutral grey cards and ink line drawings in the values-icon style, each on a loop.
-   Business: a van drives down a street and stops at an office, a warehouse and a shop; a parcel pops out at each.
-   Coach: four call tiles fill one by one (a full calendar), then a line climbs (results get a boost). */
+/* Qualify (round 7): small icons in the values style, white tile, ink line icon, slow motion.
+   Business: a van drives along (the road moves under it). Coach: a call screen, the guest nods, an arrow nudges up. */
 .aud.h-a813ca,.aud.h-35dbbc{background:#f3f3f1!important}
-.aud-ill-v2{width:210px;height:auto;aspect-ratio:260/150;overflow:hidden}
-@media (min-width:1151px){section[aria-labelledby="for-h"] .aud-ill-v2{width:200px;height:auto}}
-.aud-ill-v2 .ill-line,.aud-ill-v2 .ill-line-p{fill:none;stroke:#161716;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round}
-.aud-ill-v2 .ill-line *,.aud-ill-v2 .ill-line-p,.aud-ill-v2 .ill-wheel,.aud-ill-v2 .ill-parcel{vector-effect:non-scaling-stroke}
-.aud-ill-v2 .ill-lane{stroke-dasharray:6 9;stroke-width:1.5px;opacity:.5}
-.aud-ill-v2 .ill-van-fill{fill:#f3f3f1;stroke:none}
-.aud-ill-v2 .ill-wheel,.aud-ill-v2 .ill-parcel{fill:#f3f3f1;stroke:#161716;stroke-width:2px}
-.ill-van{transform:translate(108px,142px)}
-.ill-parcel{opacity:0}
-.ill-guest{opacity:1}
-.ill-boost-line{stroke-dasharray:100;stroke-dashoffset:0}
+.aud{display:flex!important;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:20px}
+.aud-ic{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:15px;background:#fff;color:#161716;box-shadow:inset 0 0 0 1px #e4e4e1;flex:none}
+.aud-ic svg{overflow:hidden;width:34px;height:34px}
+.ic-road{stroke-dasharray:3 4;stroke-width:1.6;opacity:.55}
 @media (prefers-reduced-motion:no-preference){
-  .ill-van{animation:ill-van 12s infinite}
-  .ill-van-body{animation:ill-bob 12s infinite}
-  .ill-parcel{transform-box:fill-box;transform-origin:center;animation:12s infinite}
-  .ill-parcel.p1{animation-name:ill-p1}.ill-parcel.p2{animation-name:ill-p2}.ill-parcel.p3{animation-name:ill-p3}
-  .ill-guest{opacity:0;transform-box:fill-box;transform-origin:50% 100%;animation:10s infinite}
-  .ill-guest.g1{animation-name:ill-g1}.ill-guest.g2{animation-name:ill-g2}.ill-guest.g3{animation-name:ill-g3}.ill-guest.g4{animation-name:ill-g4}
-  .ill-boost{animation:ill-boost-fade 10s infinite}
-  .ill-boost-line{stroke-dashoffset:100;animation:ill-boost 10s infinite}
-  .ill-boost-head{opacity:0;animation:ill-head 10s infinite}
+  .ic-road{animation:ic-road .7s linear infinite}
+  .ic-van{animation:ic-bob .35s ease-in-out infinite alternate}
+  .ic-guest{transform-box:fill-box;transform-origin:50% 100%;animation:ic-nod 3.2s ease-in-out infinite}
+  .ic-boost{animation:ic-boost 3.2s cubic-bezier(.5,0,.3,1) infinite}
 }
-@keyframes ill-van{
-  0%{transform:translate(-52px,142px);animation-timing-function:cubic-bezier(.3,0,.25,1)}
-  9%,23%{transform:translate(23px,142px);animation-timing-function:cubic-bezier(.45,0,.25,1)}
-  32%,46%{transform:translate(108px,142px);animation-timing-function:cubic-bezier(.45,0,.25,1)}
-  55%,69%{transform:translate(207px,142px);animation-timing-function:cubic-bezier(.55,0,.7,.3)}
-  80%,100%{transform:translate(272px,142px)}
-}
-/* a slight bounce while driving, still at each stop */
-@keyframes ill-bob{0%,9%,23%,32%,46%,55%,69%,80%,100%{transform:none}4%,27.5%,50.5%,74%{transform:translateY(-1px)}}
-@keyframes ill-p1{0%,11%{opacity:0;transform:none}14%{opacity:1;transform:translateY(-15px)}19%{opacity:1;transform:translateY(-15px)}22%,100%{opacity:0;transform:translateY(-18px)}}
-@keyframes ill-p2{0%,34%{opacity:0;transform:none}37%{opacity:1;transform:translateY(-15px)}42%{opacity:1;transform:translateY(-15px)}45%,100%{opacity:0;transform:translateY(-18px)}}
-@keyframes ill-p3{0%,57%{opacity:0;transform:none}60%{opacity:1;transform:translateY(-15px)}65%{opacity:1;transform:translateY(-15px)}68%,100%{opacity:0;transform:translateY(-18px)}}
-@keyframes ill-g1{0%,6%{opacity:0;transform:translateY(4px)}10%,88%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}
-@keyframes ill-g2{0%,16%{opacity:0;transform:translateY(4px)}20%,88%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}
-@keyframes ill-g3{0%,26%{opacity:0;transform:translateY(4px)}30%,88%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}
-@keyframes ill-g4{0%,36%{opacity:0;transform:translateY(4px)}40%,88%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}
-@keyframes ill-boost{0%,48%{stroke-dashoffset:100}62%,100%{stroke-dashoffset:0}}
-@keyframes ill-head{0%,61%{opacity:0}65%,100%{opacity:1}}
-@keyframes ill-boost-fade{0%,88%{opacity:1}94%,100%{opacity:0}}
+@keyframes ic-road{to{stroke-dashoffset:7}}
+@keyframes ic-bob{from{transform:translateY(0)}to{transform:translateY(-.5px)}}
+@keyframes ic-nod{0%,60%,100%{transform:none}70%{transform:translateY(.8px)}80%{transform:none}88%{transform:translateY(.6px)}}
+@keyframes ic-boost{0%,20%{transform:translate(-2px,2px);opacity:0}40%,75%{transform:none;opacity:1}100%{transform:translate(1px,-1px);opacity:0}}
+
+/* Values (round 7) */
+/* "brand" above the struck-out "business" is the same size as the line */
+.op-bucket-grey .op-bk-brand{padding-top:1.15em}
+.op-bucket-grey .new{font-size:1em;bottom:72%;letter-spacing:inherit;transform:translateX(-50%) rotate(-3deg)}
+/* consistency: no underlines; the letters that only appear once are dimmed */
+.op-v-consistency .dim{color:rgba(22,23,22,.28)}
+/* curiosity: the o is an eye with an iris, pupil and a glint */
+.op-pupil{width:.24em;height:.24em;margin:-.12em 0 0 -.12em;background:#7661f6}
+.op-pupil::before{content:"";position:absolute;left:50%;top:50%;width:.12em;height:.12em;margin:-.06em 0 0 -.06em;border-radius:50%;background:#161716}
+.op-glint{position:absolute;right:.025em;top:.025em;width:.06em;height:.06em;border-radius:50%;background:#fff}
+/* candour: no icon; its underline is a voice note, bars rising and falling */
+.op-wave-w{position:relative;display:inline-block;line-height:1.15}
+.op-wave{position:absolute;left:0;right:0;width:100%;top:calc(100% + .02em);height:.36em;overflow:visible;fill:#8fb31c}
+.op-wave rect{transform-box:fill-box;transform-origin:center;transform:scaleY(var(--a))}
+@media (prefers-reduced-motion:no-preference){.op-wave rect{animation:op-wave var(--d) ease-in-out infinite alternate;animation-delay:var(--w)}}
+@keyframes op-wave{from{transform:scaleY(var(--a))}to{transform:scaleY(var(--b))}}
+/* craft: diamond, then a red heart, then black with boosters lit; it drops out and the diamond falls back in from the top (values-motion.js) */
+.op-v-craft .op-val-ic{overflow:hidden}
+#ico-craft{overflow:visible;transition:color .45s ease}
+#ico-craft polygon{transition:fill .45s ease}
+.cr-boost{opacity:0;transition:opacity .25s ease}
+.cr-lit .cr-boost{opacity:1}
+@media (prefers-reduced-motion:no-preference){.cr-lit .cr-boost path{transform-box:fill-box;transform-origin:50% 100%;animation:cr-flame .12s linear infinite alternate}}
+@keyframes cr-flame{from{transform:scaleY(.6)}to{transform:scaleY(1.15)}}
+.op-wave rect:nth-child(1){--a:0.18;--b:0.35;--d:0.61s;--w:-0.06s}
+.op-wave rect:nth-child(2){--a:0.38;--b:0.75;--d:0.37s;--w:-0.41s}
+.op-wave rect:nth-child(3){--a:0.19;--b:0.77;--d:0.38s;--w:-0.07s}
+.op-wave rect:nth-child(4){--a:0.34;--b:0.93;--d:0.4s;--w:-0.18s}
+.op-wave rect:nth-child(5){--a:0.41;--b:0.98;--d:0.58s;--w:-0.32s}
+.op-wave rect:nth-child(6){--a:0.54;--b:0.62;--d:0.69s;--w:-0.23s}
+.op-wave rect:nth-child(7){--a:0.23;--b:0.65;--d:0.47s;--w:-0.65s}
+.op-wave rect:nth-child(8){--a:0.25;--b:0.83;--d:0.61s;--w:-0.3s}
+.op-wave rect:nth-child(9){--a:0.38;--b:0.63;--d:0.37s;--w:-0.16s}
+.op-wave rect:nth-child(10){--a:0.43;--b:0.77;--d:0.48s;--w:-0.47s}
+.op-wave rect:nth-child(11){--a:0.35;--b:0.72;--d:0.67s;--w:-0.56s}
+.op-wave rect:nth-child(12){--a:0.27;--b:0.83;--d:0.56s;--w:-0.7s}
+.op-wave rect:nth-child(13){--a:0.45;--b:0.72;--d:0.74s;--w:-0.09s}
+.op-wave rect:nth-child(14){--a:0.33;--b:0.9;--d:0.41s;--w:-0.39s}
+.op-wave rect:nth-child(15){--a:0.19;--b:0.87;--d:0.66s;--w:-0.46s}
+.op-wave rect:nth-child(16){--a:0.5;--b:0.73;--d:0.63s;--w:-0.48s}
+.op-wave rect:nth-child(17){--a:0.39;--b:0.78;--d:0.69s;--w:-0.76s}
+.op-wave rect:nth-child(18){--a:0.36;--b:0.87;--d:0.37s;--w:-0.56s}
+.op-wave rect:nth-child(19){--a:0.42;--b:1.0;--d:0.68s;--w:-0.23s}
+.op-wave rect:nth-child(20){--a:0.32;--b:0.87;--d:0.36s;--w:-0.37s}
+.op-wave rect:nth-child(21){--a:0.24;--b:0.65;--d:0.37s;--w:-0.61s}
+.op-wave rect:nth-child(22){--a:0.23;--b:0.7;--d:0.51s;--w:-0.7s}
+.op-wave rect:nth-child(23){--a:0.21;--b:0.78;--d:0.57s;--w:-0.71s}
+.op-wave rect:nth-child(24){--a:0.18;--b:0.35;--d:0.46s;--w:-0.33s}
+
+/* Offer headline: "What working together" starts at the left edge, "looks like" at the right; they meet as the section scrolls in (offer-head.js) */
+.op-meet span{display:inline-block;will-change:transform}

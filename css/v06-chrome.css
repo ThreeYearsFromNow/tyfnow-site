@@ -79,3 +79,9 @@
 }
 .hdr-menu{min-height:40px;border-radius:8px;font-weight:500;font-size:14px}
 @media (prefers-reduced-motion:reduce){.hdr-in,.brand-s{transition:none}}
+
+/* Header (round 7): logo left, links on the right at the top of the page as well as in the floating bar; no strap line under the logo */
+.hdr-in{justify-content:space-between}
+.hdr-nav{margin-left:auto}
+.hdr .brand{gap:0}
+.hdr .brand-w{font-size:21px}
