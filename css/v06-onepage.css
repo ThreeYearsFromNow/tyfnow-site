@@ -488,3 +488,13 @@ main{overflow-x:clip}
 .op-tl2.is-live .op-dot.op-tl-p{transform:scale(.4)}
 .op-tl2.is-live .op-tl-seg{opacity:1;transform:scaleY(0)}
 .op-tl2.is-live .op-tl-p.is-in{opacity:1;transform:none}
+
+/* Round 9f: pills as connecting blobs (js/pill-goo.js). Black shape layer under the goo filter, white text on top */
+.op-goo-defs{position:absolute;width:0;height:0;overflow:hidden}
+.op-tick.is-goo{gap:6px;padding-block:10px}
+.op-goo-row{position:relative}
+.op-tick.is-goo .op-tick-row{animation:none;will-change:transform}
+.op-tick.is-goo .op-goo-bg{position:absolute;left:0;top:0;filter:url(#op-goo)}
+.op-bk-open .op-tick-grey.is-goo .op-tick-row li,.op-bk-open .op-tick-grey.is-goo .op-tick-row li:nth-child(7n+1),.op-bk-open .op-tick-grey.is-goo .op-tick-row li:nth-child(7n+5){margin-right:16px;box-shadow:none;will-change:transform}
+.op-bk-open .op-tick-grey.is-goo .op-goo-bg li,.op-bk-open .op-tick-grey.is-goo .op-goo-bg li:nth-child(7n+1),.op-bk-open .op-tick-grey.is-goo .op-goo-bg li:nth-child(7n+5){background:#161716;color:transparent}
+.op-bk-open .op-tick-grey.is-goo .op-goo-fg li,.op-bk-open .op-tick-grey.is-goo .op-goo-fg li:nth-child(7n+1),.op-bk-open .op-tick-grey.is-goo .op-goo-fg li:nth-child(7n+5){background:transparent;color:#fff}
