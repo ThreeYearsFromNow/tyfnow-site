@@ -16,12 +16,20 @@ Business owners turning over £250k to £2.5m, or certified coaches with a pract
 
 ## Pages
 
+The site is one page. Its sections, in order:
+
 - Home: https://www.threeyearsfromnow.com/
-- How we work: https://www.threeyearsfromnow.com/how-we-work
-- Work: https://www.threeyearsfromnow.com/work
+- Who it's for: https://www.threeyearsfromnow.com/#for
+- The problem: https://www.threeyearsfromnow.com/#problem
+- How it works: https://www.threeyearsfromnow.com/#how-it-works
+- Business to brand: https://www.threeyearsfromnow.com/#brand
+- How we work: https://www.threeyearsfromnow.com/#how-we-work
+- Work: https://www.threeyearsfromnow.com/#work
+- What working together looks like: https://www.threeyearsfromnow.com/#offer
+- Contact (form on the page): https://www.threeyearsfromnow.com/#contact
 - Blog: https://www.threeyearsfromnow.com/blog
-- Contact: https://www.threeyearsfromnow.com/contact
 - Privacy: https://www.threeyearsfromnow.com/privacy
+- Terms: https://www.threeyearsfromnow.com/terms
 
 ## Company
 
