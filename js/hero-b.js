@@ -1,4 +1,4 @@
-/* TYFNOW hero-b.js: hero option B (trial, F158). Default hero since F162; ?hero=a shows option A (before/after).
+/* TYFNOW hero-b.js: hero option B (trial, F158). Alternates with option A (before/after) on each visit since F180.
    Floating portfolio tiles around the headline, after the Cosmos reference. Every visit or refresh
    picks a new mix: which images, which crop, which slot, angle, size and depth. 23 Oct 2026. */
 (function () {
@@ -6,7 +6,17 @@
   var hero = document.querySelector('.hero'), box = document.getElementById('hero-float');
   if (!hero || !box) return;
   var q = new URLSearchParams(window.location.search);
-  if (q.get('hero') === 'a') return; /* floating hero is the default since F162; ?hero=a shows the before/after */
+  /* F180: the hero alternates on every visit or refresh, before/after (a) then floating tiles (b), then a again.
+     ?hero=a or ?hero=b forces one. Storage is guarded; without it the pick is random. */
+  var forced = q.get('hero'), pick;
+  if (forced === 'a' || forced === 'b') pick = forced;
+  else {
+    var lastSeen = null;
+    try { lastSeen = window.localStorage.getItem('tyfnow_hero'); } catch (e) {}
+    pick = lastSeen === 'a' ? 'b' : lastSeen === 'b' ? 'a' : (Math.random() < 0.5 ? 'a' : 'b');
+    try { window.localStorage.setItem('tyfnow_hero', pick); } catch (e) {}
+  }
+  if (pick === 'a') return;
 
   hero.classList.add('hero--b');
   box.hidden = false;
