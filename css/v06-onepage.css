@@ -484,10 +484,10 @@ main{overflow-x:clip}
 .op-tl-step .body{margin:0;max-width:520px}
 .op-tl-seg{display:block;width:2px;height:80px;margin:28px 0;border-radius:2px;background:#161716;transform-origin:top}
 @media (max-width:760px){.op-tl2{margin-top:44px}.op-tl-seg{height:56px;margin:20px 0}}
-.op-tl2.is-live .op-tl-p{opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)}
-.op-tl2.is-live .op-dot.op-tl-p{transform:scale(.4)}
-.op-tl2.is-live .op-tl-seg{opacity:1;transform:scaleY(0)}
-.op-tl2.is-live .op-tl-p.is-in{opacity:1;transform:none}
+.op-tl-live .op-tl-p{opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)}
+.op-tl-live .op-dot.op-tl-p{transform:scale(.4)}
+.op-tl-live .op-tl-seg{opacity:1;transform:scaleY(0)}
+.op-tl-live .op-tl-p.is-in{opacity:1;transform:none}
 
 /* Round 9f: pills as connecting blobs (js/pill-goo.js). Black shapes in an SVG under its own goo filter; white HTML text on top */
 .op-tick.is-goo{gap:6px;padding-block:8px}
@@ -495,3 +495,10 @@ main{overflow-x:clip}
 .op-goo-svg{position:absolute;left:0;top:-14px;display:block;overflow:visible;pointer-events:none}
 .op-tick.is-goo .op-tick-row{position:relative;animation:none;will-change:transform}
 .op-bk-open .op-tick-grey.is-goo .op-tick-row li,.op-bk-open .op-tick-grey.is-goo .op-tick-row li:nth-child(7n+1),.op-bk-open .op-tick-grey.is-goo .op-tick-row li:nth-child(7n+5){margin-right:16px;background:transparent;color:#fff;box-shadow:none;will-change:transform}
+
+/* Round 9g: the timeline runs into the values; values sentence on two lines at its full size where the screen allows */
+.op-tl2+.op-values,.op-values{margin-top:0;max-width:none;width:100%;padding:44px 40px}
+.op-values .op-creed{max-width:none;margin:0 auto;text-wrap:balance}
+.op-tl-live .op-tl-seg.is-in+.op-values{transition-delay:.05s}
+@media (max-width:760px){.op-values{padding:30px 16px}}
+.op-tl2>.op-tl-seg:last-child{margin-bottom:0}
