@@ -421,3 +421,16 @@ main{overflow-x:clip}
 .op-bucket-grey{overflow:visible}
 .op-bucket-grey .op-bk-brand{padding-top:.4em}
 .op-bucket-grey .op-tick{overflow:hidden}
+
+/* Round 9: section 3 motion (js/same-tools.js). Without JS or with reduced motion both lines read in full */
+/* "Same ___." : AI, templates, beige take turns; without JS they read "Same AI, same templates, same beige." */
+.st-w+.st-w::before{content:", same "}
+.st-rot.is-live{position:relative;display:inline-block;vertical-align:bottom;height:1.3em;overflow:hidden;transition:width .45s cubic-bezier(.22,.61,.36,1)}
+.st-rot.is-live .st-w{position:absolute;left:0;top:0;white-space:nowrap;color:var(--t-ink,#161716);transform:translateY(110%);opacity:0;transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .3s}
+.st-rot.is-live .st-w::before{content:none}
+.st-rot.is-live .st-w.is-on{transform:none;opacity:1}
+.st-rot.is-live .st-w.is-out{transform:translateY(-110%);opacity:0}
+/* "Run a business" first, then "brand whilst others run a" grows in between */
+.st-grow.is-live{display:inline-block;vertical-align:bottom;overflow:hidden;white-space:nowrap;width:0;transition:width 1.1s cubic-bezier(.65,0,.35,1)}
+.st-grow.is-live .st-gin{display:inline-block;opacity:0;transition:opacity .6s .35s}
+.st-grow.is-open .st-gin{opacity:1}
