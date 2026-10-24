@@ -26,8 +26,8 @@
   var OUT_S = [['Website', 'f-web'], ['App', 'f-app'], ['Search', 'f-search'], ['Content', 'f-content']];
   var DISC = ['Creative', 'Production', 'Workflow', 'Testing'];
 
-  /* geometry: a wide ring with six tasks, or a smaller ring with two on phones */
-  var WIDE = { vb: [1040, 640], c: [520, 320], rin: 230, rout: 292, core: 104, xy: [[0, -150], [-128, -72], [128, 72], [0, 150], [-128, 72], [128, -72]], out: OUT };
+  /* geometry: a wide ring or a smaller one on phones; two tasks at a time on both */
+  var WIDE = { vb: [1040, 640], c: [520, 320], rin: 230, rout: 292, core: 104, xy: [[-36, -132], [36, 132]], out: OUT };
   var NARROW = { vb: [340, 380], c: [170, 190], rin: 134, rout: 148, core: 48, narrow: true, chip: 36, xy: [[0, -72], [0, 72]], out: OUT_S };
   var G, svg, outs = [], counts = [0, 0, 0, 0], slots = [], disc = [], pi = 0, rot = 0;
 
@@ -48,6 +48,7 @@
       t.textContent = d; var w = len(t, d.length * 7) + 24; r.setAttribute('x', -w / 2); r.setAttribute('width', w); disc.push(g);
     });
     el('circle', { 'class': 'rg-in', cx: G.c[0], cy: G.c[1], r: G.rin }, svg);
+    el('circle', { 'class': 'rg-link', cx: G.c[0], cy: G.c[1], r: G.rin, pathLength: 360 }, svg); /* marching dots linking the four headings */
     G.tg = el('g', {}, svg);
     var h = G.core;
     el('rect', { 'class': 'rg-core', x: G.c[0] - h / 2, y: G.c[1] - h / 2, width: h, height: h, rx: h * 0.23 }, svg);
@@ -158,7 +159,7 @@
     time += dt; mix += (target - mix) * Math.min(1, dt * .9); rot += dt * 4;
     place(); paint();
     since += dt; sinceTw += dt;
-    if (sinceTw > (G.narrow ? 1.8 : 1.2)) { sinceTw = 0; flashSend(); }
+    if (sinceTw > 1.8) { sinceTw = 0; flashSend(); }
     if (since > 4.5) { since = 0; setLead(who === 'a' ? 'h' : 'a'); }
     raf = requestAnimationFrame(frame);
   }
