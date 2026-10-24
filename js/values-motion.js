@@ -1,6 +1,7 @@
 /* TYFNOW values-motion.js: slow motion in three of the value icons (24 Oct 2026).
    Curiosity runs in CSS (its o is an eye that looks around and blinks).
-   Creativity's three lines become a tipi tent, then a simple hourglass, then the asterisk again.
+   Creativity (round 8): three lines only, a little faster: asterisk, then a tipi, then an arrow, then the asterisk again.
+   Candour (round 8): a flat line that swells into a voice note, talks, then settles back to a line, on a loop.
    Craft (round 7): the diamond folds its top in to a red heart; the lines turn black, boosters light,
    it drops out of its tile, and the diamond falls back in from the top.
    Runs only while the values are on screen. Reduced motion: the icons stay still. */
@@ -11,12 +12,23 @@
   var cre = D.getElementById('ico-creativity'), cra = D.getElementById('ico-craft');
   if (!cre || !cra) return;
   var lines = cre.querySelectorAll('line'), poly = cra.querySelector('polygon'), mover = cra.querySelector('.cr-move');
+  var bars = D.querySelectorAll('.op-wave rect');
+  /* each bar talks at its own height and speed */
+  var BAR = Array.prototype.map.call(bars, function () { return { lo: .2 + Math.random() * .3, hi: .6 + Math.random() * .4, sp: 7 + Math.random() * 9, ph: Math.random() * 6.28 }; });
+  var LINE = .12, CAND = 5400; /* one loop: line 1.6s, swell .6s, talk 2.6s, settle .6s */
+  function candour(t) {
+    var c = t % CAND, e = c < 1600 ? 0 : c < 2200 ? ease((c - 1600) / 600) : c < 4800 ? 1 : 1 - ease((c - 4800) / 600);
+    for (var i = 0; i < bars.length; i++) {
+      var b = BAR[i], h = b.lo + (b.hi - b.lo) * (.5 + .5 * Math.sin(t / 1000 * b.sp + b.ph));
+      bars[i].style.transform = 'scaleY(' + (LINE + (h - LINE) * e).toFixed(3) + ')';
+    }
+  }
 
-  /* each state: four lines as [x1, y1, x2, y2]; the fourth is a point when not needed */
+  /* each state: three lines as [x1, y1, x2, y2]; never a fourth */
   var CRE = [
-    [[12, 4, 12, 20], [5.07, 8, 18.93, 16], [5.07, 16, 18.93, 8], [12, 12, 12, 12]],    /* asterisk */
-    [[4, 20, 20, 20], [6, 20, 14, 4], [18, 20, 10, 4], [12, 20, 12, 15.5]],               /* tipi tent */
-    [[6, 4, 18, 4], [7, 5, 17, 19], [17, 5, 7, 19], [6, 20, 18, 20]]                       /* hourglass */
+    [[12, 4, 12, 20], [5.07, 8, 18.93, 16], [5.07, 16, 18.93, 8]],    /* asterisk */
+    [[4, 20, 20, 20], [6, 20, 13.5, 4], [18, 20, 10.5, 4]],             /* tipi: ground and two crossed poles */
+    [[4, 12, 19, 12], [13, 6, 19, 12], [13, 18, 19, 12]]                /* arrow pointing right */
   ];
   /* seven points, clockwise from the top */
   var CRA = [
@@ -45,10 +57,10 @@
     else { setCra(CRA[0]); look('diamond'); }
     mover.setAttribute('transform', 'translate(0 ' + y.toFixed(2) + ')');
   }
-  var HOLD = 2600, MORPH = 1500;
+  var HOLD = 1800, MORPH = 1000;
   function ease(k) { return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
   function mix(a, b, t) { return a.map(function (v, i) { return v + (b[i] - v) * t; }); }
-  function setCre(st) { for (var i = 0; i < 4; i++) { var l = lines[i], v = st[i]; l.setAttribute('x1', v[0].toFixed(2)); l.setAttribute('y1', v[1].toFixed(2)); l.setAttribute('x2', v[2].toFixed(2)); l.setAttribute('y2', v[3].toFixed(2)); } }
+  function setCre(st) { for (var i = 0; i < lines.length; i++) { var l = lines[i], v = st[i]; l.setAttribute('x1', v[0].toFixed(2)); l.setAttribute('y1', v[1].toFixed(2)); l.setAttribute('x2', v[2].toFixed(2)); l.setAttribute('y2', v[3].toFixed(2)); } }
   function setCra(p) { var out = []; for (var i = 0; i < p.length; i += 2) out.push(p[i].toFixed(2) + ',' + p[i + 1].toFixed(2)); poly.setAttribute('points', out.join(' ')); }
 
   var t0 = 0, running = false, raf = 0, paused = 0;
@@ -59,6 +71,7 @@
     setCre(CRE[from].map(function (l, i) { return mix(l, CRE[to][i], k); }));
     /* craft runs on its own, longer loop, offset so the two never change together */
     craft(t + 1200);
+    candour(t);
     raf = requestAnimationFrame(frame);
   }
   function start() { if (running) return; running = true; t0 = performance.now() - paused; raf = requestAnimationFrame(frame); }

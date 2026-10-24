@@ -375,7 +375,7 @@ main{overflow-x:clip}
 .op-wave-w{position:relative;display:inline-block;line-height:1.15}
 .op-wave{position:absolute;left:0;right:0;width:100%;top:calc(100% + .02em);height:.36em;overflow:visible;fill:#8fb31c}
 .op-wave rect{transform-box:fill-box;transform-origin:center;transform:scaleY(var(--a))}
-@media (prefers-reduced-motion:no-preference){.op-wave rect{animation:op-wave var(--d) ease-in-out infinite alternate;animation-delay:var(--w)}}
+/* round 8: the voice-note motion (line, swell, talk, settle) runs in js/values-motion.js; reduced motion keeps this still waveform */
 @keyframes op-wave{from{transform:scaleY(var(--a))}to{transform:scaleY(var(--b))}}
 /* craft: diamond, then a red heart, then black with boosters lit; it drops out and the diamond falls back in from the top (values-motion.js) */
 .op-v-craft .op-val-ic{overflow:hidden}
