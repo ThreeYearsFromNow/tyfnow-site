@@ -1,0 +1,499 @@
+/* TYFNOW v06-onepage.css: one-page site (24 Oct 2026). Sections 5 to 9 after How we work, Work and Contact
+   moved onto the home page. Loaded after v06-home.css. Every class is prefixed op- so nothing collides. */
+
+/* in-page links land below the sticky header */
+section[id]{scroll-margin-top:96px}
+@media (max-width:760px){section[id]{scroll-margin-top:80px}}
+
+/* active nav link follows the scroll (js/v06.js) */
+.hdr-link.is-active{color:#161716;font-weight:600;background:#eeeaff}
+
+.op-gap{margin-top:44px}
+
+/* 05 service pills under the surfaces */
+.op-svc{list-style:none;margin:40px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:9px;max-width:900px}
+.op-svc li{padding:10px 16px;border-radius:999px;font-size:12.5px;font-weight:550;color:#161716;background:#fff;box-shadow:inset 0 0 0 1px #dededb}
+.op-svc .t-l{background:#eeeaff;box-shadow:none}
+.op-svc .t-p{background:#ffe1d9;box-shadow:none}
+.op-svc .t-m{background:#bcefe9;box-shadow:none}
+.op-svc .t-g{background:#dfff9b;box-shadow:none}
+
+/* 06 how we work: push cards, loop row, values line */
+.op-push{max-width:1100px;margin:56px auto 0;padding:24px;border-radius:22px;background:#f3f3f1;display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:16px}
+@media (max-width:1000px){.op-push{grid-template-columns:1fr;max-width:580px}}
+@media (max-width:760px){.op-push{padding:12px;border-radius:18px}}
+.op-mod{border-radius:17px;background:#fff;border:1px solid #dededb;padding:24px 22px;display:flex;flex-direction:column;gap:16px;text-align:left}
+.op-mod-dark{background:#1d1c22;border-color:#1d1c22}
+.op-mod-dark h3{color:#fff}
+.op-mi{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.op-mi li{padding:12px 14px;border-radius:11px;background:#f8f8f6;font-size:15px;font-weight:550;color:#161716}
+.op-mod-dark .op-mi li{background:rgba(255,255,255,.08);color:#fff}
+
+.op-loop{list-style:none;max-width:1100px;margin:16px auto 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.op-loop li{border-radius:17px;border:1px solid #dededb;background:#fff;padding:22px 24px;display:flex;flex-direction:column;gap:6px;text-align:left}
+@media (max-width:1000px){.op-loop{max-width:580px;grid-template-columns:1fr}}
+.op-mantra{max-width:760px;margin:44px auto 0;text-align:center;font-size:19px;line-height:1.55;font-weight:500;letter-spacing:-.01em;color:#161716;text-wrap:balance}
+@media (max-width:760px){.op-mantra{font-size:17px}}
+
+/* 07 the work: three tiles, one names line */
+.op-tiles{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:1000px){.op-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.op-tile:first-child{grid-column:span 2}}
+@media (max-width:620px){.op-tiles{grid-template-columns:1fr}.op-tile:first-child{grid-column:auto}}
+.op-tile{min-width:0;border-radius:20px;border:1px solid #dededb;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.op-media{aspect-ratio:960/823;overflow:hidden;background:#ececea}
+@media (max-width:1000px){.op-tile:first-child .op-media{aspect-ratio:16/9}}
+@media (max-width:620px){.op-tile:first-child .op-media{aspect-ratio:960/823}}
+.op-media img{width:100%;height:100%;object-fit:cover;display:block}
+.op-cap{padding:18px 22px}
+.op-names{max-width:760px;margin:40px auto 0;text-align:center;font-size:17px;line-height:1.6;color:#454644;text-wrap:balance}
+
+/* 08 offer: three cards, what happens next */
+.op-cards3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:1100px;margin:56px auto 0}
+@media (max-width:1000px){.op-cards3{grid-template-columns:1fr;max-width:580px}}
+.op-rhythm{position:relative;border-radius:18px;padding:26px 24px 28px;display:flex;flex-direction:column;gap:12px;text-align:left;border:1px solid rgba(22,23,22,.05)}
+.op-rhythm h3{padding-right:24px}
+.op-rhythm-paper{background:#f8f8f6}
+.op-dot{position:absolute;top:26px;right:24px;width:10px;height:10px;border-radius:50%}
+.op-dot-violet{background:#7661f6}
+.op-dot-grey{background:#b8b8b4}
+.op-dot-mint{background:#2f9e8f}
+.op-next{max-width:1100px;margin:40px auto 0;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+.op-steps{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;justify-content:center;gap:34px;width:100%}
+.op-steps li{position:relative;flex:1 1 0;max-width:330px;padding:18px 20px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px #dededb;font-size:15.5px;line-height:1.55;color:#161716;text-wrap:balance}
+.op-steps li+li::before{content:"→";position:absolute;left:-26px;top:50%;transform:translateY(-50%);font-size:16px;color:#7661f6}
+@media (max-width:1000px){
+  .op-steps{flex-direction:column;align-items:center;gap:30px}
+  .op-steps li{width:100%;max-width:580px}
+  .op-steps li+li::before{content:"↓";left:50%;top:-24px;transform:translateX(-50%)}
+}
+.op-ph{background:#ffe1d9;color:#161716;padding:1px 6px;border-radius:6px;font-weight:600}
+
+/* 09 close and contact: one card, form inside */
+.op-close{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:56px;align-items:center}
+.op-close-text{display:flex;flex-direction:column;gap:22px;text-align:left}
+.op-close-text .lead{max-width:520px}
+@media (max-width:1000px){
+  .op-close{grid-template-columns:1fr;gap:36px;justify-items:center}
+  .op-close-text{text-align:center;align-items:center}
+  .op-form-panel{width:100%;max-width:600px}
+}
+.op-form-panel{background:#fdfdfc;border-radius:20px;padding:34px 32px;box-shadow:0 30px 60px -40px rgba(40,28,110,.55);display:flex;flex-direction:column;gap:10px;text-align:left}
+@media (max-width:760px){.op-form-panel{padding:26px 20px;border-radius:16px}}
+.op-form{display:flex;flex-direction:column;gap:16px;margin-top:12px}
+.op-f{display:flex;flex-direction:column;gap:7px}
+.op-f label{font-size:14px;font-weight:600;color:#161716}
+.op-f input,.op-f textarea{width:100%;min-height:48px;padding:12px 14px;border-radius:10px;border:1px solid #cfcfcb;background:#fff;font:400 16px/1.4 Inter,"Helvetica Neue",Arial,sans-serif;color:#161716}
+.op-f textarea{min-height:130px;resize:vertical}
+.op-f input:focus-visible,.op-f textarea:focus-visible,.op-consent input:focus-visible{outline:3px solid #7661f6;outline-offset:2px}
+.op-help{font-size:12.5px;line-height:1.5;color:#5f605d}
+.op-consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:#454644;cursor:pointer}
+.op-consent input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:#161716}
+.op-send{align-self:flex-start}
+.op-send:disabled{opacity:.42;cursor:not-allowed;transform:none}
+.op-send:disabled:hover{background:#161716;transform:none}
+.op-note{font-size:14px;color:#a53a27}
+.op-note:empty{display:none}
+.op-success{padding:18px 20px;border-radius:14px;background:#dff3ec;color:#1f4f48;font-size:15.5px;line-height:1.6}
+.op-success:focus{outline:3px solid #2f9e8f;outline-offset:2px}
+.op-email{margin-top:6px;font-size:14px;color:#5f605d}
+.op-form[hidden]{display:none}
+
+/* Section 2: illustration on the left, text on the right */
+.aud-ill{order:0}
+@media (min-width:1151px){.aud{grid-template-columns:auto minmax(0,1fr);column-gap:28px}}
+@media (max-width:1150px){.aud-ill{justify-self:start}}
+
+/* Section 3: copy block sits in the centre of the section (R8.1); the balls fall, pile and drain around it */
+.same-tools{align-items:center;justify-content:center;padding-block:96px;min-height:clamp(680px,86vh,820px)}
+.same-tools .wrap{width:100%}
+.same-tools-text{text-align:center}
+.same-tools-text .lead{margin-inline:auto}
+@media (max-width:760px){.same-tools{align-items:center;padding-block:72px;min-height:660px}}
+.ball-l,.ball img{display:block;will-change:transform}
+
+/* ===== Section 4: HumanAIse ring over a moving gradient, edge to edge (js/ring.js) ===== */
+.rg-sec{position:relative;z-index:2;overflow:hidden;isolation:isolate;background:#f3f8ee} /* above section 3, so draining balls fall behind it */
+.rg-bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block}
+.rg-head{gap:16px}
+.rg-head .lead{max-width:620px;color:#3f403e}
+/* Headline exception (24 Oct 2026, experiment): the one headline allowed a coloured word.
+   Only the word leading is coloured; the other stays ink */
+.rg-w{color:#161716;transition:color .8s ease}
+.rg-sec.lead-h .rg-w-h{color:#2f8a4a}
+.rg-sec.lead-a .rg-w-a{color:#5b45e8}
+.rg-stage{position:relative;max-width:1000px;margin:24px auto 0}
+.rg-svg{display:block;width:100%;height:auto;overflow:visible}
+.rg-fallback,.rg-key{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px}
+.rg-fallback li{padding:5px 9px;border-radius:6px;font-size:13px;font-weight:650}
+.rg-live .rg-fallback{display:none}
+.rg-key{font-size:14px;color:#454644}
+.rg-key li{display:inline-flex;align-items:center;gap:8px}
+.rg-key li::before{content:"";width:12px;height:12px;border-radius:4px;background:var(--k)}
+.rg-sec .f-web{--k:#7661f6;--tb:#eeeaff;--tc:#4f3fd0}
+.rg-sec .f-app{--k:#161716;--tb:#161716;--tc:#fdfdfc}
+.rg-sec .f-search{--k:#ff816d;--tb:#ffe1d9;--tc:#a53a27}
+.rg-sec .f-content{--k:#2f9e8f;--tb:#dff3ec;--tc:#1f6f64}
+.rg-fallback li{background:var(--tb);color:var(--tc)}
+/* svg parts (old signal typography: uppercase source, 13.5px task; tinted tags) */
+.rg-in{fill:rgba(255,255,255,.42);stroke:rgba(255,255,255,.95);stroke-width:1.5}
+.rg-out{fill:none;stroke:rgba(22,23,22,.22);stroke-width:1;stroke-dasharray:3 5}
+/* R8.6: dotted line round the inner circle, joining Website, App, Search and AI answers, Content; dots march clockwise */
+.rg-link{fill:none;stroke:#161716;stroke-opacity:.5;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:0 4}
+.rg-svg.is-narrow .rg-link{stroke-width:2;stroke-dasharray:0 5}
+@media (prefers-reduced-motion:no-preference){.rg-live .rg-link{animation:rg-march 6s linear infinite}}
+@keyframes rg-march{to{stroke-dashoffset:-20}}
+/* Round 9: spokes from the core to each heading, dots travelling outwards */
+.rg-spoke{fill:none;stroke:#161716;stroke-opacity:.5;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:0 16}
+.rg-svg.is-narrow .rg-spoke{stroke-width:2;stroke-dasharray:0 10}
+@media (prefers-reduced-motion:no-preference){.rg-live .rg-spoke{animation:rg-spoke 6s linear infinite}}
+@keyframes rg-spoke{to{stroke-dashoffset:-80}}
+/* R8.7: payoff under the ring */
+.rg-pay{margin:28px auto 0;max-width:640px;text-align:center;font-size:20px;line-height:1.4;letter-spacing:-.01em;color:#161716}
+@media (max-width:640px){.rg-pay{margin-top:18px;font-size:17px}}
+.rg-core{fill:#161716}
+.rg-core-t{fill:#fff;font-size:21px;font-weight:800;letter-spacing:-.05em}
+.rg-dp{fill:rgba(253,253,252,.88);stroke:#dededb;stroke-width:1}
+.rg-dt{fill:#454644;font-size:12px;font-weight:550}
+.rg-tag{fill:var(--tb)}
+.rg-tagt{fill:var(--tc);font-size:13px;font-weight:650;letter-spacing:.01em}
+.rg-tagn{fill:var(--tc);font-weight:800}
+.rg-chip{fill:#fdfdfc;stroke:#dededb;stroke-width:1;transition:fill .35s,stroke .35s}
+.rg-src{fill:#5f605d;font-size:10px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;transition:fill .35s}
+.rg-txt{fill:#161716;font-size:13.5px;font-weight:550;transition:fill .35s}
+.rg-task{transition:opacity .5s}
+.rg-task.is-new{opacity:0}
+.rg-task.is-h .rg-chip{fill:#dcf3d2;stroke:#7cc46e}.rg-task.is-h .rg-src{fill:#2f6b38}.rg-task.is-h .rg-txt{fill:#173f1f}
+.rg-task.is-a .rg-chip{fill:#e4defe;stroke:#7661f6}.rg-task.is-a .rg-src{fill:#4f3fd0}.rg-task.is-a .rg-txt{fill:#2a1f86}
+.rg-svg.is-narrow .rg-core-t{font-size:10.5px}
+.rg-svg.is-narrow .rg-src{font-size:9.5px}
+.rg-svg.is-narrow .rg-txt{font-size:12.5px}
+.rg-svg.is-narrow .rg-tagt{font-size:12px}
+
+/* Section 3 drain: balls fall out through the bottom of the section and pass behind section 4's card */
+.same-tools{overflow:visible}
+.pit-section{overflow:visible;clip-path:inset(0 0 -900px 0)}
+
+/* Capital I with serifs in section 4, so "HumanAIse" and "AI" never read as "Alse" or "Al".
+   The self-hosted Inter subset has no cv08, so one glyph comes from a tiny Inter Tight subset (fonts/inter-i-serif.woff, OFL). */
+@font-face{font-family:"TYFNOW I";font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-i-serif.woff) format("woff");unicode-range:U+0049}
+.rg-sec,.rg-sec h2,.rg-sec h3{font-family:"TYFNOW I",Inter,"Inter Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-feature-settings:"cv08" 1}
+
+/* Section 5: pills run across in two rows, opposite directions (thumbnails removed) */
+.op-tick{margin-top:40px;display:flex;flex-direction:column;gap:10px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.op-tick-row{list-style:none;margin:0;padding:0;display:flex;width:max-content}
+.op-tick-row li{flex:none;margin-right:10px;padding:11px 18px;border-radius:999px;font-size:14px;font-weight:550;color:#161716;background:#fff;box-shadow:inset 0 0 0 1px #dededb;white-space:nowrap}
+.op-tick-row .t-l{background:#eeeaff;box-shadow:none}
+.op-tick-row .t-p{background:#ffe1d9;box-shadow:none}
+.op-tick-row .t-m{background:#bcefe9;box-shadow:none}
+.op-tick-row .t-g{background:#dfff9b;box-shadow:none}
+@media (prefers-reduced-motion:no-preference){
+  .op-tick-row{animation:op-tick 46s linear infinite}
+  .op-tick-rev{animation-direction:reverse;animation-duration:52s}
+  @keyframes op-tick{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+}
+
+/* Section 5, second half: How we work and the values as two strong buckets side by side */
+#how-we-work{scroll-margin-top:96px}
+.op-buckets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch;margin-top:72px}
+@media (max-width:1000px){.op-buckets{grid-template-columns:1fr;max-width:640px;margin-inline:auto}}
+@media (max-width:760px){.op-buckets{margin-top:56px}}
+.op-bucket{border-radius:24px;padding:40px 34px 34px;display:flex;flex-direction:column;gap:10px;text-align:left}
+@media (max-width:760px){.op-bucket{padding:30px 16px 18px;border-radius:20px}}
+.op-bucket-grey{background:#f3f3f1;color:#161716}
+.op-bucket-paper{background:#fff;box-shadow:inset 0 0 0 1px #dededb}
+.op-bk-h{font-size:clamp(30px,3vw,40px);line-height:1.15;letter-spacing:-.035em;font-weight:570;padding:0 4px;color:inherit}
+.op-bucket-grey .op-bk-h{color:#161716}
+.op-bk-sub{font-size:16px;line-height:1.55;padding:0 4px;margin-bottom:16px;color:#5f605d}
+.op-rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;flex:1}
+.op-row{border-radius:16px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);padding:20px;display:flex;flex-direction:column;gap:12px;flex:1;justify-content:center}
+.op-row h3{color:#fff}
+.op-aside{display:block;margin-top:4px;font-size:14px;font-weight:450;letter-spacing:-.01em;color:#b9b9b5}
+.op-row .op-mi{flex-direction:row;flex-wrap:wrap;gap:6px}
+.op-row .op-mi li{padding:8px 12px;font-size:14px;background:rgba(255,255,255,.1);color:#fff}
+.op-row-lit{background:#fff;box-shadow:none}
+.op-row-lit h3{color:#161716}
+.op-row-lit .op-mi li{background:#f3f3f1;color:#161716}
+.op-vals{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;flex:1}
+.op-val{border-radius:16px;background:#f8f8f6;padding:16px 18px;display:flex;align-items:center;gap:16px;text-align:left;flex:1}
+.op-val div{display:flex;flex-direction:column;gap:3px}
+.op-val-ic{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;line-height:1}
+.op-val-ic svg{display:block}
+.op-ic-l{background:#eeeaff;color:#4f3fd0}
+.op-ic-p{background:#ffe1d9;color:#a53a27}
+.op-ic-m{background:#bcefe9;color:#1f6f64}
+.op-ic-g{background:#dfff9b;color:#3f5a00}
+.op-ic-q{font-size:30px;padding-top:10px}
+.op-ic-v{background:#f2f0ff;color:#4f3fd0}
+
+/* Section 4: Execute, learn, repeat runs over the whole HumanAIse section, under the headline */
+.rg-elr{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px}
+.rg-elr li{position:relative;display:inline-block;font-size:15px;color:#3f403e}
+.rg-elr b{font-weight:650;color:#161716}
+.rg-elr li+li::before{content:"→";position:absolute;left:-23px;color:#71726f}
+@media (max-width:640px){.rg-elr{flex-direction:column;align-items:center;gap:4px}.rg-elr li+li::before{content:none}}
+
+/* Section 5 pills: black and white */
+.op-tick-row li,.op-tick-row .t-l,.op-tick-row .t-p,.op-tick-row .t-m,.op-tick-row .t-g{background:#fff;color:#161716;box-shadow:inset 0 0 0 1px #c9c9c5}
+.op-tick-row li:nth-child(4n+1){background:#161716;color:#fff;box-shadow:none}
+
+/* Footer: no line above it on the one-page site */
+.foot{border-top:0}
+
+/* nothing animated (balls, hero tiles) can push the page sideways */
+main{overflow-x:clip}
+
+/* Work: Conference Badges before and after (moved from the hero) */
+.op-case{position:relative;width:100%;max-width:1040px;margin:56px auto 0;isolation:isolate}
+.op-case::before{content:"";position:absolute;z-index:-1;left:-3%;right:-3%;top:-7%;bottom:-14%;border-radius:48px;background:radial-gradient(ellipse 70% 75% at 50% 55%,#9a86ff 0%,#b9abff 45%,rgba(199,186,255,0) 78%);filter:blur(26px);opacity:.75}
+.op-case img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 30px 60px -34px rgba(40,28,110,.55)}
+@media (max-width:760px){.op-case{margin-top:36px}.op-case img{border-radius:14px}}
+
+/* Value icons in motion (js/values-motion.js; Curiosity in CSS) */
+.op-ico{display:block;overflow:visible}
+.op-q{transform-box:view-box;transform-origin:12px 12px}
+@media (prefers-reduced-motion:no-preference){
+  .op-q{animation:op-q 14s cubic-bezier(.6,0,.3,1) infinite}
+  .op-q-dot{animation:op-q-dot 14s ease infinite}
+  @keyframes op-q{0%,18%{transform:none}30%,44%{transform:rotate(-90deg)}56%,62%{transform:none}72%,86%{transform:translateY(-6px) rotate(8deg)}98%,100%{transform:none}}
+  @keyframes op-q-dot{0%,64%{opacity:1}70%,88%{opacity:0}96%,100%{opacity:1}}
+}
+
+/* Values bucket: one sentence, the five values underlined, each led by its moving icon */
+.op-bucket-paper{justify-content:flex-start}
+.op-creed{margin:8px 0 0;padding:0 4px;font-size:clamp(23px,2.6vw,36px);line-height:2;font-weight:500;letter-spacing:-.02em;color:#161716;text-wrap:pretty}
+.op-v{white-space:nowrap}
+.op-v .op-val-ic{display:inline-flex;vertical-align:-.32em;width:1.45em;height:1.45em;border-radius:.4em;margin-right:.3em;font-size:inherit}
+.op-v .op-ico{width:.86em;height:.86em}
+.op-v .op-ic-q{padding-top:0}
+.op-v u{text-decoration-thickness:2px;text-underline-offset:.22em}
+.op-v-curiosity u{text-decoration-color:#7661f6}
+.op-v-creativity u{text-decoration-color:#ff816d}
+.op-v-consistency u{text-decoration-color:#2f9e8f}
+.op-v-candour u{text-decoration-color:#8fb31c}
+.op-v-craft u{text-decoration-color:#7661f6}
+@media (min-width:1001px){.op-bucket-paper .op-creed{margin-top:auto;margin-bottom:auto}}
+
+/* Section 5: the headline lives in the ink bucket; the pills run underneath */
+.op-buckets{margin-top:0}
+.op-bk-brand{font-size:clamp(30px,3.1vw,42px);line-height:1.18;letter-spacing:-.035em;max-width:none;padding:.4em 4px 0;text-align:left;color:#161716}
+.op-bucket-grey .old{color:#8e8e8a}
+.op-bucket-grey .scribble path{stroke:#161716}
+.op-bucket-grey .new{color:#161716}
+.op-bucket-grey .op-bk-sub{color:#5f605d;max-width:520px}
+.op-tick{margin-top:56px}
+/* the rows build to a payoff: context, next move, then you run the business */
+.op-rows{gap:24px}
+.op-rows>.op-row{position:relative}
+.op-rows>.op-row+.op-row::before{content:"↓";position:absolute;left:50%;top:-21px;transform:translateX(-50%);font-size:14px;line-height:1;color:#8e8e8a}
+.op-row-pay{padding:24px 22px;gap:10px}
+.op-pay-h{font-size:clamp(24px,2.2vw,30px);line-height:1.15;letter-spacing:-.03em;font-weight:590;color:#161716}
+.op-pay-sub{font-size:17px;line-height:1.45;color:#454644;margin-bottom:4px}
+
+/* Section 5 (round 3): the ink bucket holds the push row and the pills; the payoff sits under both buckets */
+.op-bucket-grey .op-rows{flex:none}
+.op-bucket-grey .op-rows>.op-row{flex:none}
+.op-tick-grey{margin-top:auto;padding-top:14px}
+.op-tick-grey .op-tick-row li{background:#fff;color:#161716;box-shadow:none}
+.op-tick-grey .op-tick-row li:nth-child(4n+1){background:#161716;color:#fff;box-shadow:none}
+
+/* the running pills never widen the buckets */
+@media (max-width:1000px){.op-buckets{grid-template-columns:minmax(0,1fr)}}
+.op-bucket,.op-row,.op-tick{min-width:0}
+
+/* Section 5 (round 4): the pills run straight across the ink bucket, edge to edge, no fade */
+.op-tick-bleed{margin:auto -34px 0;padding-top:24px;-webkit-mask-image:none;mask-image:none}
+@media (max-width:760px){.op-tick-bleed{margin-left:-16px;margin-right:-16px}}
+.op-bucket-grey{overflow:hidden}
+/* Consistency: no icon; the letters that repeat are underlined */
+.op-v-consistency u{text-decoration-color:#2f9e8f}
+
+/* Section 5 (round 5): "You run the business" heads the section; the left bucket is light grey (Amplemarket-style panel) */
+#how-we-work{scroll-margin-top:112px}
+.op-bk-top{margin-bottom:56px}
+@media (max-width:760px){.op-bk-top{margin-bottom:40px}}
+
+/* The work: call CTA, business email only */
+.op-call{position:relative;z-index:1;margin:72px auto 0;max-width:880px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.op-call-form{display:flex;gap:10px;width:100%}
+.op-call-form input:not(.sr-only){flex:1 1 auto;min-width:0;min-height:52px;padding:12px 16px;border-radius:10px;border:1px solid #cfcfcb;background:#fff;font:400 16px/1.4 Inter,"Helvetica Neue",Arial,sans-serif;color:#161716}
+.op-call-form input:focus-visible{outline:3px solid #7661f6;outline-offset:2px}
+.op-call-form input[aria-invalid=true]{border-color:#a53a27}
+.op-call-form .btn{flex:none}
+.op-call-note{font-size:14px;line-height:1.5;color:#5f605d}
+.op-call-note.is-error{color:#a53a27}
+.op-call-note a{color:inherit}
+.op-call-done{font-size:19px;line-height:1.5;font-weight:550;color:#161716;padding:14px 22px;border-radius:12px;background:#f3f3f1}
+.op-call-done:focus{outline:none}
+@media (max-width:900px){.op-call-form{flex-wrap:wrap}.op-call-form input:not(.sr-only){flex:1 1 calc(50% - 5px)}.op-call-form .btn{width:100%}}
+@media (max-width:640px){.op-call-form{flex-direction:column}.op-call-form input:not(.sr-only){flex:none}.op-call-form .btn{white-space:normal;text-align:center}}
+.op-case::before{pointer-events:none}
+@media (max-width:760px){.op-call{margin-top:48px}}
+.op-call-form[hidden],.op-call-note[hidden]{display:none}
+
+/* Section 4 (24 Oct, round 6): heading tags all black; each tally sits in its own small light box */
+.rg-tag{fill:#161716}
+.rg-tagt{fill:#fff}
+.rg-nbox{fill:#fdfdfc}
+.rg-tagn{fill:#161716;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.rg-fallback li{background:#161716;color:#fff}
+
+/* Values: curiosity has no icon; its "o" is an eye that looks around. Consistency: each repeated letter pair shares one underline colour */
+.op-eye{position:relative;display:inline-block;width:.56em;height:.56em;margin:0 .03em;border:.075em solid currentColor;border-radius:50%;vertical-align:-.02em;box-sizing:border-box;animation:op-blink 7s ease-in-out infinite}
+.op-pupil{position:absolute;left:50%;top:50%;width:.2em;height:.2em;margin:-.1em 0 0 -.1em;border-radius:50%;background:currentColor;animation:op-look 9s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes op-look{0%,10%{transform:translate(0,0)}16%,30%{transform:translate(.11em,-.02em)}36%,48%{transform:translate(-.11em,-.03em)}54%,64%{transform:translate(-.07em,.09em)}70%,82%{transform:translate(.08em,-.08em)}90%,100%{transform:translate(0,0)}}
+@keyframes op-blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.12)}}
+@media (prefers-reduced-motion:reduce){.op-eye,.op-pupil{animation:none}}
+.op-v-consistency u.u-c{text-decoration-color:#7661f6}
+.op-v-consistency u.u-n{text-decoration-color:#ff816d}
+.op-v-consistency u.u-s{text-decoration-color:#2f9e8f}
+.op-eye::after{content:"";position:absolute;left:-.1em;right:-.1em;top:calc(100% + .28em);height:2px;background:#7661f6}
+
+/* Qualify (round 7): small icons in the values style, white tile, ink line icon, slow motion.
+   Business: a van drives along (the road moves under it). Coach: a call screen, the guest nods, an arrow nudges up. */
+.aud.h-a813ca,.aud.h-35dbbc{background:#f3f3f1!important}
+.aud{display:flex!important;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:20px}
+.aud-ic{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:15px;background:#fff;color:#161716;box-shadow:inset 0 0 0 1px #e4e4e1;flex:none}
+.aud-ic svg{overflow:hidden;width:34px;height:34px}
+.ic-road{stroke-dasharray:3 4;stroke-width:1.6;opacity:.55}
+@media (prefers-reduced-motion:no-preference){
+  .ic-road{animation:ic-road .7s linear infinite}
+  .ic-van{animation:ic-bob .35s ease-in-out infinite alternate}
+  .ic-guest{transform-box:fill-box;transform-origin:50% 100%;animation:ic-nod 3.2s ease-in-out infinite}
+  .ic-boost{animation:ic-boost 3.2s cubic-bezier(.5,0,.3,1) infinite}
+}
+@keyframes ic-road{to{stroke-dashoffset:7}}
+@keyframes ic-bob{from{transform:translateY(0)}to{transform:translateY(-.5px)}}
+@keyframes ic-nod{0%,60%,100%{transform:none}70%{transform:translateY(.8px)}80%{transform:none}88%{transform:translateY(.6px)}}
+@keyframes ic-boost{0%,20%{transform:translate(-2px,2px);opacity:0}40%,75%{transform:none;opacity:1}100%{transform:translate(1px,-1px);opacity:0}}
+
+/* Values (round 7) */
+/* "brand" above the struck-out "business" is the same size as the line */
+.op-bucket-grey .op-bk-brand{padding-top:1.15em}
+.op-bucket-grey .new{font-size:1em;bottom:72%;letter-spacing:inherit;transform:translateX(-50%) rotate(-3deg)}
+/* consistency: no underlines; the letters that only appear once are dimmed */
+.op-v-consistency .dim{color:rgba(22,23,22,.28)}
+/* curiosity: the o is an eye with an iris, pupil and a glint */
+.op-pupil{width:.24em;height:.24em;margin:-.12em 0 0 -.12em;background:#7661f6}
+.op-pupil::before{content:"";position:absolute;left:50%;top:50%;width:.12em;height:.12em;margin:-.06em 0 0 -.06em;border-radius:50%;background:#161716}
+.op-glint{position:absolute;right:.025em;top:.025em;width:.06em;height:.06em;border-radius:50%;background:#fff}
+/* candour: no icon; its underline is a voice note, bars rising and falling */
+.op-wave-w{position:relative;display:inline-block;line-height:1.15}
+.op-wave{position:absolute;left:0;right:0;width:100%;top:calc(100% + .02em);height:.36em;overflow:visible;fill:#8fb31c}
+.op-wave rect{transform-box:fill-box;transform-origin:center;transform:scaleY(var(--a))}
+/* round 8: the voice-note motion (line, swell, talk, settle) runs in js/values-motion.js; reduced motion keeps this still waveform */
+@keyframes op-wave{from{transform:scaleY(var(--a))}to{transform:scaleY(var(--b))}}
+/* craft: diamond, then a red heart, then black with boosters lit; it drops out and the diamond falls back in from the top (values-motion.js) */
+.op-v-craft .op-val-ic{overflow:hidden}
+#ico-craft{overflow:visible;transition:color .45s ease}
+#ico-craft polygon{transition:fill .45s ease}
+.cr-boost{opacity:0;transition:opacity .25s ease}
+.cr-lit .cr-boost{opacity:1}
+@media (prefers-reduced-motion:no-preference){.cr-lit .cr-boost path{transform-box:fill-box;transform-origin:50% 100%;animation:cr-flame .12s linear infinite alternate}}
+@keyframes cr-flame{from{transform:scaleY(.6)}to{transform:scaleY(1.15)}}
+.op-wave rect:nth-child(1){--a:0.18;--b:0.35;--d:0.61s;--w:-0.06s}
+.op-wave rect:nth-child(2){--a:0.38;--b:0.75;--d:0.37s;--w:-0.41s}
+.op-wave rect:nth-child(3){--a:0.19;--b:0.77;--d:0.38s;--w:-0.07s}
+.op-wave rect:nth-child(4){--a:0.34;--b:0.93;--d:0.4s;--w:-0.18s}
+.op-wave rect:nth-child(5){--a:0.41;--b:0.98;--d:0.58s;--w:-0.32s}
+.op-wave rect:nth-child(6){--a:0.54;--b:0.62;--d:0.69s;--w:-0.23s}
+.op-wave rect:nth-child(7){--a:0.23;--b:0.65;--d:0.47s;--w:-0.65s}
+.op-wave rect:nth-child(8){--a:0.25;--b:0.83;--d:0.61s;--w:-0.3s}
+.op-wave rect:nth-child(9){--a:0.38;--b:0.63;--d:0.37s;--w:-0.16s}
+.op-wave rect:nth-child(10){--a:0.43;--b:0.77;--d:0.48s;--w:-0.47s}
+.op-wave rect:nth-child(11){--a:0.35;--b:0.72;--d:0.67s;--w:-0.56s}
+.op-wave rect:nth-child(12){--a:0.27;--b:0.83;--d:0.56s;--w:-0.7s}
+.op-wave rect:nth-child(13){--a:0.45;--b:0.72;--d:0.74s;--w:-0.09s}
+.op-wave rect:nth-child(14){--a:0.33;--b:0.9;--d:0.41s;--w:-0.39s}
+.op-wave rect:nth-child(15){--a:0.19;--b:0.87;--d:0.66s;--w:-0.46s}
+.op-wave rect:nth-child(16){--a:0.5;--b:0.73;--d:0.63s;--w:-0.48s}
+.op-wave rect:nth-child(17){--a:0.39;--b:0.78;--d:0.69s;--w:-0.76s}
+.op-wave rect:nth-child(18){--a:0.36;--b:0.87;--d:0.37s;--w:-0.56s}
+.op-wave rect:nth-child(19){--a:0.42;--b:1.0;--d:0.68s;--w:-0.23s}
+.op-wave rect:nth-child(20){--a:0.32;--b:0.87;--d:0.36s;--w:-0.37s}
+.op-wave rect:nth-child(21){--a:0.24;--b:0.65;--d:0.37s;--w:-0.61s}
+.op-wave rect:nth-child(22){--a:0.23;--b:0.7;--d:0.51s;--w:-0.7s}
+.op-wave rect:nth-child(23){--a:0.21;--b:0.78;--d:0.57s;--w:-0.71s}
+.op-wave rect:nth-child(24){--a:0.18;--b:0.35;--d:0.46s;--w:-0.33s}
+
+/* Offer headline: "What working together" starts at the left edge, "looks like" at the right; they meet as the section scrolls in (offer-head.js) */
+.op-meet span{display:inline-block;will-change:transform}
+
+/* Round 8: section 5 head */
+/* R8.8: "(or start others…)" sits tight under "You run the business" */
+.op-bk-top{gap:6px}
+.op-bk-top .lead{line-height:1.15}
+/* R8.11: the bucket headline moves back up; "brand" may break out above the box. The pill strip keeps its own clip */
+.op-bucket-grey{overflow:visible}
+.op-bucket-grey .op-bk-brand{padding-top:.4em}
+.op-bucket-grey .op-tick{overflow:hidden}
+
+
+/* Round 9: section 5 opens up, no box; the values move under the offer */
+.op-buckets-open{display:block;margin-top:0}
+.op-bk-open{background:none;border-radius:0;padding:0;overflow:visible;align-items:center;text-align:center;gap:14px}
+.op-bk-open .op-bk-brand{padding:1.1em 0 0;text-align:center}
+.op-bk-open .op-bk-sub{max-width:560px;margin-inline:auto}
+.op-bk-open .op-tick-bleed{width:100vw;margin:48px calc(50% - 50vw) 0;padding-top:0}
+.op-bk-open .op-tick-grey .op-tick-row li{background:#f3f3f1}
+.op-bk-open .op-tick-grey .op-tick-row li:nth-child(4n+1){background:#161716}
+@media (max-width:760px){.op-bk-open .op-tick-bleed{margin-top:36px}}
+
+/* Offer: the three terms as open rows, title left, detail right */
+.op-terms{max-width:1100px;margin:56px auto 0;text-align:left}
+.op-term{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:baseline;padding:30px 0;border-top:1px solid #dededb}
+.op-term:last-child{border-bottom:1px solid #dededb}
+.op-term h3{display:flex;align-items:baseline;gap:14px;margin:0}
+.op-term .op-dot{position:static;flex:none;transform:translateY(-.15em)}
+.op-term .body{margin:0;max-width:560px}
+@media (max-width:760px){.op-term{grid-template-columns:1fr;gap:8px;padding:22px 0}}
+
+/* Values bucket now sits in the offer, between the terms and what happens next */
+.op-values{max-width:1100px;margin:72px auto 0;text-align:center;align-items:center}
+.op-values .op-creed{margin:12px auto 0;max-width:900px;text-align:center}
+@media (max-width:760px){.op-values{margin-top:48px}}
+
+/* Round 9c: balls mostly white and black, no stroke, bigger (sizes in js/tools-pit.js) */
+.ball{font-weight:560;color:#161716;background:#fff;box-shadow:0 12px 24px -14px rgba(22,23,22,.35),0 2px 6px -3px rgba(22,23,22,.12)}
+.ball.t-g1{background:#efefed}
+.ball.t-g2{background:#e2e2df}
+.ball.t-g3{background:#d2d2ce}
+.ball-l.is-one{white-space:nowrap}
+
+/* Close: the rings go; the gradient drifts like section 4's (js/close-gradient.js); the CSS gradient stays as fallback */
+.cl-grad{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+.closer>.wrap{z-index:1}
+
+/* Offer terms as a timeline: a rail on the left fills as you scroll, each term arrives as the rail reaches it (js/offer-timeline.js) */
+.op-tl{position:relative}
+.op-tl .op-term{position:relative;padding:28px 0 28px 48px;border:0}
+.op-tl .op-term:last-child{border:0}
+.op-tl .op-term h3{display:block}
+.op-tl .op-term .op-dot{position:absolute;left:0;top:calc(28px + .56em - 6px);width:12px;height:12px;transform:none;transition:background-color .35s,box-shadow .35s}
+.op-tl-rail{position:absolute;left:5px;width:2px;top:0;height:0;background:#dededb;border-radius:2px;overflow:hidden}
+.op-tl-fill{position:absolute;inset:0;background:#161716;transform-origin:top;transform:scaleY(1)}
+.op-tl.is-live .op-tl-fill{transform:scaleY(0)}
+.op-tl.is-live .op-term h3,.op-tl.is-live .op-term .body{opacity:0;transform:translateY(18px);transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)}
+.op-tl.is-live .op-term .body{transition-delay:.08s}
+.op-tl.is-live .op-term .op-dot{background:#fdfdfc;box-shadow:inset 0 0 0 2px #c9c9c5}
+.op-tl.is-live .op-term.is-in h3,.op-tl.is-live .op-term.is-in .body{opacity:1;transform:none}
+.op-tl.is-live .op-term.is-in .op-dot-violet{background:#7661f6;box-shadow:none}
+.op-tl.is-live .op-term.is-in .op-dot-grey{background:#b8b8b4;box-shadow:none}
+.op-tl.is-live .op-term.is-in .op-dot-mint{background:#2f9e8f;box-shadow:none}
+@media (max-width:760px){.op-tl .op-term{padding:22px 0 22px 36px}.op-tl .op-term .op-dot{top:calc(22px + .56em - 6px)}}
+/* Timeline centred (wider screens): rail down the middle, title to its left, detail to its right */
+@media (min-width:761px){
+  .op-tl .op-term{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:96px;padding-left:0}
+  .op-tl .op-term h3{text-align:right}
+  .op-tl .op-term .body{max-width:440px}
+  .op-tl .op-term .op-dot{left:calc(50% - 6px)}
+  .op-tl-rail{left:calc(50% - 1px)}
+}
+
+/* Round 9d */
+/* section 5 pills start further in, fading at both ends */
+.op-bk-open .op-tick-bleed{width:auto;max-width:1100px;margin:48px auto 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+@media (max-width:760px){.op-bk-open .op-tick-bleed{margin:36px 0 0}}
+/* qualify icons in colour, like the values tiles */
+.aud-ic{box-shadow:none}
+.aud-ic-van{background:#dff5f0;color:#1f7a6e}
+.aud-ic-call{background:#f2f0ff;color:#4f3fd0}

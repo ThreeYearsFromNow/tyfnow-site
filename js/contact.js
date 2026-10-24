@@ -10,7 +10,7 @@
   try {
     var q = new URLSearchParams(W.location.search).get('email');
     if (q && !email.value) email.value = q;
-    if (q) W.history.replaceState(null, '', W.location.pathname);
+    if (q) W.history.replaceState(null, '', W.location.pathname + W.location.hash);
   } catch (e) {}
   var g = T.goals();
   if (g && g.work && T.store.get('tyfnow_gate') === 'answered' && !msg.value) {
